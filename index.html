@@ -20,19 +20,19 @@
               cyan: '#00f2ff',
               cyanGlow: '#00b8e6',
               purple: '#9d00ff',
-              darkBg: '#040209',
-              cardBg: 'rgba(18, 8, 28, 0.65)'
+              darkBg: '#05020a',
+              cardBg: 'rgba(16, 8, 26, 0.75)'
             }
           },
           animation: {
             'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            'spin-slow': 'spin 20s linear infinite',
-            'glow-pulse': 'glowPulse 2s ease-in-out infinite alternate'
+            'spin-slow': 'spin 25s linear infinite',
+            'glow-pulse': 'glowPulse 2.5s ease-in-out infinite alternate'
           },
           keyframes: {
             glowPulse: {
-              '0%': { filter: 'drop-shadow(0 0 15px rgba(255, 0, 127, 0.4))' },
-              '100%': { filter: 'drop-shadow(0 0 35px rgba(0, 242, 255, 0.7))' }
+              '0%': { filter: 'drop-shadow(0 0 15px rgba(255, 0, 127, 0.35))' },
+              '100%': { filter: 'drop-shadow(0 0 35px rgba(0, 242, 255, 0.6))' }
             }
           }
         }
@@ -44,52 +44,67 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,800;0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,800;0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
+    /* FONDO TEXTURIZADO MODERNO CON GRID PATTERN */
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #040209;
+      background-color: #05020a;
+      background-image: 
+        radial-gradient(rgba(255, 0, 127, 0.12) 1px, transparent 0),
+        radial-gradient(rgba(0, 242, 255, 0.08) 1px, transparent 0);
+      background-size: 32px 32px;
+      background-position: 0 0, 16px 16px;
       color: #f3e8ff;
       overflow-x: hidden;
     }
+
     .font-montserrat {
       font-family: 'Montserrat', sans-serif;
     }
+
     .glass-panel {
-      background: rgba(14, 6, 22, 0.75);
+      background: rgba(12, 5, 20, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 0, 127, 0.2);
     }
+
     .glass-card {
-      background: rgba(22, 10, 36, 0.55);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 0, 127, 0.15);
+      background: rgba(20, 9, 32, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 0, 127, 0.18);
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     .glass-card:hover {
       border-color: rgba(0, 242, 255, 0.5);
       box-shadow: 0 15px 35px -10px rgba(255, 0, 127, 0.35);
-      transform: translateY(-5px);
+      transform: translateY(-4px);
     }
+
     .text-glow-magenta {
-      text-shadow: 0 0 18px rgba(255, 0, 127, 0.7);
+      text-shadow: 0 0 18px rgba(255, 0, 127, 0.75);
     }
+
     .text-glow-cyan {
-      text-shadow: 0 0 18px rgba(0, 242, 255, 0.7);
+      text-shadow: 0 0 18px rgba(0, 242, 255, 0.75);
     }
+
     .gradient-border-btn {
       position: relative;
       background: linear-gradient(135deg, #ff007f 0%, #00f2ff 100%);
       padding: 1px;
       border-radius: 9999px;
     }
+
     .gradient-border-btn-inner {
-      background: #080312;
+      background: #090314;
       border-radius: 9999px;
       transition: all 0.3s ease;
     }
+
     .gradient-border-btn:hover .gradient-border-btn-inner {
       background: transparent;
     }
@@ -103,20 +118,17 @@
     Tu navegador no soporta el reproductor de audio.
   </audio>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR RESPONSIVE -->
   <header class="sticky top-0 z-40 glass-panel border-b border-brand-magenta/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
-      <!-- Logo + Brand Name -->
+      <!-- Logo + Marca -->
       <a href="#" class="flex items-center gap-3.5 group">
-        <!-- Recreación SVG del Isotipo del Perfil con Audífonos -->
-        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-brand-magenta via-brand-purple to-brand-cyan p-0.5 shadow-lg shadow-brand-magenta/30 group-hover:scale-105 transition-transform">
-          <div class="w-full h-full bg-black rounded-full flex items-center justify-center overflow-hidden relative">
-            <svg class="w-8 h-8 text-brand-magenta" viewBox="0 0 100 100" fill="currentColor">
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-brand-magenta via-brand-purple to-brand-cyan p-0.5 shadow-lg shadow-brand-magenta/30 group-hover:scale-105 transition-transform flex-shrink-0">
+          <div class="w-full h-full bg-black rounded-full flex items-center justify-center overflow-hidden">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-brand-magenta" viewBox="0 0 100 100" fill="currentColor">
               <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4" />
-              <!-- Silueta Perfil -->
               <path d="M 50 25 C 40 25 32 33 32 43 C 32 50 36 56 42 59 L 42 63 C 34 66 25 74 25 85 L 75 85 C 75 74 66 66 58 63 L 58 59 C 64 56 68 50 68 43 C 68 33 60 25 50 25 Z" fill="#ff007f"/>
-              <!-- Audífonos Cian -->
               <path d="M 30 43 A 20 20 0 0 1 70 43" fill="none" stroke="#00f2ff" stroke-width="6" stroke-linecap="round"/>
               <rect x="25" y="38" width="8" height="14" rx="4" fill="#00f2ff"/>
               <rect x="67" y="38" width="8" height="14" rx="4" fill="#00f2ff"/>
@@ -124,15 +136,15 @@
           </div>
         </div>
         <div class="flex flex-col">
-          <span class="font-montserrat font-black text-2xl tracking-tighter text-white flex items-center gap-1">
+          <span class="font-montserrat font-black text-xl sm:text-2xl tracking-tighter text-white flex items-center gap-1">
             PARLAR<span class="text-brand-magenta text-glow-magenta">RADIO</span>
           </span>
-          <span class="font-montserrat font-bold text-[10px] tracking-[0.25em] text-brand-cyan uppercase -mt-1">SOMOS MUNDO</span>
+          <span class="font-montserrat font-bold text-[9px] sm:text-[10px] tracking-[0.25em] text-brand-cyan uppercase -mt-1">SOMOS MUNDO</span>
         </div>
       </a>
 
       <!-- Navegación Escritorio -->
-      <nav class="hidden md:flex items-center gap-8 font-semibold text-xs tracking-wider uppercase text-slate-300">
+      <nav class="hidden lg:flex items-center gap-8 font-semibold text-xs tracking-wider uppercase text-slate-300">
         <a href="#inicio" class="hover:text-brand-cyan transition-colors">Inicio</a>
         <a href="#pilares" class="hover:text-brand-cyan transition-colors">Pilares</a>
         <a href="#programas" class="hover:text-brand-cyan transition-colors">Radio Shows</a>
@@ -140,81 +152,92 @@
         <a href="#contacto" class="hover:text-brand-cyan transition-colors">Contacto</a>
       </nav>
 
-      <!-- Botones Acceso Rápido -->
-      <div class="flex items-center gap-3">
-        <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all">
+      <!-- Botones navbar y Menú Hamburgesa Móvil -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all">
           <i class="fa-brands fa-whatsapp text-sm"></i>
-          <span>Canal Oficial</span>
+          <span>Canal</span>
         </a>
 
-        <button onclick="togglePlay()" class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-magenta via-brand-purple to-brand-cyan text-white font-black text-xs tracking-wider shadow-lg shadow-brand-magenta/30 hover:shadow-brand-cyan/40 hover:scale-105 active:scale-95 transition-all uppercase">
+        <button onclick="togglePlay()" class="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-brand-magenta via-brand-purple to-brand-cyan text-white font-black text-xs tracking-wider shadow-lg shadow-brand-magenta/30 hover:scale-105 active:scale-95 transition-all uppercase">
           <i id="navPlayIcon" class="fa-solid fa-play"></i>
-          <span id="navPlayText">ESCUCHAR</span>
+          <span id="navPlayText" class="hidden sm:inline">ESCUCHAR</span>
         </button>
+
+        <!-- Botón Hamburguesa Celulares -->
+        <button onclick="toggleMobileMenu()" class="lg:hidden w-10 h-10 rounded-xl bg-slate-900 border border-brand-magenta/30 text-white flex items-center justify-center">
+          <i id="menuIcon" class="fa-solid fa-bars text-base"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menú Desplegable Celulares -->
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-brand-magenta/20 bg-slate-950/95 px-6 py-6 space-y-4">
+      <a href="#inicio" onclick="toggleMobileMenu()" class="block font-semibold text-sm text-slate-200 hover:text-brand-cyan">Inicio</a>
+      <a href="#pilares" onclick="toggleMobileMenu()" class="block font-semibold text-sm text-slate-200 hover:text-brand-cyan">Pilares</a>
+      <a href="#programas" onclick="toggleMobileMenu()" class="block font-semibold text-sm text-slate-200 hover:text-brand-cyan">Radio Shows</a>
+      <a href="#nosotros" onclick="toggleMobileMenu()" class="block font-semibold text-sm text-slate-200 hover:text-brand-cyan">Nosotros</a>
+      <a href="#contacto" onclick="toggleMobileMenu()" class="block font-semibold text-sm text-slate-200 hover:text-brand-cyan">Contacto</a>
+      <div class="pt-2">
+        <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-bold text-xs uppercase">
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span>Seguir en WhatsApp</span>
+        </a>
       </div>
     </div>
   </header>
 
   <!-- HERO SECTION -->
-  <section id="inicio" class="relative py-20 md:py-28 overflow-hidden">
-    <!-- Luces Cósmicas y Planeta de Fondo -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-magenta/15 rounded-full blur-[140px] pointer-events-none"></div>
-    <div class="absolute top-1/4 right-10 w-80 h-80 bg-brand-cyan/15 rounded-full blur-[120px] pointer-events-none"></div>
-
+  <section id="inicio" class="relative py-12 md:py-24 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         
         <!-- Texto Hero Principal -->
         <div class="lg:col-span-7 text-center lg:text-left">
-          <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-brand-magenta/10 border border-brand-magenta/30 text-brand-cyan text-xs font-bold uppercase tracking-widest mb-6">
-            <span class="w-2.5 h-2.5 rounded-full bg-brand-magenta animate-pulse"></span>
-            Señal Internacional Transmitiendo En Vivo
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-magenta/10 border border-brand-magenta/30 text-brand-cyan text-[11px] sm:text-xs font-bold uppercase tracking-widest mb-6">
+            <span class="w-2 h-2 rounded-full bg-brand-magenta animate-pulse"></span>
+            Señal Digital En Vivo 24/7
           </div>
           
-          <h1 class="font-montserrat font-black text-5xl sm:text-7xl tracking-tighter text-white mb-3 leading-none italic">
+          <h1 class="font-montserrat font-black text-4xl sm:text-6xl lg:text-7xl tracking-tighter text-white mb-2 leading-none italic">
             PARLAR <span class="text-brand-magenta text-glow-magenta">RADIO</span>
           </h1>
           
-          <p class="font-montserrat font-extrabold text-2xl sm:text-3xl text-brand-cyan tracking-widest uppercase mb-6 text-glow-cyan">
+          <p class="font-montserrat font-extrabold text-xl sm:text-3xl text-brand-cyan tracking-widest uppercase mb-6 text-glow-cyan">
             SOMOS MUNDO
           </p>
 
-          <p class="text-base text-slate-300 mb-8 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
-            Una plataforma radial global que une fronteras a través de la música, el arte y la comunicación libre. Transmisión digital en vivo con la máxima calidad de audio.
+          <p class="text-sm sm:text-base text-slate-300 mb-8 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
+            Plataforma radial internacional que une fronteras a través de la música, el arte y la libre expresión.
           </p>
 
-          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-            <button onclick="togglePlay()" class="px-8 py-4 rounded-full bg-gradient-to-r from-brand-magenta via-brand-purple to-brand-cyan text-white font-montserrat font-black text-sm tracking-widest uppercase shadow-xl shadow-brand-magenta/30 hover:shadow-brand-cyan/50 hover:scale-105 active:scale-95 transition-all flex items-center gap-3">
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <button onclick="togglePlay()" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-brand-magenta via-brand-purple to-brand-cyan text-white font-montserrat font-black text-xs sm:text-sm tracking-widest uppercase shadow-xl shadow-brand-magenta/30 hover:shadow-brand-cyan/50 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
               <i id="heroPlayIcon" class="fa-solid fa-play text-base"></i>
               <span id="heroPlayText">REPRODUCIR SEÑAL</span>
             </button>
 
-            <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" class="gradient-border-btn font-montserrat font-bold text-xs tracking-wider uppercase">
-              <div class="gradient-border-btn-inner px-6 py-4 text-white flex items-center gap-2">
+            <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto gradient-border-btn font-montserrat font-bold text-xs tracking-wider uppercase text-center">
+              <div class="gradient-border-btn-inner px-6 py-4 text-white flex items-center justify-center gap-2">
                 <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i>
-                <span>Canal en WhatsApp</span>
+                <span>Canal WhatsApp</span>
               </div>
             </a>
           </div>
         </div>
 
-        <!-- Emblema / Reproductor Cósmico (Basado en la Imagen Oficial) -->
-        <div class="lg:col-span-5 flex justify-center">
-          <div class="glass-card p-8 rounded-3xl w-full max-w-md relative text-center border-brand-magenta/30 shadow-2xl animate-glow-pulse">
+        <!-- Reproductor Cósmico -->
+        <div class="lg:col-span-5 flex justify-center mt-4 lg:mt-0">
+          <div class="glass-card p-6 sm:p-8 rounded-3xl w-full max-w-sm sm:max-w-md relative text-center border-brand-magenta/30 shadow-2xl animate-glow-pulse">
             
-            <!-- Logotipo Circular Central de la Imagen -->
-            <div class="relative w-48 h-48 mx-auto mb-6">
-              <!-- Anillo Rotatorio Cósmico -->
+            <div class="relative w-40 h-40 sm:w-48 sm:h-48 mx-auto mb-6">
               <div class="absolute inset-0 rounded-full border-2 border-dashed border-brand-cyan/40 animate-spin-slow"></div>
               
-              <!-- Círculo Central con Isotipo -->
               <div class="w-full h-full rounded-full bg-gradient-to-tr from-brand-magenta via-slate-900 to-brand-cyan p-1 flex items-center justify-center shadow-2xl">
                 <div class="w-full h-full bg-slate-950 rounded-full flex flex-col items-center justify-center relative overflow-hidden">
-                  <svg class="w-24 h-24 text-brand-magenta mb-1" viewBox="0 0 100 100" fill="currentColor">
+                  <svg class="w-20 h-20 sm:w-24 sm:h-24 text-brand-magenta" viewBox="0 0 100 100" fill="currentColor">
                     <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="3" />
-                    <!-- Silueta -->
                     <path d="M 50 25 C 40 25 32 33 32 43 C 32 50 36 56 42 59 L 42 63 C 34 66 25 74 25 85 L 75 85 C 75 74 66 66 58 63 L 58 59 C 64 56 68 50 68 43 C 68 33 60 25 50 25 Z" fill="#ff007f"/>
-                    <!-- Audífonos -->
                     <path d="M 30 43 A 20 20 0 0 1 70 43" fill="none" stroke="#00f2ff" stroke-width="5" stroke-linecap="round"/>
                     <rect x="24" y="37" width="8" height="15" rx="4" fill="#00f2ff"/>
                     <rect x="68" y="37" width="8" height="15" rx="4" fill="#00f2ff"/>
@@ -222,16 +245,14 @@
                 </div>
               </div>
 
-              <!-- Badge Estado -->
               <div id="liveBadge" class="absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-slate-900 border border-slate-700 text-[10px] font-black tracking-widest text-slate-400 uppercase">
                 OFFLINE
               </div>
             </div>
 
-            <h3 class="font-montserrat font-black text-2xl text-white tracking-tight">PARLAR RADIO</h3>
+            <h3 class="font-montserrat font-black text-xl sm:text-2xl text-white tracking-tight">PARLAR RADIO</h3>
             <p class="font-montserrat font-bold text-xs text-brand-cyan uppercase tracking-widest mb-6">SOMOS MUNDO</p>
 
-            <!-- Visualizador de Audio (Ecualizador) -->
             <div id="eqVisualizer" class="flex items-center justify-center gap-1.5 h-10 mb-6 opacity-30">
               <span class="w-1.5 bg-brand-cyan rounded-full h-3"></span>
               <span class="w-1.5 bg-brand-magenta rounded-full h-7"></span>
@@ -241,12 +262,11 @@
               <span class="w-1.5 bg-brand-cyan rounded-full h-3"></span>
             </div>
 
-            <!-- Botón Principal Card -->
-            <button onclick="togglePlay()" class="w-16 h-16 rounded-full bg-gradient-to-r from-brand-magenta to-brand-cyan text-white flex items-center justify-center mx-auto shadow-xl shadow-brand-magenta/40 hover:scale-110 active:scale-95 transition-transform mb-3">
-              <i id="cardPlayIcon" class="fa-solid fa-play text-2xl ml-1"></i>
+            <button onclick="togglePlay()" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-brand-magenta to-brand-cyan text-white flex items-center justify-center mx-auto shadow-xl shadow-brand-magenta/40 hover:scale-110 active:scale-95 transition-transform mb-3">
+              <i id="cardPlayIcon" class="fa-solid fa-play text-xl sm:text-2xl ml-1"></i>
             </button>
             
-            <p id="statusText" class="text-xs text-slate-400 font-medium">Haz clic para encender el stream</p>
+            <p id="statusText" class="text-xs text-slate-400 font-medium">Toca para escuchar en directo</p>
           </div>
         </div>
 
@@ -254,46 +274,42 @@
     </div>
   </section>
 
-  <!-- LOS 4 PILARES OFICIALES DEL LOGOTIPO -->
+  <!-- LOS 4 PILARES OFICIALES -->
   <section id="pilares" class="py-16 relative border-t border-brand-magenta/15 bg-slate-950/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         
-        <!-- Pilar 1: Música -->
-        <div class="glass-card p-6 rounded-2xl text-center group">
-          <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-brand-magenta/10 border border-brand-magenta/40 flex items-center justify-center text-brand-magenta group-hover:scale-110 group-hover:bg-brand-magenta group-hover:text-white transition-all shadow-lg shadow-brand-magenta/20">
-            <i class="fa-solid fa-music text-2xl"></i>
+        <div class="glass-card p-5 sm:p-6 rounded-2xl text-center group">
+          <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-full bg-brand-magenta/10 border border-brand-magenta/40 flex items-center justify-center text-brand-magenta group-hover:scale-110 group-hover:bg-brand-magenta group-hover:text-white transition-all">
+            <i class="fa-solid fa-music text-xl sm:text-2xl"></i>
           </div>
-          <h4 class="font-montserrat font-extrabold text-base text-white tracking-wider uppercase mb-1">MÚSICA</h4>
-          <p class="text-xs text-slate-400">Selección global sin fronteras</p>
+          <h4 class="font-montserrat font-extrabold text-xs sm:text-base text-white tracking-wider uppercase mb-1">MÚSICA</h4>
+          <p class="text-[11px] sm:text-xs text-slate-400">Selección global</p>
         </div>
 
-        <!-- Pilar 2: Cultura -->
-        <div class="glass-card p-6 rounded-2xl text-center group">
-          <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-white transition-all shadow-lg shadow-amber-500/20">
-            <i class="fa-solid fa-users text-2xl"></i>
+        <div class="glass-card p-5 sm:p-6 rounded-2xl text-center group">
+          <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-full bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-white transition-all">
+            <i class="fa-solid fa-users text-xl sm:text-2xl"></i>
           </div>
-          <h4 class="font-montserrat font-extrabold text-base text-white tracking-wider uppercase mb-1">CULTURA</h4>
-          <p class="text-xs text-slate-400">Diversidad de pensamientos</p>
+          <h4 class="font-montserrat font-extrabold text-xs sm:text-base text-white tracking-wider uppercase mb-1">CULTURA</h4>
+          <p class="text-[11px] sm:text-xs text-slate-400">Voces diversas</p>
         </div>
 
-        <!-- Pilar 3: Información -->
-        <div class="glass-card p-6 rounded-2xl text-center group">
-          <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all shadow-lg shadow-emerald-500/20">
-            <i class="fa-solid fa-circle-info text-2xl"></i>
+        <div class="glass-card p-5 sm:p-6 rounded-2xl text-center group">
+          <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-full bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all">
+            <i class="fa-solid fa-circle-info text-xl sm:text-2xl"></i>
           </div>
-          <h4 class="font-montserrat font-extrabold text-base text-white tracking-wider uppercase mb-1">INFORMACIÓN</h4>
-          <p class="text-xs text-slate-400">Objetividad y veracidad</p>
+          <h4 class="font-montserrat font-extrabold text-xs sm:text-base text-white tracking-wider uppercase mb-1">INFORMACIÓN</h4>
+          <p class="text-[11px] sm:text-xs text-slate-400">Veracidad global</p>
         </div>
 
-        <!-- Pilar 4: Lo Nuestro -->
-        <div class="glass-card p-6 rounded-2xl text-center group">
-          <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-brand-cyan/10 border border-brand-cyan/40 flex items-center justify-center text-brand-cyan group-hover:scale-110 group-hover:bg-brand-cyan group-hover:text-slate-950 transition-all shadow-lg shadow-brand-cyan/20">
-            <i class="fa-solid fa-globe text-2xl"></i>
+        <div class="glass-card p-5 sm:p-6 rounded-2xl text-center group">
+          <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-full bg-brand-cyan/10 border border-brand-cyan/40 flex items-center justify-center text-brand-cyan group-hover:scale-110 group-hover:bg-brand-cyan group-hover:text-slate-950 transition-all">
+            <i class="fa-solid fa-globe text-xl sm:text-2xl"></i>
           </div>
-          <h4 class="font-montserrat font-extrabold text-base text-white tracking-wider uppercase mb-1">LO NUESTRO</h4>
-          <p class="text-xs text-slate-400">Nuestra identidad al mundo</p>
+          <h4 class="font-montserrat font-extrabold text-xs sm:text-base text-white tracking-wider uppercase mb-1">LO NUESTRO</h4>
+          <p class="text-[11px] sm:text-xs text-slate-400">Identidad propia</p>
         </div>
 
       </div>
@@ -301,28 +317,27 @@
     </div>
   </section>
 
-  <!-- RADIO SHOWS DESTACADOS -->
-  <section id="programas" class="py-24 relative">
+  <!-- RADIO SHOWS -->
+  <section id="programas" class="py-20 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
         <h2 class="font-montserrat font-bold text-xs uppercase tracking-[0.3em] text-brand-cyan mb-2">Parrilla Oficial</h2>
         <h3 class="font-montserrat font-black text-3xl sm:text-4xl text-white">Nuestros Radio Shows</h3>
-        <p class="text-slate-400 mt-3 text-sm">Voces internacionales transmitiendo desde distintos países en habla hispana.</p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <!-- Show 1: Quinta Sinfonía -->
-        <div class="glass-card p-6 rounded-3xl flex flex-col justify-between group">
+        <!-- Quinta Sinfonía -->
+        <div class="glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="text-3xl">🇪🇨</span>
-              <span class="text-[10px] font-black px-3 py-1 rounded-full bg-brand-magenta/15 text-brand-magenta border border-brand-magenta/30 uppercase tracking-wider">Ecuador</span>
+              <span class="text-[10px] font-black px-3 py-1 rounded-full bg-brand-magenta/15 text-brand-magenta border border-brand-magenta/30 uppercase">Ecuador</span>
             </div>
-            <h4 class="font-montserrat font-black text-xl text-white group-hover:text-brand-cyan transition-colors">Quinta Sinfonía</h4>
+            <h4 class="font-montserrat font-black text-xl text-white">Quinta Sinfonía</h4>
             <p class="text-xs font-semibold text-slate-300 mt-1 mb-4">Conduce: <strong class="text-brand-magenta">Wladimir Ormaza</strong></p>
-            <p class="text-xs text-slate-400 leading-relaxed">Una armónica travesía por los grandes éxitos musicales, clásicos inolvidables y sonidos contemporáneos.</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Grandes éxitos musicales, clásicos imperecederos y la mejor selección sonora.</p>
           </div>
           <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-brand-cyan font-semibold">
             <span>Parlar Radio</span>
@@ -330,16 +345,16 @@
           </div>
         </div>
 
-        <!-- Show 2: Ni chicha ni limonada -->
-        <div class="glass-card p-6 rounded-3xl flex flex-col justify-between group">
+        <!-- Ni chicha ni limonada -->
+        <div class="glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="text-3xl">🇦🇷</span>
-              <span class="text-[10px] font-black px-3 py-1 rounded-full bg-brand-cyan/15 text-brand-cyan border border-brand-cyan/30 uppercase tracking-wider">Argentina</span>
+              <span class="text-[10px] font-black px-3 py-1 rounded-full bg-brand-cyan/15 text-brand-cyan border border-brand-cyan/30 uppercase">Argentina</span>
             </div>
-            <h4 class="font-montserrat font-black text-xl text-white group-hover:text-brand-cyan transition-colors">Ni Chicha Ni Limonada</h4>
+            <h4 class="font-montserrat font-black text-xl text-white">Ni Chicha Ni Limonada</h4>
             <p class="text-xs font-semibold text-slate-300 mt-1 mb-4">Conduce: <strong class="text-brand-cyan">Ramiro Parisi</strong></p>
-            <p class="text-xs text-slate-400 leading-relaxed">Entretenimiento distendido, debates de cultura general, humor y una fina selección de temas sin etiquetas.</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Entretenimiento, cultura, humor y temas variados sin etiquetas.</p>
           </div>
           <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-brand-cyan font-semibold">
             <span>Parlar Radio</span>
@@ -347,16 +362,16 @@
           </div>
         </div>
 
-        <!-- Show 3: Jarrito Café -->
-        <div class="glass-card p-6 rounded-3xl flex flex-col justify-between group">
+        <!-- Jarrito Café -->
+        <div class="glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="text-3xl">🇲🇽</span>
-              <span class="text-[10px] font-black px-3 py-1 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30 uppercase tracking-wider">México</span>
+              <span class="text-[10px] font-black px-3 py-1 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30 uppercase">México</span>
             </div>
-            <h4 class="font-montserrat font-black text-xl text-white group-hover:text-brand-cyan transition-colors">Jarrito Café</h4>
+            <h4 class="font-montserrat font-black text-xl text-white">Jarrito Café</h4>
             <p class="text-xs font-semibold text-slate-300 mt-1 mb-4">Conduce: <strong class="text-amber-400">Bertiux Solano</strong></p>
-            <p class="text-xs text-slate-400 leading-relaxed">Historias, calidez y la mejor vibra para iniciar la jornada con el aroma de un buen café en cabina.</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Historias, calidez y buena energía para acompañar tus mañanas.</p>
           </div>
           <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-brand-cyan font-semibold">
             <span>Parlar Radio</span>
@@ -364,16 +379,16 @@
           </div>
         </div>
 
-        <!-- Show 4: Prisma -->
-        <div class="glass-card p-6 rounded-3xl flex flex-col justify-between group">
+        <!-- Prisma -->
+        <div class="glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="text-3xl">🇪🇸</span>
-              <span class="text-[10px] font-black px-3 py-1 rounded-full bg-purple-500/15 text-purple-400 border border-purple-500/30 uppercase tracking-wider">España</span>
+              <span class="text-[10px] font-black px-3 py-1 rounded-full bg-purple-500/15 text-purple-400 border border-purple-500/30 uppercase">España</span>
             </div>
-            <h4 class="font-montserrat font-black text-xl text-white group-hover:text-brand-cyan transition-colors">Prisma</h4>
+            <h4 class="font-montserrat font-black text-xl text-white">Prisma</h4>
             <p class="text-xs font-semibold text-slate-300 mt-1 mb-4">Conduce: <strong class="text-purple-400">Vladimir Hernández Solís</strong></p>
-            <p class="text-xs text-slate-400 leading-relaxed">Diversos enfoques sobre la música, actualidad y cultura global analizados desde un ángulo único.</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Enfoques diversos sobre música, actualidad y análisis cultural.</p>
           </div>
           <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-brand-cyan font-semibold">
             <span>Parlar Radio</span>
@@ -388,38 +403,35 @@
   <!-- NOSOTROS / CONTACTO -->
   <section id="nosotros" class="py-20 relative border-t border-brand-magenta/15 bg-slate-950/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
         
         <div>
           <h2 class="font-montserrat font-bold text-xs uppercase tracking-[0.3em] text-brand-cyan mb-2">Manifiesto</h2>
           <h3 class="font-montserrat font-black text-3xl sm:text-4xl text-white mb-6">Parlar Radio: SOMOS MUNDO</h3>
-          <p class="text-slate-300 leading-relaxed text-sm mb-4">
-            Parlar Radio se consolida como un puente auditivo entre continentes. Nuestra estación reúne locutores y creadores desde Ecuador, Argentina, México y España para brindar una programación diversa y libre.
-          </p>
-          <p class="text-slate-400 leading-relaxed text-sm mb-8">
-            Únete a nuestro canal oficial de WhatsApp o contáctanos directamente para ser parte de nuestra audiencia global.
+          <p class="text-slate-300 leading-relaxed text-sm mb-6">
+            Conectamos locutores desde Ecuador, Argentina, México y España para transmitir una voz verdaderamente global.
           </p>
 
-          <div class="flex flex-wrap gap-4" id="contacto">
-            <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-xl bg-emerald-600/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-600/30 font-bold text-xs flex items-center gap-2 transition-colors uppercase tracking-wider">
+          <div class="flex flex-wrap gap-3" id="contacto">
+            <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-xl bg-emerald-600/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-600/30 font-bold text-xs flex items-center gap-2 transition-colors uppercase">
               <i class="fa-brands fa-whatsapp text-lg"></i>
-              <span>Canal de WhatsApp</span>
+              <span>Canal Oficial</span>
             </a>
-            <a href="https://x.com/ParlarRadio" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-xl bg-slate-900 border border-slate-700 text-white hover:bg-slate-800 font-bold text-xs flex items-center gap-2 transition-colors uppercase tracking-wider">
+            <a href="https://x.com/ParlarRadio" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white hover:bg-slate-800 font-bold text-xs flex items-center gap-2 transition-colors uppercase">
               <i class="fa-brands fa-x-twitter text-lg"></i>
               <span>@ParlarRadio</span>
             </a>
           </div>
         </div>
 
-        <!-- Card de Contacto -->
-        <div class="glass-card p-8 rounded-3xl relative border-brand-magenta/30">
-          <h4 class="font-montserrat font-bold text-xl text-white mb-2">Cabina de Correo Oficial</h4>
-          <p class="text-xs text-slate-400 mb-6">Envíanos tus sugerencias, comentarios o saludos a la radio.</p>
+        <!-- Card Correo -->
+        <div class="glass-card p-6 sm:p-8 rounded-3xl relative border-brand-magenta/30">
+          <h4 class="font-montserrat font-bold text-lg sm:text-xl text-white mb-2">Contacto Oficial</h4>
+          <p class="text-xs text-slate-400 mb-6">Escríbenos directamente a nuestra casilla digital.</p>
           
-          <div class="bg-black p-4 rounded-xl border border-brand-magenta/30 flex items-center justify-between">
-            <span class="text-sm font-mono text-brand-cyan font-bold">parlar.radio@live.com</span>
-            <button onclick="copiarEmail()" class="px-4 py-2 rounded-lg bg-gradient-to-r from-brand-magenta to-brand-purple text-white text-xs font-black tracking-wider hover:opacity-90 transition-opacity uppercase">
+          <div class="bg-black p-3.5 sm:p-4 rounded-xl border border-brand-magenta/30 flex items-center justify-between gap-2 overflow-x-auto">
+            <span class="text-xs sm:text-sm font-mono text-brand-cyan font-bold truncate">parlar.radio@live.com</span>
+            <button onclick="copiarEmail()" class="px-3 sm:px-4 py-2 rounded-lg bg-gradient-to-r from-brand-magenta to-brand-purple text-white text-xs font-black hover:opacity-90 transition-opacity uppercase flex-shrink-0">
               Copiar
             </button>
           </div>
@@ -439,33 +451,30 @@
   </footer>
 
   <!-- BARRA REPRODUCTOR STICKY INFERIOR -->
-  <div class="fixed bottom-0 left-0 right-0 z-50 glass-panel border-t border-brand-magenta/30 px-4 py-3.5">
+  <div class="fixed bottom-0 left-0 right-0 z-50 glass-panel border-t border-brand-magenta/30 px-4 py-3">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       
-      <!-- Info de la Radio -->
-      <div class="flex items-center gap-3.5">
-        <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-brand-magenta to-brand-cyan p-0.5 flex items-center justify-center">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-magenta to-brand-cyan p-0.5 flex items-center justify-center flex-shrink-0">
           <div class="w-full h-full bg-black rounded-full flex items-center justify-center">
-            <i class="fa-solid fa-radio text-brand-magenta text-sm"></i>
+            <i class="fa-solid fa-radio text-brand-magenta text-xs"></i>
           </div>
         </div>
-        <div>
-          <h5 class="font-montserrat font-extrabold text-sm text-white leading-none">Parlar Radio</h5>
-          <span class="font-montserrat font-bold text-[10px] text-brand-cyan uppercase tracking-wider">SOMOS MUNDO</span>
+        <div class="truncate">
+          <h5 class="font-montserrat font-extrabold text-xs sm:text-sm text-white leading-none truncate">Parlar Radio</h5>
+          <span class="font-montserrat font-bold text-[9px] sm:text-[10px] text-brand-cyan uppercase tracking-wider">SOMOS MUNDO</span>
         </div>
       </div>
 
-      <!-- Control Play Sticky -->
       <div class="flex items-center gap-3">
-        <button onclick="togglePlay()" class="w-12 h-12 rounded-full bg-gradient-to-r from-brand-magenta to-brand-cyan text-white flex items-center justify-center shadow-lg shadow-brand-magenta/40 hover:scale-105 active:scale-95 transition-transform">
-          <i id="stickyPlayIcon" class="fa-solid fa-play text-lg ml-0.5"></i>
+        <button onclick="togglePlay()" class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r from-brand-magenta to-brand-cyan text-white flex items-center justify-center shadow-lg shadow-brand-magenta/40 hover:scale-105 active:scale-95 transition-transform">
+          <i id="stickyPlayIcon" class="fa-solid fa-play text-base sm:text-lg ml-0.5"></i>
         </button>
       </div>
 
-      <!-- Control de Volúmen -->
-      <div class="hidden sm:flex items-center gap-2.5">
+      <div class="hidden md:flex items-center gap-2.5">
         <i class="fa-solid fa-volume-high text-xs text-slate-400"></i>
-        <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)" class="w-24 accent-brand-magenta h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)" class="w-20 accent-brand-magenta h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
       </div>
 
     </div>
@@ -478,14 +487,13 @@
 
     function togglePlay() {
       if (!isPlaying) {
-        // Generador anti-caché para la señal MP3 en directo
         audio.src = "https://supreme-yeah-hoping-nature.trycloudflare.com/listen/parlar_radio/radio.mp3?t=" + new Date().getTime();
         audio.play().then(() => {
           isPlaying = true;
           updateUI(true);
         }).catch(err => {
           console.error("Error al reproducir el stream:", err);
-          alert("No se pudo conectar a la señal en vivo. Por favor reintente en unos segundos.");
+          alert("No se pudo conectar a la señal en vivo. Intente en unos segundos.");
         });
       } else {
         audio.pause();
@@ -497,6 +505,17 @@
 
     function setVolume(val) {
       audio.volume = val;
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const icon = document.getElementById('menuIcon');
+      menu.classList.toggle('hidden');
+      if (menu.classList.contains('hidden')) {
+        icon.className = "fa-solid fa-bars text-base";
+      } else {
+        icon.className = "fa-solid fa-xmark text-base";
+      }
     }
 
     function updateUI(playing) {
@@ -512,13 +531,13 @@
 
       if (playing) {
         navPlayIcon.className = "fa-solid fa-pause";
-        navPlayText.innerText = "PAUSAR";
+        if (navPlayText) navPlayText.innerText = "PAUSAR";
         
         heroPlayIcon.className = "fa-solid fa-pause text-base";
         heroPlayText.innerText = "PAUSAR SEÑAL";
 
-        cardPlayIcon.className = "fa-solid fa-pause text-2xl";
-        stickyPlayIcon.className = "fa-solid fa-pause text-lg";
+        cardPlayIcon.className = "fa-solid fa-pause text-xl sm:text-2xl";
+        stickyPlayIcon.className = "fa-solid fa-pause text-base sm:text-lg";
 
         liveBadge.className = "absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-emerald-500 text-[10px] font-black tracking-widest text-white uppercase animate-pulse shadow-lg shadow-emerald-500/40";
         liveBadge.innerText = "EN VIVO";
@@ -529,18 +548,18 @@
         eqVisualizer.className = "flex items-center justify-center gap-1.5 h-10 mb-6 opacity-100 animate-pulse";
       } else {
         navPlayIcon.className = "fa-solid fa-play";
-        navPlayText.innerText = "ESCUCHAR";
+        if (navPlayText) navPlayText.innerText = "ESCUCHAR";
 
         heroPlayIcon.className = "fa-solid fa-play text-base";
         heroPlayText.innerText = "REPRODUCIR SEÑAL";
 
-        cardPlayIcon.className = "fa-solid fa-play text-2xl ml-1";
-        stickyPlayIcon.className = "fa-solid fa-play text-lg ml-0.5";
+        cardPlayIcon.className = "fa-solid fa-play text-xl sm:text-2xl ml-1";
+        stickyPlayIcon.className = "fa-solid fa-play text-base sm:text-lg ml-0.5";
 
         liveBadge.className = "absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-slate-900 border border-slate-700 text-[10px] font-black tracking-widest text-slate-400 uppercase";
         liveBadge.innerText = "OFFLINE";
 
-        statusText.innerText = "Haz clic para encender el stream";
+        statusText.innerText = "Toca para escuchar en directo";
         statusText.className = "text-xs text-slate-400 font-medium";
 
         eqVisualizer.className = "flex items-center justify-center gap-1.5 h-10 mb-6 opacity-30";
