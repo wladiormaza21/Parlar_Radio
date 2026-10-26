@@ -4,16 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PARLAR RADIO | SOMOS MUNDO</title>
+<title>PARLAR RADIO | Somos Mundo</title>
 
-<meta name="description" content="PARLAR RADIO - Somos Mundo. Música, cultura, información y entretenimiento desde Ecuador para el mundo.">
+<!-- Fuentes -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Iconos -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 
-/* =========================================================
-   PARLAR RADIO
-   DISEÑO WEB PROFESIONAL
-   ========================================================= */
+:root{
+    --bg:#05070d;
+    --bg2:#090d16;
+    --panel:#0c111c;
+    --panel2:#101622;
+
+    --white:#ffffff;
+    --soft:#cbd1dc;
+    --muted:#7e8796;
+
+    --pink:#ff0080;
+    --pink2:#ff3ca0;
+
+    --cyan:#00d9ff;
+
+    --border:rgba(255,255,255,.08);
+}
 
 *{
     margin:0;
@@ -26,899 +46,938 @@ html{
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#020611;
-    color:#ffffff;
+    font-family:'Inter',sans-serif;
+    background:
+        radial-gradient(circle at 15% 15%,rgba(255,0,128,.10),transparent 30%),
+        radial-gradient(circle at 85% 35%,rgba(0,217,255,.07),transparent 30%),
+        linear-gradient(180deg,#05070d,#020409);
+    color:white;
+    min-height:100vh;
     overflow-x:hidden;
 }
 
-/* =========================================================
-   FONDO
-   ========================================================= */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-2;
-
-    background:
-        radial-gradient(circle at 15% 20%, rgba(255,0,127,.16), transparent 32%),
-        radial-gradient(circle at 85% 25%, rgba(0,229,255,.13), transparent 30%),
-        radial-gradient(circle at 50% 100%, rgba(0,120,255,.12), transparent 40%),
-        #020611;
+a{
+    color:inherit;
+    text-decoration:none;
 }
 
-body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-1;
-    pointer-events:none;
-
-    background-image:
-        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
-
-    background-size:40px 40px;
+button{
+    font-family:inherit;
 }
 
-/* =========================================================
-   VARIABLES
-   ========================================================= */
-
-:root{
-    --pink:#ff007f;
-    --cyan:#00e5ff;
-    --yellow:#ffd400;
-    --green:#00ff91;
-    --dark:#020611;
-    --panel:rgba(8,15,31,.82);
-    --border:rgba(255,255,255,.10);
-}
-
-/* =========================================================
+/* =====================================================
    HEADER
-   ========================================================= */
+===================================================== */
 
-header{
+.header{
     position:sticky;
     top:0;
     z-index:1000;
 
     height:82px;
 
-    background:rgba(2,6,17,.92);
+    background:rgba(5,7,13,.92);
     backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
 
-    border-bottom:1px solid rgba(0,229,255,.16);
+    border-bottom:1px solid rgba(255,255,255,.07);
 }
 
 .header-inner{
-    max-width:1250px;
+    max-width:1200px;
     height:100%;
     margin:auto;
-    padding:0 25px;
+
+    padding:0 22px;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
 }
 
-/* =========================================================
-   LOGOTIPO
-   ========================================================= */
-
 .brand{
     display:flex;
     align-items:center;
     gap:13px;
-    text-decoration:none;
 }
 
-.logo-symbol{
-    width:48px;
-    height:48px;
+.brand-logo{
+    width:52px;
+    height:52px;
+
+    object-fit:contain;
 
     border-radius:50%;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    filter:
+        drop-shadow(0 0 8px rgba(255,0,128,.25));
+}
 
-    font-size:21px;
-    font-weight:900;
-
-    color:white;
-
-    background:
-        linear-gradient(#060b18,#060b18) padding-box,
-        conic-gradient(
-            from 0deg,
-            var(--pink),
-            var(--cyan),
-            var(--yellow),
-            var(--green),
-            var(--pink)
-        ) border-box;
-
-    border:3px solid transparent;
-
-    box-shadow:
-        0 0 18px rgba(255,0,127,.35),
-        0 0 25px rgba(0,229,255,.18);
+.brand-text{
+    line-height:1;
 }
 
 .brand-name{
-    font-size:24px;
+    font-size:22px;
     font-weight:900;
-    letter-spacing:-1px;
+    letter-spacing:-.8px;
 }
 
 .brand-name span{
     color:var(--pink);
 }
 
-.brand-slogan{
-    margin-top:2px;
+.brand-tagline{
+    margin-top:7px;
 
-    color:var(--cyan);
-
-    font-size:9px;
-    font-weight:bold;
-
-    letter-spacing:5px;
-}
-
-/* =========================================================
-   NAVEGACIÓN
-   ========================================================= */
-
-nav{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-nav a{
-    color:#d8e0ec;
-    text-decoration:none;
-
-    font-size:12px;
+    font-size:8px;
     font-weight:800;
 
-    padding:11px 15px;
+    letter-spacing:5px;
 
-    border-radius:10px;
+    color:var(--cyan);
+}
+
+.desktop-nav{
+    display:flex;
+    gap:30px;
+    align-items:center;
+}
+
+.desktop-nav a{
+    font-size:12px;
+    font-weight:700;
+    color:#aeb5c2;
 
     transition:.25s;
 }
 
-nav a:hover{
+.desktop-nav a:hover{
     color:white;
-    background:rgba(0,229,255,.08);
 }
 
-.whatsapp{
-    border:1px solid rgba(0,255,145,.35);
-    color:#00ff91!important;
-}
-
-/* =========================================================
-   HERO
-   ========================================================= */
-
-.hero{
-    min-height:720px;
-
+.whatsapp-btn{
     display:flex;
     align-items:center;
+    gap:8px;
 
-    position:relative;
-    overflow:hidden;
+    padding:10px 15px;
+
+    border-radius:10px;
+
+    border:1px solid rgba(37,211,102,.25);
+
+    color:#7eeaa2;
+
+    font-size:11px;
+    font-weight:700;
 }
 
-.hero-inner{
-    max-width:1250px;
-    width:100%;
+.whatsapp-btn:hover{
+    background:rgba(37,211,102,.08);
+}
 
+.menu-btn{
+    display:none;
+
+    width:44px;
+    height:44px;
+
+    border:1px solid var(--border);
+    border-radius:12px;
+
+    background:#0d121c;
+    color:white;
+
+    font-size:20px;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+    max-width:1200px;
     margin:auto;
-    padding:80px 25px;
 
+    padding:75px 22px 65px;
+}
+
+.hero-grid{
     display:grid;
-    grid-template-columns:1.05fr .95fr;
+    grid-template-columns:1fr 460px;
 
     gap:70px;
+
     align-items:center;
 }
 
-/* =========================================================
-   HERO TEXTO
-   ========================================================= */
+.hero-copy{
+    max-width:650px;
+}
 
 .live-label{
     display:inline-flex;
     align-items:center;
     gap:9px;
 
-    padding:9px 15px;
+    padding:8px 13px;
 
-    border-radius:50px;
+    border-radius:30px;
 
-    background:rgba(255,0,127,.08);
-    border:1px solid rgba(255,0,127,.35);
+    background:rgba(255,0,128,.06);
 
-    font-size:11px;
-    font-weight:900;
-    letter-spacing:1.5px;
+    border:1px solid rgba(255,0,128,.25);
+
+    color:#ff75b9;
+
+    font-size:10px;
+    font-weight:800;
+
+    letter-spacing:1.8px;
+
+    margin-bottom:25px;
 }
 
 .live-dot{
-    width:9px;
-    height:9px;
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
 
     background:var(--pink);
-    border-radius:50%;
 
     box-shadow:0 0 12px var(--pink);
 
-    animation:pulse 1.4s infinite;
+    animation:livePulse 1.5s infinite;
 }
 
-@keyframes pulse{
+@keyframes livePulse{
+
     0%,100%{
-        transform:scale(1);
         opacity:1;
+        transform:scale(1);
     }
 
     50%{
-        transform:scale(1.6);
         opacity:.45;
+        transform:scale(.7);
     }
+
 }
 
-.hero h1{
-    margin-top:25px;
-
-    font-size:clamp(50px,7vw,92px);
+.hero-title{
+    font-size:clamp(48px,7vw,82px);
 
     line-height:.92;
 
     font-weight:900;
 
     letter-spacing:-4px;
+
+    margin-bottom:15px;
 }
 
-.hero h1 .silver{
-    background:linear-gradient(
-        180deg,
-        #ffffff,
-        #cbd5e1,
-        #687386
-    );
-
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+.hero-title .white{
+    color:white;
 }
 
-.hero h1 .pink{
+.hero-title .pink{
     color:var(--pink);
-
-    text-shadow:
-        0 0 25px rgba(255,0,127,.45);
 }
 
-.slogan{
-    margin-top:16px;
+.hero-subtitle{
+    font-size:20px;
 
-    font-size:clamp(18px,2.5vw,30px);
+    font-weight:700;
 
-    font-weight:900;
+    letter-spacing:7px;
 
-    letter-spacing:8px;
+    color:#d7dbe2;
 
-    color:var(--cyan);
+    margin-bottom:24px;
 }
 
 .hero-description{
-    max-width:650px;
+    color:#8f98a8;
 
-    margin-top:25px;
+    font-size:15px;
 
-    color:#aab6c8;
-
-    font-size:16px;
     line-height:1.8;
+
+    max-width:590px;
+
+    margin-bottom:30px;
 }
 
-/* =========================================================
-   BOTONES
-   ========================================================= */
-
-.buttons{
-    margin-top:32px;
-
+.hero-buttons{
     display:flex;
-    gap:14px;
+    gap:12px;
     flex-wrap:wrap;
 }
 
-.btn{
+.btn-primary{
     border:none;
+
+    padding:15px 23px;
+
+    border-radius:12px;
+
+    background:var(--pink);
+
+    color:white;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    letter-spacing:.7px;
+
     cursor:pointer;
 
-    text-decoration:none;
-
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-
-    gap:10px;
-
-    padding:16px 25px;
-
-    border-radius:14px;
-
-    font-weight:900;
-    font-size:13px;
+    box-shadow:0 10px 30px rgba(255,0,128,.18);
 
     transition:.25s;
 }
 
-.btn:hover{
-    transform:translateY(-3px);
+.btn-primary:hover{
+    transform:translateY(-2px);
+    background:#ff168b;
 }
 
-.btn-play{
+.btn-secondary{
+    padding:15px 21px;
+
+    border-radius:12px;
+
+    background:#0d121b;
+
+    border:1px solid var(--border);
+
+    color:#d4d8df;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    transition:.25s;
+}
+
+.btn-secondary:hover{
+    border-color:rgba(255,255,255,.18);
     color:white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff007f,
-            #e50072,
-            #ff007f
-        );
-
-    box-shadow:
-        0 10px 35px rgba(255,0,127,.3);
 }
 
-.btn-whatsapp{
-    color:#00ff91;
+/* =====================================================
+   LOGO SHOWCASE
+===================================================== */
 
-    background:rgba(0,255,145,.06);
-
-    border:1px solid rgba(0,255,145,.35);
-}
-
-/* =========================================================
-   LOGO PROTAGONISTA
-   ========================================================= */
-
-.hero-logo{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.logo-card{
-    width:min(500px,90vw);
-    aspect-ratio:1/1;
-
-    border-radius:38px;
-
-    padding:12px;
-
-    background:
-        linear-gradient(#050a16,#050a16) padding-box,
-        conic-gradient(
-            from 0deg,
-            var(--pink),
-            var(--cyan),
-            var(--yellow),
-            var(--green),
-            var(--pink)
-        ) border-box;
-
-    border:3px solid transparent;
-
-    box-shadow:
-        0 0 30px rgba(255,0,127,.25),
-        0 0 60px rgba(0,229,255,.15);
-
+.logo-showcase{
     position:relative;
+
+    display:flex;
+
+    justify-content:center;
 }
 
-.logo-card-inner{
+.logo-panel{
+    position:relative;
+
     width:100%;
-    height:100%;
+    max-width:430px;
+
+    aspect-ratio:1/1;
 
     border-radius:28px;
 
     background:
         radial-gradient(circle at center,
-            rgba(255,0,127,.16),
-            transparent 55%),
-        #050914;
+        rgba(255,0,128,.09),
+        transparent 45%),
+        #070a11;
+
+    border:1px solid rgba(255,255,255,.09);
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    flex-direction:column;
-
-    text-align:center;
-
     overflow:hidden;
+
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.55);
 }
 
-.radio-icon{
-    width:150px;
-    height:150px;
+.logo-panel::before{
+    content:"";
+
+    position:absolute;
+
+    inset:18px;
+
+    border-radius:22px;
+
+    border:1px solid rgba(255,0,128,.20);
+
+    pointer-events:none;
+}
+
+.logo-panel::after{
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+    height:260px;
 
     border-radius:50%;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    background:rgba(255,0,128,.10);
 
-    font-size:60px;
-
-    background:
-        linear-gradient(#060b18,#060b18) padding-box,
-        conic-gradient(
-            var(--pink),
-            var(--cyan),
-            var(--yellow),
-            var(--green),
-            var(--pink)
-        ) border-box;
-
-    border:8px solid transparent;
-
-    box-shadow:
-        0 0 30px rgba(255,0,127,.35);
-
-    margin-bottom:25px;
+    filter:blur(70px);
 }
 
-.logo-title{
-    font-size:43px;
-    font-weight:900;
-    letter-spacing:-2px;
+.main-logo{
+    position:relative;
+
+    z-index:2;
+
+    width:78%;
+
+    max-width:340px;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(0 0 25px rgba(255,0,128,.25));
 }
 
-.logo-title span{
-    color:var(--pink);
-}
-
-.logo-subtitle{
-    color:var(--cyan);
-
-    font-weight:900;
-    font-size:13px;
-
-    letter-spacing:7px;
-
-    margin-top:5px;
-}
-
-/* =========================================================
-   SECCIÓN ESCUCHA
-   ========================================================= */
-
-.listen{
-    padding:80px 25px;
-
-    border-top:1px solid rgba(255,255,255,.06);
-    border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.section-title{
-    text-align:center;
-
-    max-width:700px;
-
-    margin:0 auto 45px;
-}
-
-.section-title small{
-    color:var(--cyan);
-
-    font-size:11px;
-    font-weight:900;
-
-    letter-spacing:3px;
-}
-
-.section-title h2{
-    margin-top:10px;
-
-    font-size:38px;
-    font-weight:900;
-}
-
-.section-title p{
-    margin-top:12px;
-
-    color:#8997aa;
-
-    font-size:14px;
-}
-
-/* =========================================================
+/* =====================================================
    PLAYER
-   ========================================================= */
+===================================================== */
 
-.player{
-    max-width:850px;
-    margin:auto;
+.player-section{
+    max-width:1050px;
 
-    padding:28px;
+    margin:0 auto 80px;
 
-    border-radius:25px;
+    padding:0 22px;
+}
 
-    background:rgba(8,15,31,.9);
+.player-card{
+    background:
+        linear-gradient(145deg,
+        rgba(255,255,255,.045),
+        rgba(255,255,255,.015));
 
-    border:1px solid rgba(0,229,255,.18);
+    border:1px solid rgba(255,255,255,.09);
 
-    box-shadow:
-        0 20px 70px rgba(0,0,0,.45);
+    border-radius:24px;
+
+    padding:22px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.4);
 }
 
 .player-top{
     display:flex;
+
     align-items:center;
-    gap:18px;
+
+    justify-content:space-between;
+
+    margin-bottom:20px;
 }
 
-.player-logo{
-    width:65px;
-    height:65px;
+.player-title{
+    font-size:11px;
+
+    font-weight:800;
+
+    color:#9098a6;
+
+    letter-spacing:2px;
+}
+
+.on-air{
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    color:#ff72b6;
+
+    font-size:10px;
+    font-weight:800;
+}
+
+.on-air-dot{
+    width:6px;
+    height:6px;
 
     border-radius:50%;
 
-    display:flex;
+    background:var(--pink);
+
+    box-shadow:0 0 10px var(--pink);
+}
+
+/* SONG AREA */
+
+.song-area{
+    display:grid;
+
+    grid-template-columns:190px 1fr;
+
+    gap:25px;
+
     align-items:center;
-    justify-content:center;
-
-    font-size:24px;
-    font-weight:900;
-
-    background:
-        linear-gradient(#070b16,#070b16) padding-box,
-        linear-gradient(135deg,var(--pink),var(--cyan)) border-box;
-
-    border:3px solid transparent;
 }
 
-.player-info h3{
-    font-size:18px;
-    font-weight:900;
+.cover-wrapper{
+    position:relative;
+
+    width:190px;
+    height:190px;
 }
 
-.player-info p{
-    color:var(--cyan);
+.cover{
+    width:100%;
+    height:100%;
 
-    font-size:11px;
-    font-weight:bold;
+    object-fit:cover;
 
-    margin-top:5px;
+    border-radius:18px;
+
+    background:#080b12;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.5);
+
+    transition:opacity .35s;
 }
 
-.equalizer{
-    height:70px;
-
-    margin:25px 0;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    gap:4px;
+.cover.playing{
+    box-shadow:
+        0 0 0 1px rgba(255,0,128,.15),
+        0 20px 50px rgba(255,0,128,.12);
 }
 
-.equalizer span{
-    width:5px;
-
-    height:15px;
-
-    border-radius:5px;
-
-    background:linear-gradient(
-        to top,
-        var(--pink),
-        var(--cyan)
-    );
-
-    animation:eq 1s ease-in-out infinite alternate;
+.song-info{
+    min-width:0;
 }
 
-.equalizer span:nth-child(2){animation-delay:.1s}
-.equalizer span:nth-child(3){animation-delay:.2s}
-.equalizer span:nth-child(4){animation-delay:.3s}
-.equalizer span:nth-child(5){animation-delay:.4s}
-.equalizer span:nth-child(6){animation-delay:.5s}
-.equalizer span:nth-child(7){animation-delay:.6s}
-.equalizer span:nth-child(8){animation-delay:.7s}
-.equalizer span:nth-child(9){animation-delay:.8s}
-.equalizer span:nth-child(10){animation-delay:.9s}
+.now-playing{
+    color:#777f8e;
 
-@keyframes eq{
-    from{height:10px}
-    to{height:55px}
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    margin-bottom:9px;
+}
+
+.song-title{
+    font-size:27px;
+
+    font-weight:800;
+
+    line-height:1.15;
+
+    color:white;
+
+    margin-bottom:8px;
+
+    word-break:break-word;
+}
+
+.artist{
+    color:#9aa2af;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    margin-bottom:24px;
 }
 
 .player-controls{
     display:flex;
-    justify-content:center;
+
     align-items:center;
-    gap:18px;
+
+    gap:15px;
 }
 
 .play-button{
-    width:64px;
-    height:64px;
+    width:56px;
+    height:56px;
 
     border:none;
+
     border-radius:50%;
 
-    background:linear-gradient(
-        135deg,
-        var(--pink),
-        #d60068
-    );
+    background:var(--pink);
 
     color:white;
 
-    font-size:22px;
+    font-size:18px;
 
     cursor:pointer;
 
-    box-shadow:0 0 30px rgba(255,0,127,.35);
+    box-shadow:0 10px 30px rgba(255,0,128,.25);
+
+    transition:.25s;
 }
 
-.status{
-    padding:8px 12px;
+.play-button:hover{
+    transform:scale(1.05);
+}
 
-    border-radius:20px;
+.volume{
+    display:flex;
 
-    background:rgba(255,0,127,.08);
+    align-items:center;
+
+    gap:9px;
+
+    color:#858d9a;
+}
+
+.volume input{
+    width:110px;
+
+    accent-color:var(--pink);
+
+    cursor:pointer;
+}
+
+.player-status{
+    margin-left:auto;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    color:#656d7a;
+
+    letter-spacing:1px;
+}
+
+/* =====================================================
+   FEATURES
+===================================================== */
+
+.features{
+    max-width:1100px;
+
+    margin:0 auto 80px;
+
+    padding:0 22px;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:15px;
+}
+
+.feature{
+    padding:22px;
+
+    background:#080c14;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+}
+
+.feature i{
+    font-size:18px;
 
     color:var(--pink);
 
-    font-size:10px;
-    font-weight:900;
-
-    border:1px solid rgba(255,0,127,.2);
+    margin-bottom:14px;
 }
 
-/* =========================================================
-   PROGRAMACIÓN
-   ========================================================= */
+.feature h3{
+    font-size:13px;
 
-.programs{
-    max-width:1250px;
-    margin:auto;
+    margin-bottom:7px;
+}
 
-    padding:80px 25px;
+.feature p{
+    color:#747d8c;
+
+    font-size:11px;
+
+    line-height:1.6;
+}
+
+/* =====================================================
+   PROGRAMS
+===================================================== */
+
+.program-section{
+    max-width:1100px;
+
+    margin:0 auto 90px;
+
+    padding:0 22px;
+}
+
+.section-header{
+    margin-bottom:28px;
+}
+
+.section-label{
+    color:var(--pink);
+
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    margin-bottom:8px;
+}
+
+.section-title{
+    font-size:30px;
+
+    font-weight:800;
+
+    letter-spacing:-1px;
+}
+
+.section-description{
+    color:#777f8d;
+
+    font-size:13px;
+
+    margin-top:8px;
 }
 
 .program-grid{
     display:grid;
 
-    grid-template-columns:
-        repeat(4,1fr);
+    grid-template-columns:repeat(4,1fr);
 
-    gap:18px;
+    gap:15px;
 }
 
 .program{
-    padding:25px;
+    overflow:hidden;
 
-    border-radius:20px;
+    border-radius:15px;
 
-    background:rgba(8,15,31,.75);
+    background:#090d15;
 
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid var(--border);
 
     transition:.3s;
 }
 
 .program:hover{
-    transform:translateY(-7px);
+    transform:translateY(-4px);
 
-    border-color:rgba(255,0,127,.45);
-
-    box-shadow:0 15px 40px rgba(0,0,0,.3);
+    border-color:rgba(255,0,128,.25);
 }
 
-.program-icon{
-    width:55px;
-    height:55px;
+.program-image{
+    width:100%;
+    aspect-ratio:16/10;
 
-    border-radius:15px;
+    object-fit:cover;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    opacity:.85;
+}
 
-    font-size:23px;
+.program-content{
+    padding:15px;
+}
 
-    background:rgba(255,0,127,.1);
-
+.program-category{
     color:var(--pink);
 
-    margin-bottom:20px;
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:1.5px;
 }
 
 .program h3{
-    font-size:18px;
+    font-size:14px;
 
-    margin-bottom:8px;
+    margin:6px 0;
 }
 
 .program p{
-    color:#8997aa;
+    color:#747d8a;
 
-    font-size:12px;
-
-    line-height:1.6;
+    font-size:10px;
 }
 
-/* =========================================================
+/* =====================================================
    FOOTER
-   ========================================================= */
+===================================================== */
 
 footer{
-    padding:60px 25px 120px;
+    border-top:1px solid var(--border);
 
-    border-top:1px solid rgba(255,255,255,.08);
+    padding:45px 22px 110px;
 
-    background:#01040b;
+    background:#03050a;
 }
 
 .footer-inner{
-    max-width:1250px;
+    max-width:1100px;
+
     margin:auto;
 
     display:grid;
 
-    grid-template-columns:1.4fr 1fr 1fr;
+    grid-template-columns:1.5fr 1fr 1fr;
 
     gap:50px;
 }
 
-footer h3{
-    font-size:20px;
-}
+.footer-logo{
+    width:180px;
 
-footer h3 span{
-    color:var(--pink);
-}
-
-footer h4{
     margin-bottom:15px;
-
-    color:white;
-
-    font-size:12px;
-
-    letter-spacing:2px;
 }
 
-footer p,
-footer a{
-    color:#748095;
+.footer p{
+    color:#697180;
 
-    font-size:12px;
+    font-size:11px;
 
     line-height:1.8;
 
-    text-decoration:none;
+    max-width:430px;
 }
 
-footer a:hover{
-    color:var(--cyan);
+.footer h4{
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    margin-bottom:15px;
+}
+
+.footer a{
+    display:block;
+
+    color:#737c89;
+
+    font-size:11px;
+
+    margin-bottom:10px;
+}
+
+.footer a:hover{
+    color:white;
 }
 
 .copyright{
-    max-width:1250px;
+    max-width:1100px;
 
-    margin:40px auto 0;
+    margin:35px auto 0;
 
-    padding-top:25px;
+    padding-top:20px;
 
-    border-top:1px solid rgba(255,255,255,.07);
+    border-top:1px solid var(--border);
 
-    color:#566174;
+    color:#505866;
 
-    font-size:10px;
-
-    text-align:center;
+    font-size:9px;
 }
 
-/* =========================================================
-   PLAYER FIJO
-   ========================================================= */
+/* =====================================================
+   MOBILE PLAYER
+===================================================== */
 
 .bottom-player{
     position:fixed;
 
-    bottom:0;
     left:0;
     right:0;
+    bottom:0;
 
     z-index:2000;
 
-    background:rgba(2,6,17,.96);
+    background:rgba(5,7,13,.96);
 
-    backdrop-filter:blur(18px);
+    backdrop-filter:blur(20px);
 
-    border-top:1px solid rgba(0,229,255,.18);
+    border-top:1px solid rgba(255,255,255,.08);
 
-    padding:10px 20px;
+    padding:9px 14px;
+
+    display:none;
 }
 
 .bottom-inner{
-    max-width:1250px;
+    max-width:1000px;
 
     margin:auto;
 
     display:flex;
-    align-items:center;
-    justify-content:space-between;
 
-    gap:20px;
-}
-
-.bottom-brand{
-    display:flex;
     align-items:center;
+
     gap:12px;
 }
 
-.bottom-symbol{
+.bottom-cover{
     width:42px;
     height:42px;
 
-    border-radius:50%;
+    border-radius:8px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-weight:900;
-
-    border:2px solid var(--pink);
+    object-fit:cover;
 }
 
-.bottom-brand strong{
-    font-size:12px;
+.bottom-info{
+    min-width:0;
+
+    flex:1;
 }
 
-.bottom-brand small{
-    display:block;
+.bottom-title{
+    font-size:10px;
 
-    color:var(--cyan);
+    font-weight:800;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.bottom-artist{
+    color:#707988;
 
     font-size:9px;
 
     margin-top:3px;
-}
 
-.bottom-controls{
-    display:flex;
-    align-items:center;
-    gap:12px;
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
 }
 
 .bottom-play{
-    width:45px;
-    height:45px;
+    width:42px;
+    height:42px;
 
     border:none;
 
@@ -931,26 +990,39 @@ footer a:hover{
     cursor:pointer;
 }
 
-.volume{
-    width:100px;
-}
+/* =====================================================
+   MOBILE
+===================================================== */
 
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
+@media(max-width:850px){
 
-@media(max-width:900px){
-
-    nav{
+    .desktop-nav,
+    .whatsapp-btn{
         display:none;
     }
 
-    .hero-inner{
+    .menu-btn{
+        display:block;
+    }
+
+    .hero{
+        padding-top:45px;
+    }
+
+    .hero-grid{
         grid-template-columns:1fr;
 
+        gap:40px;
+    }
+
+    .hero-copy{
         text-align:center;
 
-        gap:45px;
+        margin:auto;
+    }
+
+    .hero-buttons{
+        justify-content:center;
     }
 
     .hero-description{
@@ -958,16 +1030,8 @@ footer a:hover{
         margin-right:auto;
     }
 
-    .buttons{
-        justify-content:center;
-    }
-
-    .hero-logo{
-        order:-1;
-    }
-
-    .logo-card{
-        width:min(390px,90vw);
+    .logo-panel{
+        max-width:370px;
     }
 
     .program-grid{
@@ -975,132 +1039,129 @@ footer a:hover{
     }
 
     .footer-inner{
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:1fr;
+        gap:30px;
     }
 
 }
 
 @media(max-width:600px){
 
-    header{
-        height:74px;
+    .header{
+        height:72px;
     }
 
     .header-inner{
         padding:0 16px;
     }
 
-    .logo-symbol{
-        width:42px;
-        height:42px;
-
-        font-size:18px;
+    .brand-logo{
+        width:43px;
+        height:43px;
     }
 
     .brand-name{
-        font-size:19px;
+        font-size:18px;
     }
 
-    .brand-slogan{
+    .brand-tagline{
         font-size:7px;
-        letter-spacing:3px;
+        letter-spacing:4px;
     }
 
     .hero{
-        min-height:auto;
+        padding:38px 16px 45px;
     }
 
-    .hero-inner{
-        padding:55px 18px 65px;
+    .hero-title{
+        font-size:48px;
+        letter-spacing:-2.5px;
     }
 
-    .hero h1{
-        font-size:55px;
-        letter-spacing:-3px;
-    }
-
-    .slogan{
-        font-size:16px;
-        letter-spacing:5px;
+    .hero-subtitle{
+        font-size:14px;
+        letter-spacing:4px;
     }
 
     .hero-description{
-        font-size:14px;
+        font-size:13px;
     }
 
-    .buttons{
-        flex-direction:column;
+    .logo-panel{
+        border-radius:22px;
     }
 
-    .btn{
-        width:100%;
+    .player-section{
+        padding:0 16px;
+
+        margin-bottom:55px;
     }
 
-    .logo-card{
-        border-radius:25px;
-        padding:8px;
+    .player-card{
+        padding:15px;
+
+        border-radius:19px;
     }
 
-    .radio-icon{
-        width:110px;
-        height:110px;
+    .song-area{
+        grid-template-columns:1fr;
 
-        font-size:42px;
+        text-align:center;
+    }
 
+    .cover-wrapper{
+        width:min(100%,270px);
+        height:auto;
+        aspect-ratio:1;
+
+        margin:auto;
+    }
+
+    .song-title{
+        font-size:21px;
+    }
+
+    .artist{
+        font-size:12px;
         margin-bottom:18px;
     }
 
-    .logo-title{
-        font-size:30px;
+    .player-controls{
+        justify-content:center;
     }
 
-    .logo-subtitle{
-        font-size:9px;
-        letter-spacing:5px;
+    .player-status{
+        display:none;
     }
 
-    .section-title h2{
-        font-size:30px;
+    .volume{
+        display:none;
     }
 
-    .listen,
-    .programs{
-        padding:60px 18px;
+    .features{
+        grid-template-columns:1fr;
+
+        padding:0 16px;
     }
 
-    .player{
-        padding:20px 15px;
+    .program-section{
+        padding:0 16px;
     }
 
     .program-grid{
         grid-template-columns:1fr;
     }
 
-    .footer-inner{
-        grid-template-columns:1fr;
-        gap:30px;
+    footer{
+        padding-left:16px;
+        padding-right:16px;
+        padding-bottom:90px;
     }
 
     .bottom-player{
-        padding:8px 12px;
+        display:block;
     }
 
-    .bottom-brand div:last-child{
-        display:none;
-    }
-
-    .volume{
-        width:65px;
-    }
-
-}
-
-/* =========================================================
-   OCULTAR AUDIO NATIVO
-   ========================================================= */
-
-audio{
-    display:none;
 }
 
 </style>
@@ -1108,632 +1169,1017 @@ audio{
 
 <body>
 
-<!-- =======================================================
+<!-- =====================================================
      HEADER
-======================================================= -->
+===================================================== -->
 
-<header>
+<header class="header">
 
-<div class="header-inner">
+    <div class="header-inner">
 
-<a href="#inicio" class="brand">
+        <a href="#inicio" class="brand">
 
-<div class="logo-symbol">
-PR
-</div>
+            <!--
+                IMPORTANTE:
+                Sube tu logotipo a GitHub con el nombre:
+                logo.png
+            -->
 
-<div>
+            <img
+                src="logo.png"
+                class="brand-logo"
+                alt="Parlar Radio">
 
-<div class="brand-name">
-PARLAR <span>RADIO</span>
-</div>
+            <div class="brand-text">
 
-<div class="brand-slogan">
-SOMOS MUNDO
-</div>
+                <div class="brand-name">
+                    PARLAR <span>RADIO</span>
+                </div>
 
-</div>
+                <div class="brand-tagline">
+                    SOMOS MUNDO
+                </div>
 
-</a>
+            </div>
 
-<nav>
+        </a>
 
-<a href="#inicio">Inicio</a>
-<a href="#escuchar">Escuchar</a>
-<a href="#programacion">Programación</a>
-<a href="#contacto">Contacto</a>
+        <nav class="desktop-nav">
 
-<a
-href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t"
-target="_blank"
-class="whatsapp"
->
-WhatsApp
-</a>
+            <a href="#inicio">Inicio</a>
 
-</nav>
+            <a href="#radio">Radio</a>
 
-</div>
+            <a href="#programacion">Programación</a>
+
+            <a href="#contacto">Contacto</a>
+
+        </nav>
+
+        <a
+            href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t"
+            target="_blank"
+            class="whatsapp-btn">
+
+            <i class="fa-brands fa-whatsapp"></i>
+
+            Canal WhatsApp
+
+        </a>
+
+        <button class="menu-btn" onclick="toggleMenu()">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+    </div>
 
 </header>
 
 
-<!-- =======================================================
+<!-- =====================================================
      HERO
-======================================================= -->
+===================================================== -->
 
-<section class="hero" id="inicio">
+<main>
 
-<div class="hero-inner">
+<section id="inicio" class="hero">
 
-<div>
+    <div class="hero-grid">
 
-<div class="live-label">
+        <div class="hero-copy">
 
-<span class="live-dot"></span>
+            <div class="live-label">
 
-PARLAR RADIO · EN VIVO
+                <span class="live-dot"></span>
 
-</div>
+                PARLAR RADIO · EN VIVO
+
+            </div>
+
+            <h1 class="hero-title">
+
+                <span class="white">PARLAR</span>
+
+                <span class="pink">RADIO</span>
+
+            </h1>
+
+            <div class="hero-subtitle">
+                SOMOS MUNDO
+            </div>
+
+            <p class="hero-description">
+
+                Una radio internacional desde Ecuador.
+                Música, cultura, información y entretenimiento
+                conectando voces y comunidades alrededor del mundo.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <button
+                    class="btn-primary"
+                    onclick="togglePlay()">
+
+                    <i class="fa-solid fa-play" id="heroIcon"></i>
+
+                    <span id="heroText">
+                        ESCUCHAR EN VIVO
+                    </span>
+
+                </button>
+
+                <a
+                    href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t"
+                    target="_blank"
+                    class="btn-secondary">
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                    UNIRSE AL CANAL
+
+                </a>
+
+            </div>
+
+        </div>
 
 
-<h1>
+        <!-- LOGOTIPO PROTAGONISTA -->
 
-<span class="silver">PARLAR</span>
-<span class="pink">RADIO</span>
+        <div class="logo-showcase">
 
-</h1>
+            <div class="logo-panel">
 
+                <img
+                    src="logo.png"
+                    class="main-logo"
+                    alt="PARLAR RADIO">
 
-<div class="slogan">
-SOMOS MUNDO
-</div>
+            </div>
 
+        </div>
 
-<p class="hero-description">
-
-Una radio internacional nacida en Ecuador.
-Música, cultura, información, entretenimiento
-y nuestras voces conectando al mundo.
-
-</p>
-
-
-<div class="buttons">
-
-<button
-class="btn btn-play"
-onclick="togglePlay()"
->
-
-▶ ESCUCHAR EN VIVO
-
-</button>
-
-
-<a
-class="btn btn-whatsapp"
-href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t"
-target="_blank"
->
-
-WhatsApp
-
-</a>
-
-</div>
-
-</div>
-
-
-<!-- ===================================================
-     LOGO PROTAGONISTA
-=================================================== -->
-
-<div class="hero-logo">
-
-<div class="logo-card">
-
-<div class="logo-card-inner">
-
-<div class="radio-icon">
-◉
-</div>
-
-<div class="logo-title">
-PARLAR <span>RADIO</span>
-</div>
-
-<div class="logo-subtitle">
-SOMOS MUNDO
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
-<!-- =======================================================
-     ESCUCHAR
-======================================================= -->
+<!-- =====================================================
+     PLAYER PRINCIPAL
+===================================================== -->
 
-<section class="listen" id="escuchar">
+<section id="radio" class="player-section">
 
-<div class="section-title">
+    <div class="player-card">
 
-<small>TRANSMISIÓN OFICIAL</small>
+        <div class="player-top">
 
-<h2>Escucha PARLAR RADIO</h2>
+            <div class="player-title">
+                REPRODUCTOR OFICIAL
+            </div>
 
-<p>
-Conéctate directamente a nuestra transmisión.
-Sin Caster.fm y sin reproductores externos.
-</p>
+            <div class="on-air">
 
-</div>
+                <span class="on-air-dot"></span>
 
+                EN VIVO
 
-<div class="player">
+            </div>
 
-<div class="player-top">
-
-<div class="player-logo">
-PR
-</div>
-
-<div class="player-info">
-
-<h3>PARLAR RADIO HD</h3>
-
-<p>
-TRANSMISIÓN EN VIVO · SOMOS MUNDO
-</p>
-
-</div>
-
-</div>
+        </div>
 
 
-<div class="equalizer">
+        <div class="song-area">
 
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
+            <div class="cover-wrapper">
 
-</div>
+                <img
+                    id="cover"
+                    class="cover"
+                    src="logo.png"
+                    alt="Portada">
+
+            </div>
 
 
-<div class="player-controls">
+            <div class="song-info">
 
-<button
-class="play-button"
-onclick="togglePlay()"
-id="playButton"
->
+                <div class="now-playing">
+                    SONANDO AHORA
+                </div>
 
-▶
+                <div
+                    id="songTitle"
+                    class="song-title">
 
-</button>
+                    PARLAR RADIO
 
-<span class="status" id="status">
-LISTO PARA ESCUCHAR
-</span>
+                </div>
 
-</div>
+                <div
+                    id="artist"
+                    class="artist">
+
+                    Transmisión en vivo
+
+                </div>
 
 
-<!--
-IMPORTANTE:
-Este es el único reproductor de la página.
+                <div class="player-controls">
 
-Si tu URL pública de AzuraCast cambia,
-solamente debes modificar el SRC.
--->
+                    <button
+                        id="playButton"
+                        class="play-button"
+                        onclick="togglePlay()">
 
-<audio
-id="radioAudio"
-preload="none"
->
+                        <i
+                            class="fa-solid fa-play"
+                            id="playIcon">
+                        </i>
 
-<source
-src="https://supreme-yeah-hoping-nature.trycloudflare.com/listen/parlar_radio/radio.mp3"
-type="audio/mpeg"
->
+                    </button>
 
-</audio>
 
-</div>
+                    <div class="volume">
+
+                        <i class="fa-solid fa-volume-low"></i>
+
+                        <input
+                            type="range"
+                            id="volume"
+                            min="0"
+                            max="100"
+                            value="80">
+
+                    </div>
+
+
+                    <div
+                        id="playerStatus"
+                        class="player-status">
+
+                        LISTO PARA TRANSMITIR
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- =======================================================
+<!-- =====================================================
+     CARACTERÍSTICAS
+===================================================== -->
+
+<section class="features">
+
+    <div class="feature">
+
+        <i class="fa-solid fa-globe"></i>
+
+        <h3>Radio Internacional</h3>
+
+        <p>
+            Conectando Ecuador con oyentes
+            alrededor del mundo.
+        </p>
+
+    </div>
+
+
+    <div class="feature">
+
+        <i class="fa-solid fa-music"></i>
+
+        <h3>Música y Cultura</h3>
+
+        <p>
+            Música, entretenimiento y contenidos
+            culturales durante todo el día.
+        </p>
+
+    </div>
+
+
+    <div class="feature">
+
+        <i class="fa-solid fa-microphone"></i>
+
+        <h3>Voces del Mundo</h3>
+
+        <p>
+            Programas, entrevistas y espacios
+            producidos desde diferentes países.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
      PROGRAMACIÓN
-======================================================= -->
+===================================================== -->
 
-<section class="programs" id="programacion">
+<section id="programacion" class="program-section">
 
-<div class="section-title">
+    <div class="section-header">
 
-<small>PARLAR RADIO</small>
+        <div class="section-label">
+            PARLAR RADIO
+        </div>
 
-<h2>Nuestra Programación</h2>
+        <h2 class="section-title">
+            Programación destacada
+        </h2>
 
-<p>
-Contenido para acompañarte desde cualquier lugar del mundo.
-</p>
+        <p class="section-description">
+            Conoce algunos de los espacios que forman
+            parte de nuestra programación.
+        </p>
 
-</div>
-
-
-<div class="program-grid">
-
-
-<div class="program">
-
-<div class="program-icon">
-♫
-</div>
-
-<h3>Quinta Sinfonía</h3>
-
-<p>
-Cultura, música y contenidos especiales
-con Wladimir Ormaza.
-</p>
-
-</div>
+    </div>
 
 
-<div class="program">
-
-<div class="program-icon">
-🎙
-</div>
-
-<h3>Ni chicha ni limonada</h3>
-
-<p>
-Información, opinión y debate
-con Ramiro Parisi.
-</p>
-
-</div>
+    <div class="program-grid">
 
 
-<div class="program">
+        <div class="program">
 
-<div class="program-icon">
-☕
-</div>
+            <img
+                class="program-image"
+                src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=700&q=80">
 
-<h3>Jarrito Café</h3>
+            <div class="program-content">
 
-<p>
-Cultura, entretenimiento y conversación
-con Bertiux Solano.
-</p>
+                <div class="program-category">
+                    CULTURA · MÚSICA
+                </div>
 
-</div>
+                <h3>
+                    Quinta Sinfonía
+                </h3>
 
+                <p>
+                    Con Wladimir Ormaza
+                </p>
 
-<div class="program">
+            </div>
 
-<div class="program-icon">
-♫
-</div>
-
-<h3>Prisma</h3>
-
-<p>
-Música, tendencias y actualidad
-con Vladimir Hernández Solis.
-</p>
-
-</div>
+        </div>
 
 
-</div>
+        <div class="program">
+
+            <img
+                class="program-image"
+                src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=700&q=80">
+
+            <div class="program-content">
+
+                <div class="program-category">
+                    INFORMACIÓN · DEBATE
+                </div>
+
+                <h3>
+                    Ni chicha ni limonada
+                </h3>
+
+                <p>
+                    Con Ramiro Parisi
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="program">
+
+            <img
+                class="program-image"
+                src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=700&q=80">
+
+            <div class="program-content">
+
+                <div class="program-category">
+                    CULTURA · ENTRETENIMIENTO
+                </div>
+
+                <h3>
+                    Jarrito café
+                </h3>
+
+                <p>
+                    Con Bertiux Solano
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="program">
+
+            <img
+                class="program-image"
+                src="https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?auto=format&fit=crop&w=700&q=80">
+
+            <div class="program-content">
+
+                <div class="program-category">
+                    MÚSICA · TENDENCIAS
+                </div>
+
+                <h3>
+                    Prisma
+                </h3>
+
+                <p>
+                    Con Vladimir Hernández Solis
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
+</main>
 
-<!-- =======================================================
+
+<!-- =====================================================
      FOOTER
-======================================================= -->
+===================================================== -->
 
 <footer id="contacto">
 
-<div class="footer-inner">
+    <div class="footer-inner">
+
+        <div>
+
+            <img
+                src="logo.png"
+                class="footer-logo"
+                alt="Parlar Radio">
+
+            <p>
+                Radio online internacional desde Ecuador.
+                Música, cultura, información y entretenimiento
+                para oyentes de todo el mundo.
+            </p>
+
+        </div>
 
 
-<div>
+        <div>
 
-<h3>
-PARLAR <span>RADIO</span>
-</h3>
+            <h4>
+                PROGRAMAS
+            </h4>
 
-<p style="margin-top:10px;">
-SOMOS MUNDO
-</p>
+            <a href="#programacion">
+                Quinta Sinfonía
+            </a>
 
-<p style="margin-top:15px;max-width:400px;">
+            <a href="#programacion">
+                Ni chicha ni limonada
+            </a>
 
-Radio online internacional desde Ecuador.
-Música, cultura, información y entretenimiento
-para oyentes de todo el mundo.
+            <a href="#programacion">
+                Jarrito café
+            </a>
 
-</p>
+            <a href="#programacion">
+                Prisma
+            </a>
 
-</div>
-
-
-<div>
-
-<h4>
-PROGRAMAS
-</h4>
-
-<p>
-Quinta Sinfonía
-</p>
-
-<p>
-Ni chicha ni limonada
-</p>
-
-<p>
-Jarrito Café
-</p>
-
-<p>
-Prisma
-</p>
-
-</div>
+        </div>
 
 
-<div>
+        <div>
 
-<h4>
-CONTACTO
-</h4>
+            <h4>
+                CONTACTO
+            </h4>
 
-<p>
-<a href="mailto:parlar.radio@live.com">
-parlar.radio@live.com
-</a>
-</p>
+            <a href="mailto:parlar.radio@live.com">
 
-<p>
-<a
-href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t"
-target="_blank"
->
-Canal oficial de WhatsApp
-</a>
-</p>
+                <i class="fa-solid fa-envelope"></i>
 
-<p>
-<a
-href="https://x.com/ParlarRadiOfi"
-target="_blank"
->
-X / Twitter
-</a>
-</p>
+                parlar.radio@live.com
 
-</div>
+            </a>
+
+            <a
+                href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t"
+                target="_blank">
+
+                <i class="fa-brands fa-whatsapp"></i>
+
+                Canal WhatsApp
+
+            </a>
+
+            <a
+                href="https://x.com/ParlarRadiOfi"
+                target="_blank">
+
+                <i class="fa-brands fa-x-twitter"></i>
+
+                X / Twitter
+
+            </a>
+
+        </div>
+
+    </div>
 
 
-</div>
+    <div class="copyright">
 
+        © 2026 PARLAR RADIO · SOMOS MUNDO ·
+        Todos los derechos reservados.
 
-<div class="copyright">
-
-© 2026 PARLAR RADIO · SOMOS MUNDO · Todos los derechos reservados.
-
-</div>
+    </div>
 
 </footer>
 
 
-<!-- =======================================================
-     PLAYER INFERIOR
-======================================================= -->
+<!-- =====================================================
+     PLAYER MÓVIL
+===================================================== -->
 
 <div class="bottom-player">
 
-<div class="bottom-inner">
+    <div class="bottom-inner">
 
+        <img
+            id="bottomCover"
+            src="logo.png"
+            class="bottom-cover"
+            alt="Cover">
 
-<div class="bottom-brand">
+        <div class="bottom-info">
 
-<div class="bottom-symbol">
-PR
-</div>
+            <div
+                id="bottomTitle"
+                class="bottom-title">
 
-<div>
+                PARLAR RADIO
 
-<strong>
-PARLAR RADIO HD
-</strong>
+            </div>
 
-<small>
-TRANSMISIÓN EN VIVO
-</small>
+            <div
+                id="bottomArtist"
+                class="bottom-artist">
 
-</div>
+                EN VIVO
 
-</div>
+            </div>
 
+        </div>
 
-<div class="bottom-controls">
+        <button
+            class="bottom-play"
+            onclick="togglePlay()">
 
-<button
-class="bottom-play"
-onclick="togglePlay()"
-id="bottomPlay"
->
-▶
-</button>
+            <i
+                class="fa-solid fa-play"
+                id="bottomIcon">
+            </i>
 
-<input
-class="volume"
-type="range"
-min="0"
-max="100"
-value="80"
-id="volume"
->
+        </button>
+
+    </div>
 
 </div>
 
 
-</div>
+<!-- =====================================================
+     AUDIO
+===================================================== -->
 
-</div>
+<audio
+    id="radioAudio"
+    preload="none"
+    crossorigin="anonymous">
 
+    <!-- STREAM ACTUAL DE PARLAR RADIO -->
 
-<!-- =======================================================
-     JAVASCRIPT
-======================================================= -->
+    <source
+        src="https://supreme-yeah-hoping-nature.trycloudflare.com/listen/parlar_radio/radio.mp3"
+        type="audio/mpeg">
+
+</audio>
+
 
 <script>
 
-const audio = document.getElementById("radioAudio");
+/* =====================================================
+   CONFIGURACIÓN AZURACAST
+===================================================== */
 
-const playButton =
-document.getElementById("playButton");
+/*
+    IMPORTANTE:
 
-const bottomPlay =
-document.getElementById("bottomPlay");
+    El dominio de Cloudflare utilizado actualmente
+    es el mismo que aparece en tu reproductor.
 
-const status =
-document.getElementById("status");
+    Si posteriormente cambia el dominio de Cloudflare,
+    solamente modifica RADIO_SERVER.
+
+*/
+
+const RADIO_SERVER =
+"https://supreme-yeah-hoping-nature.trycloudflare.com";
+
+const STATION =
+"parlar_radio";
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const audio =
+document.getElementById("radioAudio");
+
+const cover =
+document.getElementById("cover");
+
+const bottomCover =
+document.getElementById("bottomCover");
+
+const songTitle =
+document.getElementById("songTitle");
+
+const artist =
+document.getElementById("artist");
+
+const bottomTitle =
+document.getElementById("bottomTitle");
+
+const bottomArtist =
+document.getElementById("bottomArtist");
+
+const playerStatus =
+document.getElementById("playerStatus");
 
 const volume =
 document.getElementById("volume");
 
 
-/* Volumen inicial */
+/* =====================================================
+   VOLUMEN
+===================================================== */
 
 audio.volume = 0.8;
 
+volume.addEventListener("input",function(){
 
-/* =======================================================
-   REPRODUCIR / PAUSAR
-======================================================= */
-
-function togglePlay(){
-
-if(audio.paused){
-
-status.innerText = "CONECTANDO...";
-
-audio.play()
-.then(function(){
-
-playButton.innerHTML = "❚❚";
-bottomPlay.innerHTML = "❚❚";
-
-status.innerText = "● EN VIVO";
-
-})
-.catch(function(error){
-
-console.log(error);
-
-status.innerText =
-"NO SE PUDO CONECTAR";
+    audio.volume =
+        this.value / 100;
 
 });
 
-}else{
 
-audio.pause();
+/* =====================================================
+   PLAY / PAUSE
+===================================================== */
 
-playButton.innerHTML = "▶";
-bottomPlay.innerHTML = "▶";
+function togglePlay(){
 
-status.innerText =
-"PAUSADO";
+    if(audio.paused){
+
+        audio.play()
+        .then(function(){
+
+            updatePlayer(true);
+
+        })
+        .catch(function(error){
+
+            console.log(error);
+
+            playerStatus.innerText =
+                "PULSA PLAY PARA ESCUCHAR";
+
+        });
+
+    }else{
+
+        audio.pause();
+
+        updatePlayer(false);
+
+    }
 
 }
 
+
+/* =====================================================
+   ESTADO DEL PLAYER
+===================================================== */
+
+function updatePlayer(playing){
+
+    const icons = [
+
+        document.getElementById("playIcon"),
+
+        document.getElementById("bottomIcon"),
+
+        document.getElementById("heroIcon")
+
+    ];
+
+    const button =
+        document.getElementById("playButton");
+
+    const heroText =
+        document.getElementById("heroText");
+
+
+    if(playing){
+
+        icons.forEach(function(icon){
+
+            if(icon){
+
+                icon.className =
+                "fa-solid fa-pause";
+
+            }
+
+        });
+
+        cover.classList.add("playing");
+
+        playerStatus.innerText =
+            "REPRODUCIENDO EN VIVO";
+
+        heroText.innerText =
+            "PAUSAR TRANSMISIÓN";
+
+    }else{
+
+        icons.forEach(function(icon){
+
+            if(icon){
+
+                icon.className =
+                "fa-solid fa-play";
+
+            }
+
+        });
+
+        cover.classList.remove("playing");
+
+        playerStatus.innerText =
+            "LISTO PARA TRANSMITIR";
+
+        heroText.innerText =
+            "ESCUCHAR EN VIVO";
+
+    }
+
 }
 
 
-/* =======================================================
-   EVENTOS DEL AUDIO
-======================================================= */
+audio.addEventListener("play",function(){
 
-audio.addEventListener(
-"playing",
-function(){
+    updatePlayer(true);
 
-playButton.innerHTML = "❚❚";
-bottomPlay.innerHTML = "❚❚";
+});
 
-status.innerText = "● EN VIVO";
+
+audio.addEventListener("pause",function(){
+
+    updatePlayer(false);
+
+});
+
+
+/* =====================================================
+   AZURACAST NOW PLAYING
+===================================================== */
+
+async function getNowPlaying(){
+
+    try{
+
+        const response =
+        await fetch(
+            RADIO_SERVER +
+            "/api/nowplaying/" +
+            STATION +
+            "?_=" +
+            Date.now()
+        );
+
+        if(!response.ok){
+
+            throw new Error(
+                "No se pudo consultar AzuraCast"
+            );
+
+        }
+
+        const data =
+        await response.json();
+
+
+        /*
+            AzuraCast normalmente entrega:
+
+            data.now_playing.song.title
+            data.now_playing.song.artist
+            data.now_playing.song.art
+        */
+
+
+        if(
+            data &&
+            data.now_playing &&
+            data.now_playing.song
+        ){
+
+            const song =
+                data.now_playing.song;
+
+
+            const title =
+                song.title ||
+                "PARLAR RADIO";
+
+
+            const artistName =
+                song.artist ||
+                "Transmisión en vivo";
+
+
+            songTitle.innerText =
+                title;
+
+            artist.innerText =
+                artistName;
+
+
+            bottomTitle.innerText =
+                title;
+
+            bottomArtist.innerText =
+                artistName;
+
+
+            if(song.art){
+
+                /*
+                    Actualizamos la portada
+                    solamente cuando existe.
+                */
+
+                cover.src =
+                    song.art;
+
+                bottomCover.src =
+                    song.art;
+
+            }
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "AzuraCast:",
+            error
+        );
+
+        /*
+            Si AzuraCast no responde,
+            no rompemos el reproductor.
+        */
+
+        songTitle.innerText =
+            "PARLAR RADIO";
+
+        artist.innerText =
+            "Transmisión en vivo";
+
+    }
 
 }
+
+
+/* =====================================================
+   ACTUALIZAR CANCIÓN
+===================================================== */
+
+getNowPlaying();
+
+
+/*
+    Consulta AzuraCast cada 10 segundos.
+
+    Esto permite cambiar automáticamente
+    la portada, artista y canción.
+*/
+
+setInterval(
+    getNowPlaying,
+    10000
 );
 
 
-audio.addEventListener(
-"pause",
-function(){
+/* =====================================================
+   MENÚ MÓVIL
+===================================================== */
 
-playButton.innerHTML = "▶";
-bottomPlay.innerHTML = "▶";
+function toggleMenu(){
 
-status.innerText = "PAUSADO";
+    const nav =
+    document.querySelector(".desktop-nav");
+
+    if(nav.style.display === "flex"){
+
+        nav.style.display =
+        "none";
+
+    }else{
+
+        nav.style.display =
+        "flex";
+
+        nav.style.position =
+        "absolute";
+
+        nav.style.top =
+        "72px";
+
+        nav.style.left =
+        "0";
+
+        nav.style.right =
+        "0";
+
+        nav.style.padding =
+        "20px";
+
+        nav.style.background =
+        "#070a11";
+
+        nav.style.flexDirection =
+        "column";
+
+        nav.style.borderBottom =
+        "1px solid rgba(255,255,255,.08)";
+
+    }
 
 }
+
+
+/* =====================================================
+   IMAGEN FALLBACK
+===================================================== */
+
+cover.addEventListener(
+    "error",
+    function(){
+
+        this.src =
+        "logo.png";
+
+    }
 );
 
 
-audio.addEventListener(
-"error",
-function(){
+bottomCover.addEventListener(
+    "error",
+    function(){
 
-status.innerText =
-"STREAM NO DISPONIBLE";
+        this.src =
+        "logo.png";
 
-}
-);
-
-
-/* =======================================================
-   VOLUMEN
-======================================================= */
-
-volume.addEventListener(
-"input",
-function(){
-
-audio.volume =
-this.value / 100;
-
-}
+    }
 );
 
 </script>
-
 
 </body>
 </html>
