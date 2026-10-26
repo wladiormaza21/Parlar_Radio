@@ -118,15 +118,15 @@
     Tu navegador no soporta el reproductor de audio.
   </audio>
 
-  <!-- NAVBAR RESPONSIVE -->
+  <!-- NAVBAR RESPONSIVE (Diseño limpio original) -->
   <header class="sticky top-0 z-40 glass-panel border-b border-brand-magenta/20">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- Logo + Marca -->
-      <a href="#" class="flex items-center gap-2 sm:gap-3.5 group">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-brand-magenta via-brand-purple to-brand-cyan p-0.5 shadow-lg shadow-brand-magenta/30 group-hover:scale-105 transition-transform flex-shrink-0">
+      <a href="#" class="flex items-center gap-3.5 group">
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-brand-magenta via-brand-purple to-brand-cyan p-0.5 shadow-lg shadow-brand-magenta/30 group-hover:scale-105 transition-transform flex-shrink-0">
           <div class="w-full h-full bg-black rounded-full flex items-center justify-center overflow-hidden">
-            <svg class="w-6 h-6 sm:w-8 sm:h-8 text-brand-magenta" viewBox="0 0 100 100" fill="currentColor">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-brand-magenta" viewBox="0 0 100 100" fill="currentColor">
               <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4" />
               <path d="M 50 25 C 40 25 32 33 32 43 C 32 50 36 56 42 59 L 42 63 C 34 66 25 74 25 85 L 75 85 C 75 74 66 66 58 63 L 58 59 C 64 56 68 50 68 43 C 68 33 60 25 50 25 Z" fill="#ff007f"/>
               <path d="M 30 43 A 20 20 0 0 1 70 43" fill="none" stroke="#00f2ff" stroke-width="6" stroke-linecap="round"/>
@@ -136,10 +136,10 @@
           </div>
         </div>
         <div class="flex flex-col">
-          <span class="font-montserrat font-black text-lg sm:text-2xl tracking-tighter text-white flex items-center gap-1">
+          <span class="font-montserrat font-black text-xl sm:text-2xl tracking-tighter text-white flex items-center gap-1">
             PARLAR<span class="text-brand-magenta text-glow-magenta">RADIO</span>
           </span>
-          <span class="font-montserrat font-bold text-[8px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.25em] text-brand-cyan uppercase -mt-1">SOMOS MUNDO</span>
+          <span class="font-montserrat font-bold text-[9px] sm:text-[10px] tracking-[0.25em] text-brand-cyan uppercase -mt-1">SOMOS MUNDO</span>
         </div>
       </a>
 
@@ -152,58 +152,32 @@
         <a href="#contacto" class="hover:text-brand-cyan transition-colors">Contacto</a>
       </nav>
 
-      <!-- Botones Header (Redes Sociales Compactas + Reproductor + Hamburguesa) -->
-      <div class="flex items-center gap-1.5 sm:gap-2.5">
-        
-        <!-- Redes Sociales en Miniatura -->
-        <div class="hidden sm:flex items-center gap-1.5">
-          <a href="https://www.instagram.com/parlar.radio?dlrf=MTN5cWowN2FwdmF4bA==" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-slate-900 border border-brand-magenta/30 text-brand-magenta flex items-center justify-center hover:bg-brand-magenta hover:text-white transition-all text-xs" title="Instagram">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="https://www.facebook.com/share/1M4d15T72r/" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-slate-900 border border-brand-magenta/30 text-blue-400 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all text-xs" title="Facebook">
-            <i class="fa-brands fa-facebook-f"></i>
-          </a>
-          <a href="https://www.tiktok.com/@parlar.radio?_r=1&_t=ZS-9AshCjV6nB7" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-slate-900 border border-brand-magenta/30 text-white flex items-center justify-center hover:bg-slate-800 hover:text-brand-cyan transition-all text-xs" title="TikTok">
-            <i class="fa-brands fa-tiktok"></i>
-          </a>
-          <a href="https://www.mixcloud.com/ParlarRadio/" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-slate-900 border border-brand-magenta/30 text-cyan-400 flex items-center justify-center hover:bg-cyan-600 hover:text-slate-950 transition-all text-xs" title="Podcast Mixcloud">
-            <i class="fa-solid fa-podcast"></i>
-          </a>
-          <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition-all text-xs" title="WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
-        </div>
-
-        <!-- Botón Reproducir / Pausa Header -->
-        <button onclick="togglePlay()" class="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-brand-magenta via-brand-purple to-brand-cyan text-white font-black text-xs tracking-wider shadow-lg shadow-brand-magenta/30 hover:scale-105 active:scale-95 transition-all uppercase">
+      <!-- Botones navbar y Menú Hamburguesa -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <button onclick="togglePlay()" class="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-brand-magenta via-brand-purple to-brand-cyan text-white font-black text-xs tracking-wider shadow-lg shadow-brand-magenta/30 hover:scale-105 active:scale-95 transition-all uppercase">
           <i id="navPlayIcon" class="fa-solid fa-play"></i>
           <span id="navPlayText" class="hidden sm:inline">ESCUCHAR</span>
         </button>
 
         <!-- Botón Hamburguesa Celulares -->
-        <button onclick="toggleMobileMenu()" class="lg:hidden w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 border border-brand-magenta/30 text-white flex items-center justify-center">
-          <i id="menuIcon" class="fa-solid fa-bars text-sm sm:text-base"></i>
+        <button onclick="toggleMobileMenu()" class="lg:hidden w-10 h-10 rounded-xl bg-slate-900 border border-brand-magenta/30 text-white flex items-center justify-center">
+          <i id="menuIcon" class="fa-solid fa-bars text-base"></i>
         </button>
       </div>
     </div>
 
-    <!-- Menú Desplegable Celulares con Redes Sociales -->
+    <!-- Menú Desplegable Celulares -->
     <div id="mobileMenu" class="hidden lg:hidden border-t border-brand-magenta/20 bg-slate-950/95 px-6 py-6 space-y-4">
       <a href="#inicio" onclick="toggleMobileMenu()" class="block font-semibold text-sm text-slate-200 hover:text-brand-cyan">Inicio</a>
       <a href="#pilares" onclick="toggleMobileMenu()" class="block font-semibold text-sm text-slate-200 hover:text-brand-cyan">Pilares</a>
       <a href="#programas" onclick="toggleMobileMenu()" class="block font-semibold text-sm text-slate-200 hover:text-brand-cyan">Radio Shows</a>
       <a href="#nosotros" onclick="toggleMobileMenu()" class="block font-semibold text-sm text-slate-200 hover:text-brand-cyan">Nosotros</a>
       <a href="#contacto" onclick="toggleMobileMenu()" class="block font-semibold text-sm text-slate-200 hover:text-brand-cyan">Contacto</a>
-      
-      <div class="pt-4 border-t border-slate-800">
-        <p class="text-xs font-montserrat font-bold text-brand-cyan uppercase tracking-wider mb-3">Síguenos en Redes</p>
-        <div class="grid grid-cols-5 gap-2">
-          <a href="https://www.instagram.com/parlar.radio?dlrf=MTN5cWowN2FwdmF4bA==" target="_blank" rel="noopener noreferrer" class="h-10 rounded-xl bg-slate-900 border border-brand-magenta/30 text-brand-magenta flex items-center justify-center text-base"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://www.facebook.com/share/1M4d15T72r/" target="_blank" rel="noopener noreferrer" class="h-10 rounded-xl bg-slate-900 border border-brand-magenta/30 text-blue-400 flex items-center justify-center text-base"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="https://www.tiktok.com/@parlar.radio?_r=1&_t=ZS-9AshCjV6nB7" target="_blank" rel="noopener noreferrer" class="h-10 rounded-xl bg-slate-900 border border-brand-magenta/30 text-white flex items-center justify-center text-base"><i class="fa-brands fa-tiktok"></i></a>
-          <a href="https://www.mixcloud.com/ParlarRadio/" target="_blank" rel="noopener noreferrer" class="h-10 rounded-xl bg-slate-900 border border-brand-magenta/30 text-cyan-400 flex items-center justify-center text-base"><i class="fa-solid fa-podcast"></i></a>
-          <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" class="h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-base"><i class="fa-brands fa-whatsapp"></i></a>
-        </div>
+      <div class="pt-2">
+        <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-bold text-xs uppercase">
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span>Seguir en WhatsApp</span>
+        </a>
       </div>
     </div>
   </header>
@@ -247,9 +221,11 @@
           </div>
         </div>
 
-        <!-- Reproductor Cósmico -->
-        <div class="lg:col-span-5 flex justify-center mt-4 lg:mt-0">
-          <div class="glass-card p-6 sm:p-8 rounded-3xl w-full max-w-sm sm:max-w-md relative text-center border-brand-magenta/30 shadow-2xl animate-glow-pulse">
+        <!-- Reproductor Cósmico + Redes Sociales Abajo -->
+        <div class="lg:col-span-5 flex flex-col items-center mt-4 lg:mt-0">
+          
+          <!-- Tarjeta del Reproductor Principal -->
+          <div class="glass-card p-6 sm:p-8 rounded-3xl w-full max-w-sm sm:max-w-md relative text-center border-brand-magenta/30 shadow-2xl animate-glow-pulse mb-5">
             
             <div class="relative w-40 h-40 sm:w-48 sm:h-48 mx-auto mb-6">
               <div class="absolute inset-0 rounded-full border-2 border-dashed border-brand-cyan/40 animate-spin-slow"></div>
@@ -289,6 +265,29 @@
             
             <p id="statusText" class="text-xs text-slate-400 font-medium">Toca para escuchar en directo</p>
           </div>
+
+          <!-- Redes Sociales Abajo del Reproductor -->
+          <div class="w-full max-w-sm sm:max-w-md px-1">
+            <p class="text-[11px] font-montserrat font-bold text-brand-cyan uppercase tracking-widest text-center mb-2.5">Síguenos en Redes</p>
+            <div class="grid grid-cols-5 gap-2">
+              <a href="https://www.instagram.com/parlar.radio?dlrf=MTN5cWowN2FwdmF4bA==" target="_blank" rel="noopener noreferrer" class="h-11 rounded-xl bg-slate-900/80 border border-brand-magenta/30 text-brand-magenta flex items-center justify-center text-lg hover:bg-brand-magenta hover:text-white transition-all shadow-md" title="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="https://www.facebook.com/share/1M4d15T72r/" target="_blank" rel="noopener noreferrer" class="h-11 rounded-xl bg-slate-900/80 border border-brand-magenta/30 text-blue-400 flex items-center justify-center text-lg hover:bg-blue-600 hover:text-white transition-all shadow-md" title="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="https://www.tiktok.com/@parlar.radio?_r=1&_t=ZS-9AshCjV6nB7" target="_blank" rel="noopener noreferrer" class="h-11 rounded-xl bg-slate-900/80 border border-brand-magenta/30 text-white flex items-center justify-center text-lg hover:bg-slate-800 hover:text-brand-cyan transition-all shadow-md" title="TikTok">
+                <i class="fa-brands fa-tiktok"></i>
+              </a>
+              <a href="https://www.mixcloud.com/ParlarRadio/" target="_blank" rel="noopener noreferrer" class="h-11 rounded-xl bg-slate-900/80 border border-brand-magenta/30 text-cyan-400 flex items-center justify-center text-lg hover:bg-cyan-600 hover:text-slate-950 transition-all shadow-md" title="Podcast Mixcloud">
+                <i class="fa-solid fa-podcast"></i>
+              </a>
+              <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" class="h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-lg hover:bg-emerald-500 hover:text-white transition-all shadow-md" title="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -533,9 +532,9 @@
       const icon = document.getElementById('menuIcon');
       menu.classList.toggle('hidden');
       if (menu.classList.contains('hidden')) {
-        icon.className = "fa-solid fa-bars text-sm sm:text-base";
+        icon.className = "fa-solid fa-bars text-base";
       } else {
-        icon.className = "fa-solid fa-xmark text-sm sm:text-base";
+        icon.className = "fa-solid fa-xmark text-base";
       }
     }
 
