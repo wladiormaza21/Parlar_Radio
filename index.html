@@ -182,9 +182,16 @@
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section id="inicio" class="relative py-12 md:py-24 overflow-hidden">
+  <!-- HERO SECTION CON BANNER OFICIAL -->
+  <section id="inicio" class="relative py-12 md:py-20 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- BANNER WEB OFICIAL INTEGRADO ARRIBA -->
+      <div class="mb-12 rounded-3xl overflow-hidden border-2 border-brand-magenta/40 shadow-[0_0_50px_rgba(255,0,127,0.3)] relative group">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none"></div>
+        <img src="watermarked_img_5206900058163231374.jpg" alt="Parlar Radio Banner Oficial" class="w-full h-auto object-cover max-h-[500px] group-hover:scale-[1.01] transition-transform duration-700">
+      </div>
+
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         
         <!-- Texto Hero Principal -->
@@ -294,7 +301,7 @@
     </div>
   </section>
 
-  <!-- LOS 4 PILARES OFICIALES (El botón de Música abre el artículo) -->
+  <!-- LOS 4 PILARES OFICIALES -->
   <section id="pilares" class="py-16 relative border-t border-brand-magenta/15 bg-slate-950/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
@@ -350,7 +357,7 @@
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <!-- Quinta Sinfonía (Con redes de Wladimir Ormaza) -->
+        <!-- Quinta Sinfonía -->
         <div class="glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
@@ -360,18 +367,17 @@
             <h4 class="font-montserrat font-black text-xl text-white">Quinta Sinfonía</h4>
             <p class="text-xs font-semibold text-slate-300 mt-1 mb-3">Conduce: <strong class="text-brand-magenta">Wladimir Ormaza</strong></p>
             
-            <!-- Redes sociales de Wladimir Ormaza -->
             <div class="flex items-center gap-1.5 mb-3">
-              <a href="https://www.facebook.com/share/1EAGcbVPCv/" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-brand-magenta/30 text-blue-400 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all text-xs" title="Facebook de Wladimir">
+              <a href="https://www.facebook.com/share/1EAGcbVPCv/" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-brand-magenta/30 text-blue-400 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all text-xs" title="Facebook">
                 <i class="fa-brands fa-facebook-f"></i>
               </a>
-              <a href="https://x.com/wladiradio" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-brand-magenta/30 text-white flex items-center justify-center hover:bg-slate-800 hover:text-brand-cyan transition-all text-xs" title="X de Wladimir">
+              <a href="https://x.com/wladiradio" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-brand-magenta/30 text-white flex items-center justify-center hover:bg-slate-800 hover:text-brand-cyan transition-all text-xs" title="X">
                 <i class="fa-brands fa-x-twitter"></i>
               </a>
-              <a href="https://www.instagram.com/wladiradio?dlrf=MXRtNGF3aGt3NTM2Zg==" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-brand-magenta/30 text-brand-magenta flex items-center justify-center hover:bg-brand-magenta hover:text-white transition-all text-xs" title="Instagram de Wladimir">
+              <a href="https://www.instagram.com/wladiradio?dlrf=MXRtNGF3aGt3NTM2Zg==" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-brand-magenta/30 text-brand-magenta flex items-center justify-center hover:bg-brand-magenta hover:text-white transition-all text-xs" title="Instagram">
                 <i class="fa-brands fa-instagram"></i>
               </a>
-              <a href="https://www.tiktok.com/@wladi.ormaza?_r=1&_t=ZS-9At0ukPg2In" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-brand-magenta/30 text-white flex items-center justify-center hover:bg-slate-800 hover:text-brand-cyan transition-all text-xs" title="TikTok de Wladimir">
+              <a href="https://www.tiktok.com/@wladi.ormaza?_r=1&_t=ZS-9At0ukPg2In" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-brand-magenta/30 text-white flex items-center justify-center hover:bg-slate-800 hover:text-brand-cyan transition-all text-xs" title="TikTok">
                 <i class="fa-brands fa-tiktok"></i>
               </a>
             </div>
@@ -481,11 +487,10 @@
     </div>
   </section>
 
-  <!-- MODAL DEL ARTÍCULO: El latido de la nueva era musical -->
+  <!-- MODAL DEL ARTÍCULO -->
   <div id="articleModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
     <div class="glass-panel max-w-3xl w-full max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-10 relative border border-brand-magenta/40 shadow-2xl my-8">
       
-      <!-- Botón Cerrar Modal -->
       <button onclick="toggleArticleModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-900 border border-brand-magenta/30 text-white flex items-center justify-center hover:bg-brand-magenta transition-colors shadow-lg">
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
@@ -494,77 +499,46 @@
         
         <div class="border-b border-brand-magenta/20 pb-4">
           <span class="text-[10px] font-black px-3 py-1 rounded-full bg-brand-magenta/15 text-brand-magenta border border-brand-magenta/30 uppercase tracking-widest inline-block mb-3">Especial Musical</span>
-          <h2 class="font-montserrat font-black text-2xl sm:text-3xl text-white leading-tight">El latido de la nueva era musical: Por qué el talento independiente está conquistando el mundo[span_0](start_span)[span_0](end_span)</h2>
+          <h2 class="font-montserrat font-black text-2xl sm:text-3xl text-white leading-tight">El latido de la nueva era musical: Por qué el talento independiente está conquistando el mundo</h2>
         </div>
 
         <div class="rounded-2xl overflow-hidden border border-brand-magenta/30">
           <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80" alt="Estudio casero" class="w-full h-56 sm:h-72 object-cover">
-          <p class="text-[11px] text-slate-400 p-3 italic bg-slate-950 text-center">La creatividad ya no necesita grandes corporaciones; solo un espacio propio y mucha pasión[span_1](start_span)[span_1](end_span).</p>
+          <p class="text-[11px] text-slate-400 p-3 italic bg-slate-950 text-center">La creatividad ya no necesita grandes corporaciones; solo un espacio propio y mucha pasión[span_0](start_span)[span_0](end_span).</p>
         </div>
 
         <p class="text-sm sm:text-base leading-relaxed">
-          La industria musical vive una de sus transformaciones más fascinantes y dinámicas de las últimas décadas[span_2](start_span)[span_2](end_span). Lo que antes dependía exclusivamente de los grandes estudios de grabación y las multinacionales discográficas, hoy se alimenta de la autenticidad, la inmediatez y la creatividad de artistas independientes que deciden tomar el control de su propio sonido[span_3](start_span)[span_3](end_span).
+          La industria musical vive una de sus transformaciones más fascinantes y dinámicas de las últimas décadas[span_1](start_span)[span_1](end_span). Lo que antes dependía exclusivamente de los grandes estudios de grabación y las multinacionales discográficas, hoy se alimenta de la autenticidad, la inmediatez y la creatividad de artistas independientes[span_2](start_span)[span_2](end_span).
         </p>
 
         <p class="text-sm sm:text-base leading-relaxed">
-          Pero, ¿qué es lo que realmente está moviendo los hilos de la música actual y por qué conectamos tanto con estas nuevas propuestas[span_4](start_span)[span_4](end_span)?
+          Pero, ¿qué es lo que realmente está moviendo los hilos de la música actual y por qué conectamos tanto con estas nuevas propuestas[span_3](start_span)[span_3](end_span)?
         </p>
 
-        <h3 class="font-montserrat font-bold text-lg sm:text-xl text-brand-cyan">La democratización del sonido: Del estudio casero al mundo entero[span_5](start_span)[span_5](end_span)</h3>
+        <h3 class="font-montserrat font-bold text-lg sm:text-xl text-brand-cyan">La democratización del sonido: Del estudio casero al mundo entero</h3>
         
         <p class="text-sm sm:text-base leading-relaxed">
-          Hoy en día, las barreras técnicas para producir música de alta calidad se han reducido drásticamente[span_6](start_span)[span_6](end_span). Un ordenador, una interfaz, un buen micrófono y, sobre todo, una visión artística clara son suficientes para que un creador desde su habitación componga un éxito que resuene en miles de pantallas y diales alrededor del planeta[span_7](start_span)[span_7](end_span).
+          Hoy en día, las barreras técnicas para producir música de alta calidad se han reducido drásticamente. Un ordenador, una interfaz, un buen micrófono y una visión artística clara son suficientes para que un creador desde su habitación componga un éxito.
         </p>
 
         <div class="rounded-2xl overflow-hidden border border-brand-magenta/30 my-4">
           <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=80" alt="Producción musical" class="w-full h-48 sm:h-60 object-cover">
         </div>
 
-        <p class="text-sm sm:text-base font-semibold text-white">Esta accesibilidad ha generado una explosión de géneros híbridos y fusiones inesperadas[span_8](start_span)[span_8](end_span):</p>
+        <p class="text-sm sm:text-base font-semibold text-white">Esta accesibilidad ha generado una explosión de géneros híbridos:</p>
         <ul class="list-disc pl-5 space-y-2 text-sm sm:text-base">
-          <li><strong>El lo-fi y la estética íntima:</strong> Sonidos cálidos y cercanos que priorizan la emoción por encima de la perfección artificial[span_9](start_span)[span_9](end_span).</li>
-          <li><strong>La experimentación sin etiquetas:</strong> Artistas que saltan libremente entre el pop alternativo, el urbano underground, el rock independiente y la electrónica sin atenerse a los moldes comerciales tradicionales[span_10](start_span)[span_10](end_span).</li>
+          <li><strong>El lo-fi y la estética íntima:</strong> Sonidos cálidos que priorizan la emoción.</li>
+          <li><strong>La experimentación sin etiquetas:</strong> Artistas que saltan libremente entre el pop, el urbano y el rock.</li>
         </ul>
 
-        <h3 class="font-montserrat font-bold text-lg sm:text-xl text-brand-cyan">La autenticidad como el nuevo estándar de éxito[span_11](start_span)[span_11](end_span)</h3>
+        <h3 class="font-montserrat font-bold text-lg sm:text-xl text-brand-cyan">La autenticidad como el nuevo estándar de éxito</h3>
         
         <p class="text-sm sm:text-base leading-relaxed">
-          Los oyentes de hoy buscan algo más que una melodía pegadiza; buscan <strong class="text-white">conexión genuina</strong>[span_12](start_span)[span_12](end_span). Las letras honestas, las historias reales y las propuestas visuales y sonoras que reflejan la identidad del artista se han convertido en el verdadero motor de fidelización[span_13](start_span)[span_13](end_span).
-        </p>
-
-        <div class="rounded-2xl overflow-hidden border border-brand-magenta/30 my-4">
-          <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80" alt="Interpretación acústica" class="w-full h-48 sm:h-60 object-cover">
-        </div>
-
-        <p class="text-sm sm:text-base leading-relaxed">
-          Ya no se trata solo de acumular reproducciones masivas, sino de construir una comunidad sólida que comparta la misma pasión por la buena música[span_14](start_span)[span_14](end_span). Los artistas que muestran su proceso creativo, sus dudas y sus aciertos logran un vínculo mucho más profundo con su audiencia[span_15](start_span)[span_15](end_span).
-        </p>
-
-        <h3 class="font-montserrat font-bold text-lg sm:text-xl text-brand-cyan">El papel fundamental de la radio online y los espacios de descubrimiento[span_16](start_span)[span_16](end_span)</h3>
-        
-        <p class="text-sm sm:text-base leading-relaxed">
-          En medio del mar de algoritmos de las grandes plataformas de streaming —donde muchas veces es difícil destacar—, los espacios alternativos, los podcasts y la <strong class="text-white">radio online</strong> han cobrado un protagonismo vital[span_17](start_span)[span_17](end_span).
-        </p>
-
-        <div class="rounded-2xl overflow-hidden border border-brand-magenta/30 my-4">
-          <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1200&q=80" alt="Cabina de radio" class="w-full h-48 sm:h-60 object-cover">
-          <p class="text-[11px] text-slate-400 p-3 italic bg-slate-950 text-center">La radio online recupera la esencia de la curaduría humana y el contacto directo con el oyente[span_18](start_span)[span_18](end_span).</p>
-        </div>
-
-        <p class="text-sm sm:text-base font-semibold text-white">Estos canales se han convertido en los nuevos curadores culturales[span_19](start_span)[span_19](end_span):</p>
-        <ul class="list-disc pl-5 space-y-2 text-sm sm:text-base">
-          <li><strong>Espacios humanos:</strong> Donde la selección musical tiene un rostro, un criterio y una intención curada por personas que aman la música[span_20](start_span)[span_20](end_span).</li>
-          <li><strong>Apoyo directo al talento emergente:</strong> Plataformas donde los artistas independientes encuentran un megáfono real para dar a conocer su trabajo sin intermediarios corporativos[span_21](start_span)[span_21](end_span).</li>
-        </ul>
-
-        <h3 class="font-montserrat font-bold text-lg sm:text-xl text-brand-cyan">Sintoniza con lo nuevo[span_22](start_span)[span_22](end_span)</h3>
-        
-        <p class="text-sm sm:text-base leading-relaxed">
-          La música está más viva que nunca y evoluciona segundo a segundo[span_23](start_span)[span_23](end_span). Cada acorde, cada letra y cada producción independiente nos recuerdan que el arte es, ante todo, un puente entre almas[span_24](start_span)[span_24](end_span).
+          Los oyentes de hoy buscan una <strong class="text-white">conexión genuina</strong>. Las letras honestas y las historias reales se han convertido en el motor de fidelización.
         </p>
 
         <div class="p-4 rounded-2xl bg-brand-magenta/10 border border-brand-magenta/30 text-white italic text-xs sm:text-sm text-center">
-          ¿Cuál ha sido el último descubrimiento musical que te ha volado la cabeza? ¡Sube el volumen y déjanos tus recomendaciones en los comentarios o compártelas en nuestra transmisión[span_25](start_span)[span_25](end_span)!
+          ¿Cuál ha sido el último descubrimiento musical que te ha volado la cabeza? ¡Sube el volumen y compártelo en nuestra transmisión!
         </div>
 
       </div>
@@ -616,7 +590,7 @@
     </div>
   </div>
 
-  <!-- SCRIPT LÓGICA DE STREAMING, MENÚ Y MODAL -->
+  <!-- SCRIPT LÓGICA -->
   <script>
     const audio = document.getElementById('audioStream');
     let isPlaying = false;
@@ -654,7 +628,6 @@
       }
     }
 
-    // Función para abrir y cerrar el modal del artículo de música
     function toggleArticleModal() {
       const modal = document.getElementById('articleModal');
       modal.classList.toggle('hidden');
