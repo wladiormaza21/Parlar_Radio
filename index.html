@@ -64,7 +64,7 @@
     }
 
     .glass-panel {
-      background: rgba(12, 5, 20, 0.85);
+      background: rgba(12, 5, 20, 0.92);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 0, 127, 0.2);
@@ -118,7 +118,7 @@
     Tu navegador no soporta el reproductor de audio.
   </audio>
 
-  <!-- NAVBAR RESPONSIVE (Diseño limpio original) -->
+  <!-- NAVBAR RESPONSIVE -->
   <header class="sticky top-0 z-40 glass-panel border-b border-brand-magenta/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
@@ -294,13 +294,15 @@
     </div>
   </section>
 
-  <!-- LOS 4 PILARES OFICIALES -->
+  <!-- LOS 4 PILARES OFICIALES (El botón de Música abre el artículo) -->
   <section id="pilares" class="py-16 relative border-t border-brand-magenta/15 bg-slate-950/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         
-        <div class="glass-card p-5 sm:p-6 rounded-2xl text-center group">
+        <!-- Pila Música (Clickeable para abrir el artículo) -->
+        <div onclick="toggleArticleModal()" class="glass-card p-5 sm:p-6 rounded-2xl text-center group cursor-pointer relative overflow-hidden" title="Haz clic para leer el artículo">
+          <div class="absolute top-2 right-2 px-2 py-0.5 rounded bg-brand-magenta/20 border border-brand-magenta/40 text-[9px] text-brand-cyan font-bold uppercase tracking-wider animate-pulse">Artículo</div>
           <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-full bg-brand-magenta/10 border border-brand-magenta/40 flex items-center justify-center text-brand-magenta group-hover:scale-110 group-hover:bg-brand-magenta group-hover:text-white transition-all">
             <i class="fa-solid fa-music text-xl sm:text-2xl"></i>
           </div>
@@ -462,6 +464,103 @@
     </div>
   </section>
 
+  <!-- MODAL DEL ARTÍCULO: El latido de la nueva era musical -->
+  <div id="articleModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div class="glass-panel max-w-3xl w-full max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-10 relative border border-brand-magenta/40 shadow-2xl my-8">
+      
+      <!-- Botón Cerrar Modal -->
+      <button onclick="toggleArticleModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-900 border border-brand-magenta/30 text-white flex items-center justify-center hover:bg-brand-magenta transition-colors shadow-lg">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="space-y-6 text-slate-300">
+        
+        <div class="border-b border-brand-magenta/20 pb-4">
+          <span class="text-[10px] font-black px-3 py-1 rounded-full bg-brand-magenta/15 text-brand-magenta border border-brand-magenta/30 uppercase tracking-widest inline-block mb-3">Especial Musical</span>
+          <h2 class="font-montserrat font-black text-2xl sm:text-3xl text-white leading-tight">El latido de la nueva era musical: Por qué el talento independiente está conquistando el mundo[span_2](start_span)[span_2](end_span)</h2>
+        </div>
+
+        <div class="rounded-2xl overflow-hidden border border-brand-magenta/30">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80" alt="Estudio casero" class="w-full h-56 sm:h-72 object-cover">
+          <p class="text-[11px] text-slate-400 p-3 italic bg-slate-950 text-center">La creatividad ya no necesita grandes corporaciones; solo un espacio propio y mucha pasión[span_3](start_span)[span_3](end_span).</p>
+        </div>
+
+        <p class="text-sm sm:text-base leading-relaxed">
+          La industria musical vive una de sus transformaciones más fascinantes y dinámicas de las últimas décadas[span_4](start_span)[span_4](end_span). Lo que antes dependía exclusivamente de los grandes estudios de grabación y las multinacionales discográficas, hoy se alimenta de la autenticidad, la inmediatez y la creatividad de artistas independientes que deciden tomar el control de su propio sonido[span_5](start_span)[span_5](end_span).
+        </p>
+
+        <p class="text-sm sm:text-base leading-relaxed">
+          Pero, ¿qué es lo que realmente está moviendo los hilos de la música actual y por qué conectamos tanto con estas nuevas propuestas[span_6](start_span)[span_6](end_span)?
+        </p>
+
+        <h3 class="font-montserrat font-bold text-lg sm:text-xl text-brand-cyan">La democratización del sonido: Del estudio casero al mundo entero[span_7](start_span)[span_7](end_span)</h3>
+        
+        <p class="text-sm sm:text-base leading-relaxed">
+          Hoy en día, las barreras técnicas para producir música de alta calidad se han reducido drásticamente[span_8](start_span)[span_8](end_span). Un ordenador, una interfaz, un buen micrófono y, sobre todo, una visión artística clara son suficientes para que un creador desde su habitación componga un éxito que resuene en miles de pantallas y diales alrededor del planeta[span_9](start_span)[span_9](end_span).
+        </p>
+
+        <div class="rounded-2xl overflow-hidden border border-brand-magenta/30 my-4">
+          <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=80" alt="Producción musical" class="w-full h-48 sm:h-60 object-cover">
+        </div>
+
+        <p class="text-sm sm:text-base font-semibold text-white">Esta accesibilidad ha generado una explosión de géneros híbridos y fusiones inesperadas[span_10](start_span)[span_10](end_span):</p>
+        <ul class="list-disc pl-5 space-y-2 text-sm sm:text-base">
+          <li><strong>El lo-fi y la estética íntima:</strong> Sonidos cálidos y cercanos que priorizan la emoción por encima de la perfección artificial[span_11](start_span)[span_11](end_span).</li>
+          <li><strong>La experimentación sin etiquetas:</strong> Artistas que saltan libremente entre el pop alternativo, el urbano underground, el rock independiente y la electrónica sin atenerse a los moldes comerciales tradicionales[span_12](start_span)[span_12](end_span).</li>
+        </ul>
+
+        <h3 class="font-montserrat font-bold text-lg sm:text-xl text-brand-cyan">La autenticidad como el nuevo estándar de éxito[span_13](start_span)[span_13](end_span)</h3>
+        
+        <p class="text-sm sm:text-base leading-relaxed">
+          Los oyentes de hoy buscan algo más que una melodía pegadiza; buscan <strong class="text-white">conexión genuina</strong>[span_14](start_span)[span_14](end_span). Las letras honestas, las historias reales y las propuestas visuales y sonoras que reflejan la identidad del artista se han convertido en el verdadero motor de fidelización[span_15](start_span)[span_15](end_span).
+        </p>
+
+        <div class="rounded-2xl overflow-hidden border border-brand-magenta/30 my-4">
+          <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80" alt="Interpretación acústica" class="w-full h-48 sm:h-60 object-cover">
+        </div>
+
+        <p class="text-sm sm:text-base leading-relaxed">
+          Ya no se trata solo de acumular reproducciones masivas, sino de construir una comunidad sólida que comparta la misma pasión por la buena música[span_16](start_span)[span_16](end_span). Los artistas que muestran su proceso creativo, sus dudas y sus aciertos logran un vínculo mucho más profundo con su audiencia[span_17](start_span)[span_17](end_span).
+        </p>
+
+        <h3 class="font-montserrat font-bold text-lg sm:text-xl text-brand-cyan">El papel fundamental de la radio online y los espacios de descubrimiento[span_18](start_span)[span_18](end_span)</h3>
+        
+        <p class="text-sm sm:text-base leading-relaxed">
+          En medio del mar de algoritmos de las grandes plataformas de streaming —donde muchas veces es difícil destacar—, los espacios alternativos, los podcasts y la <strong class="text-white">radio online</strong> han cobrado un protagonismo vital[span_19](start_span)[span_19](end_span).
+        </p>
+
+        <div class="rounded-2xl overflow-hidden border border-brand-magenta/30 my-4">
+          <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1200&q=80" alt="Cabina de radio" class="w-full h-48 sm:h-60 object-cover">
+          <p class="text-[11px] text-slate-400 p-3 italic bg-slate-950 text-center">La radio online recupera la esencia de la curaduría humana y el contacto directo con el oyente[span_20](start_span)[span_20](end_span).</p>
+        </div>
+
+        <p class="text-sm sm:text-base font-semibold text-white">Estos canales se han convertido en los nuevos curadores culturales[span_21](start_span)[span_21](end_span):</p>
+        <ul class="list-disc pl-5 space-y-2 text-sm sm:text-base">
+          <li><strong>Espacios humanos:</strong> Donde la selección musical tiene un rostro, un criterio y una intención curada por personas que aman la música[span_22](start_span)[span_22](end_span).</li>
+          <li><strong>Apoyo directo al talento emergente:</strong> Plataformas donde los artistas independientes encuentran un megáfono real para dar a conocer su trabajo sin intermediarios corporativos[span_23](start_span)[span_23](end_span).</li>
+        </ul>
+
+        <h3 class="font-montserrat font-bold text-lg sm:text-xl text-brand-cyan">Sintoniza con lo nuevo[span_24](start_span)[span_24](end_span)</h3>
+        
+        <p class="text-sm sm:text-base leading-relaxed">
+          La música está más viva que nunca y evoluciona segundo a segundo[span_25](start_span)[span_25](end_span). Cada acorde, cada letra y cada producción independiente nos recuerdan que el arte es, ante todo, un puente entre almas[span_26](start_span)[span_26](end_span).
+        </p>
+
+        <div class="p-4 rounded-2xl bg-brand-magenta/10 border border-brand-magenta/30 text-white italic text-xs sm:text-sm text-center">
+          ¿Cuál ha sido el último descubrimiento musical que te ha volado la cabeza? ¡Sube el volumen y déjanos tus recomendaciones en los comentarios o compártelas en nuestra transmisión[span_27](start_span)[span_27](end_span)!
+        </div>
+
+      </div>
+
+      <div class="mt-8 text-center border-t border-brand-magenta/20 pt-6">
+        <button onclick="toggleArticleModal()" class="px-8 py-3 rounded-full bg-gradient-to-r from-brand-magenta to-brand-cyan text-white font-montserrat font-black text-xs tracking-widest uppercase shadow-lg shadow-brand-magenta/40 hover:scale-105 transition-transform">
+          Cerrar Artículo
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer class="py-8 text-center text-xs text-slate-500 border-t border-brand-magenta/15">
     <div class="max-w-7xl mx-auto px-4">
@@ -500,7 +599,7 @@
     </div>
   </div>
 
-  <!-- SCRIPT LÓGICA DE STREAMING Y REPRODUCTOR -->
+  <!-- SCRIPT LÓGICA DE STREAMING, MENÚ Y MODAL -->
   <script>
     const audio = document.getElementById('audioStream');
     let isPlaying = false;
@@ -536,6 +635,12 @@
       } else {
         icon.className = "fa-solid fa-xmark text-base";
       }
+    }
+
+    // Función para abrir y cerrar el modal del artículo de música
+    function toggleArticleModal() {
+      const modal = document.getElementById('articleModal');
+      modal.classList.toggle('hidden');
     }
 
     function updateUI(playing) {
