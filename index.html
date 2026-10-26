@@ -503,4 +503,59 @@
             const icon = document.getElementById('muteBtn').querySelector('i');
             if (val == 0) {
                 icon.className = "fa-solid fa-volume-xmark text-sm text-brand-magenta";
+            } else {
+                icon.className = "fa-solid fa-volume-high text-sm";
             }
+        }
+
+        function initVisualizerCanvas() {
+            const canvas = document.getElementById('visualizerCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resize() {
+                canvas.width = canvas.parentElement.clientWidth;
+                canvas.height = canvas.parentElement.clientHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            const bars = 32;
+            let barHeights = new Array(bars).fill(6);
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                const barWidth = canvas.width / bars;
+
+                for (let i = 0; i < bars; i++) {
+                    if (isPlaying) {
+                        barHeights[i] = Math.max(6, Math.min(canvas.height, Math.sin(Date.now() * 0.006 + i * 0.25) * (canvas.height / 2) + (canvas.height / 2.1) + Math.random() * 6));
+                    } else {
+                        barHeights[i] = 4;
+                    }
+
+                    const gradient = ctx.createLinearGradient(0, canvas.height, 0, 0);
+                    gradient.addColorStop(0, '#ff007f'); // Parlar Magenta
+                    gradient.addColorStop(1, '#00e5ff'); // Parlar Cyan
+
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(i * barWidth, canvas.height - barHeights[i], barWidth - 2, barHeights[i]);
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-x-full', 'opacity-0');
+            toast.classList.add('translate-x-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-x-0', 'opacity-100');
+                toast.classList.add('translate-x-full', 'opacity-0');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
