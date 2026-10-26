@@ -13,8 +13,8 @@
                 extend: {
                     colors: {
                         brand: {
-                            magenta: '#ff007f', // Color principal de Parlar Radio
-                            cyan: '#00e5ff',   // Color secundario
+                            magenta: '#ff007f',
+                            cyan: '#00e5ff',
                             yellow: '#ffd700',
                             neonGreen: '#00ff88',
                             dark: '#070b19',
@@ -40,20 +40,18 @@
             color: #f8fafc;
         }
 
-        /* Glowing Pulse Animation matching logo aura */
         @keyframes pulse-glow {
             0%, 100% {
-                box-shadow: 0 0 20px rgba(255, 0, 127, 0.4), 0 0 35px rgba(0, 229, 255, 0.3);
+                box-shadow: 0 0 25px rgba(255, 0, 127, 0.5), 0 0 45px rgba(0, 229, 255, 0.4);
             }
             50% {
-                box-shadow: 0 0 30px rgba(255, 0, 127, 0.7), 0 0 55px rgba(0, 229, 255, 0.6);
+                box-shadow: 0 0 35px rgba(255, 0, 127, 0.8), 0 0 65px rgba(0, 229, 255, 0.7);
             }
         }
         .glow-effect {
             animation: pulse-glow 3s infinite ease-in-out;
         }
 
-        /* Live Badge Animation */
         @keyframes live-ping {
             75%, 100% {
                 transform: scale(2);
@@ -64,7 +62,6 @@
             animation: live-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
 
-        /* Metallic Silver Text Styling */
         .text-metallic {
             background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 45%, #94a3b8 100%);
             -webkit-background-clip: text;
@@ -77,14 +74,12 @@
             text-shadow: 0 0 12px rgba(255, 0, 127, 0.6);
         }
 
-        /* Glassmorphic card styling */
         .glass-card {
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(15, 23, 42, 0.75);
             backdrop-filter: blur(14px);
-            border: 1px solid rgba(0, 229, 255, 0.15);
+            border: 1px solid rgba(0, 229, 255, 0.2);
         }
         
-        /* Logo Ring Styling */
         .logo-ring {
             background: conic-gradient(from 0deg, #ff007f, #00e5ff, #ffd700, #00ff88, #ff007f);
         }
@@ -96,21 +91,15 @@
     <header class="sticky top-0 z-40 w-full glass-card border-b border-slate-800/80 bg-brand-darker/90 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <!-- Station Logo -->
+                <!-- Station Official Logo -->
                 <a href="#inicio" class="flex items-center gap-3 group">
                     <div class="relative w-12 h-12 rounded-full p-0.5 logo-ring flex items-center justify-center shadow-lg shadow-brand-magenta/30 group-hover:scale-105 transition-transform duration-300">
-                        <div class="w-full h-full bg-brand-darker rounded-full flex items-center justify-center overflow-hidden">
-                            <!-- ESTE ES EL LOGOTIPO - USAMOS UN ICONO TEMPORAL -->
-                            <!-- Reemplaza el <i class="..."> por un <img> con tu archivo de logo -->
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-pink to-brand-magenta flex items-center justify-center">
-                                <i class="fa-solid fa-headphones text-white text-sm"></i>
-                            </div>
-                        </div>
+                        <img src="https://i.ibb.co/2sdn1m59/129161-2.png" alt="Parlar Radio Logo" class="w-full h-full object-cover rounded-full">
                     </div>
                     <div>
                         <div class="flex items-center gap-1">
-                            <span class="font-black text-2xl tracking-wider text-metallic">PARLAR</span>
-                            <span class="font-black text-2xl text-neon-magenta">RADIO</span>
+                            <span class="font-black text-xl tracking-wider text-metallic">PARLAR</span>
+                            <span class="font-black text-xl text-neon-magenta">RADIO</span>
                         </div>
                         <p class="text-[9px] text-brand-cyan font-bold tracking-[0.25em] uppercase -mt-1">SOMOS MUNDO</p>
                     </div>
@@ -120,7 +109,6 @@
                 <nav class="hidden md:flex items-center gap-1 lg:gap-2">
                     <a href="#inicio" class="px-3.5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-white hover:text-brand-cyan transition-colors">Inicio</a>
                     <a href="#programacion" class="px-3.5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-white transition-colors">Programación</a>
-                    <a href="#podcasts" class="px-3.5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-white transition-colors">Podcasts</a>
                     <a href="#contacto" class="px-3.5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-white transition-colors">Contacto</a>
                 </nav>
 
@@ -142,7 +130,6 @@
         <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-brand-darker px-4 pt-3 pb-6 space-y-2">
             <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-slate-800">Inicio</a>
             <a href="#programacion" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-800">Programación</a>
-            <a href="#podcasts" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-800">Podcasts</a>
             <a href="#contacto" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-800">Contacto</a>
             <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener" class="block px-3 py-2.5 rounded-md text-base font-medium text-green-400 bg-green-950/40 border border-green-500/30">
                 <i class="fa-brands fa-whatsapp mr-2"></i> Canal de WhatsApp
@@ -155,7 +142,6 @@
         
         <!-- Hero Section -->
         <section id="inicio" class="relative overflow-hidden py-12 md:py-20 border-b border-slate-800/50">
-            <!-- Background Radial Glow Aura -->
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-brand-magenta/15 via-brand-cyan/15 to-brand-yellow/10 rounded-full blur-3xl pointer-events-none"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -163,7 +149,6 @@
                     
                     <!-- Left Hero Content -->
                     <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                        <!-- Live Status Indicator -->
                         <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-brand-cyan/40 backdrop-blur-md shadow-lg shadow-brand-cyan/10">
                             <span class="relative flex h-3 w-3">
                                 <span class="live-dot-ping absolute inline-flex h-full w-full rounded-full bg-brand-magenta opacity-75"></span>
@@ -174,7 +159,6 @@
                             <span class="text-xs text-brand-cyan font-bold tracking-widest uppercase">EN VIVO DIGITAL</span>
                         </div>
 
-                        <!-- Brand Title & Tagline -->
                         <div>
                             <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none uppercase">
                                 <span class="text-metallic">PARLAR</span><span class="text-neon-magenta">RADIO</span>
@@ -188,7 +172,6 @@
                             Conectando comunidades alrededor del planeta con la mejor música, información al instante, cultura y nuestras raíces en directo con calidad digital HD.
                         </p>
 
-                        <!-- Call To Action Controls -->
                         <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                             <button id="heroPlayBtn" onclick="togglePlay()" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-magenta via-brand-pink to-brand-magenta hover:opacity-95 text-white font-extrabold text-base tracking-wider shadow-xl glow-effect transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3">
                                 <i class="fa-solid fa-play text-xl" id="heroPlayIcon"></i>
@@ -201,20 +184,16 @@
                         </div>
                     </div>
 
-                    <!-- Right Hero Logo Visual Banner -->
+                    <!-- Right Hero Official Logo Banner -->
                     <div class="lg:col-span-5">
                         <div class="glass-card rounded-3xl p-6 relative overflow-hidden shadow-2xl">
-                            <!-- Logo Art Display - Marcador de posición -->
-                            <div class="relative group rounded-2xl overflow-hidden bg-brand-darker border border-slate-800 p-6 flex flex-col items-center justify-center text-center">
-                                <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-full logo-ring p-1 mb-4 shadow-2xl shadow-brand-magenta/40 flex items-center justify-center">
-                                    <!-- ESTE ES EL LOGOTIPO GRANDE - USAMOS UN ICONO TEMPORAL -->
-                                    <!-- Reemplaza el <i class="..."> por un <img> con tu archivo de logo -->
-                                    <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center p-4">
-                                        <i class="fa-solid fa-headphones text-brand-magenta text-5xl"></i>
-                                    </div>
+                            <div class="relative group rounded-2xl overflow-hidden bg-brand-darker border border-slate-800 p-4 flex flex-col items-center justify-center text-center">
+                                <!-- Logotipo Oficial Integrado -->
+                                <div class="w-full max-w-[300px] aspect-square rounded-2xl overflow-hidden shadow-2xl shadow-brand-magenta/40 border border-slate-700/50 mb-3 relative">
+                                    <img src="https://i.ibb.co/2sdn1m59/129161-2.png" alt="Parlar Radio Logotipo Oficial" class="w-full h-full object-cover">
                                 </div>
-                                <h3 class="text-lg font-extrabold text-white tracking-tight" id="heroShowTitle">Parlar Radio Stream HD</h3>
-                                <p class="text-xs text-brand-cyan font-bold mt-1" id="heroShowHost">Transmisión Oficial en Vivo</p>
+                                <h3 class="text-base font-extrabold text-white tracking-tight">Parlar Radio Stream HD</h3>
+                                <p class="text-xs text-brand-cyan font-bold mt-0.5">Transmisión Oficial en Vivo</p>
                             </div>
 
                             <!-- Equalizer Visualizer -->
@@ -323,8 +302,6 @@
     <footer id="contacto" class="py-12 bg-brand-darker border-t border-slate-800 text-slate-400 text-xs mt-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-slate-800">
-                
-                <!-- Brand Col -->
                 <div class="md:col-span-5 space-y-3">
                     <div class="flex items-center gap-2">
                         <span class="font-black text-xl text-metallic">PARLAR</span>
@@ -336,7 +313,6 @@
                     </p>
                 </div>
 
-                <!-- Programs List -->
                 <div class="md:col-span-4 space-y-2">
                     <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-2">Programas Estelares</h4>
                     <p>• Quinta Sinfonía (Wladimir Ormaza)</p>
@@ -345,7 +321,6 @@
                     <p>• Prisma (Vladimir Hernández Solis)</p>
                 </div>
 
-                <!-- Official Links -->
                 <div class="md:col-span-3 space-y-3">
                     <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-2">Redes Oficiales</h4>
                     <a href="mailto:parlar.radio@live.com" class="block hover:text-brand-magenta transition-colors">
@@ -368,16 +343,10 @@
     <div class="fixed bottom-0 left-0 right-0 z-50 glass-card bg-brand-darker/95 border-t border-slate-800 backdrop-blur-xl px-4 py-3 shadow-2xl">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
             
-            <!-- Left: Station Info -->
+            <!-- Left: Station Info with Logo -->
             <div class="flex items-center gap-3 min-w-0 w-1/3">
                 <div class="w-10 h-10 rounded-full logo-ring p-0.5 flex-shrink-0">
-                    <div class="w-full h-full bg-brand-darker rounded-full flex items-center justify-center relative overflow-hidden">
-                        <!-- ESTE ES EL LOGOTIPO DEL REPRODUCTOR - USAMOS UN ICONO TEMPORAL -->
-                        <!-- Reemplaza el <i class="..."> por un <img> con tu archivo de logo -->
-                        <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center p-1.5 border border-slate-800">
-                            <i class="fa-solid fa-headphones text-brand-magenta text-xs"></i>
-                        </div>
-                    </div>
+                    <img src="https://i.ibb.co/2sdn1m59/129161-2.png" alt="Logo" class="w-full h-full object-cover rounded-full">
                 </div>
                 <div class="min-w-0 hidden sm:block">
                     <h4 class="text-xs font-extrabold text-metallic truncate" id="playerTrackTitle">PARLAR RADIO HD</h4>
@@ -385,9 +354,8 @@
                 </div>
             </div>
 
-            <!-- Center: Player Controls Container & Audio Element -->
+            <!-- Center: Player Controls & Audio Stream Element (Actualizado con tu enlace Cloudflare) -->
             <div class="flex flex-col items-center gap-1 w-1/3">
-                <!-- Audio Element for Streaming -->
                 <audio id="parlar-audio-stream" preload="auto" crossorigin="anonymous">
                     <source src="https://supreme-yeah-hoping-nature.trycloudflare.com/listen/parlar_radio/radio.mp3" type="audio/mpeg">
                     Tu navegador no soporta el reproductor de audio.
@@ -432,7 +400,6 @@
             initVisualizerCanvas();
             const audio = document.getElementById('parlar-audio-stream');
             
-            // Sync play state UI with audio events
             audio.addEventListener('play', () => {
                 isPlaying = true;
                 updatePlayStateIcons(true);
@@ -534,8 +501,8 @@
                     }
 
                     const gradient = ctx.createLinearGradient(0, canvas.height, 0, 0);
-                    gradient.addColorStop(0, '#ff007f'); // Parlar Magenta
-                    gradient.addColorStop(1, '#00e5ff'); // Parlar Cyan
+                    gradient.addColorStop(0, '#ff007f');
+                    gradient.addColorStop(1, '#00e5ff');
 
                     ctx.fillStyle = gradient;
                     ctx.fillRect(i * barWidth, canvas.height - barHeights[i], barWidth - 2, barHeights[i]);
