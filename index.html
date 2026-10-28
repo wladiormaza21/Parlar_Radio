@@ -114,7 +114,7 @@
 
   <!-- Audio Player HTML5 -->
   <audio id="audioStream" preload="none">
-    <source src="https://supreme-yeah-hoping-nature.trycloudflare.com/listen/parlar_radio/radio.mp3" type="audio/mpeg">
+    <source src="https://stream.parlarradio.com/listen/parlar_radio/radio.mp3" type="audio/mpeg">
     Tu navegador no soporta el reproductor de audio.
   </audio>
 
@@ -613,7 +613,7 @@
 
     function togglePlay() {
       if (!isPlaying) {
-        audio.src = "https://supreme-yeah-hoping-nature.trycloudflare.com/listen/parlar_radio/radio.mp3?t=" + new Date().getTime();
+        audio.src = "https://stream.parlarradio.com/listen/parlar_radio/radio.mp3?t=" + new Date().getTime();
         audio.play().then(() => {
           isPlaying = true;
           updateUI(true);
