@@ -6,6 +6,10 @@
   <title>Parlar Radio | SOMOS MUNDO</title>
   <meta name="description" content="Parlar Radio - SOMOS MUNDO. Música, Cultura, Información y Lo Nuestro en una señal digital internacional 24/7.">
   
+  <!-- Enlace PWA Manifest y Color de Tema -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0f172a">
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -357,7 +361,7 @@
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <!-- Quinta Sinfonía (Con Logotipo e Imagen Oficial) -->
+        <!-- Quinta Sinfonía -->
         <div class="glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
             <div class="rounded-2xl overflow-hidden mb-4 border border-brand-magenta/30 shadow-md">
@@ -393,7 +397,7 @@
           </div>
         </div>
 
-        <!-- Ni chicha ni limonada (Con Logotipo e Imagen Oficial + Redes de Ramiro) -->
+        <!-- Ni chicha ni limonada -->
         <div class="glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
             <div class="rounded-2xl overflow-hidden mb-4 border border-brand-magenta/30 shadow-md">
@@ -704,6 +708,17 @@
       setTimeout(() => {
         msg.style.opacity = '0';
       }, 2500);
+    }
+  </script>
+
+  <!-- Registro del Service Worker para PWA -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('Service Worker registrado con éxito:', reg.scope))
+          .catch(err => console.log('Error al registrar el Service Worker:', err));
+      });
     }
   </script>
 </body>
