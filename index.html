@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -43,7 +42,7 @@
       scroll-padding-top: 100px;
     }
 
-    /* ÚNICO CAMBIO: BACKGROUND DE GITHUB */
+    /* ÚNICO CAMBIO: BACKGROUND CON 80% DE OPACIDAD VISUAL */
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg);
@@ -51,7 +50,12 @@
       overflow-x: hidden;
       padding-bottom: 100px;
 
-      background-image: url("https://raw.githubusercontent.com/wladiormaza21/Parlar_Radio/main/1793780326819.jpg");
+      background-image:
+        linear-gradient(
+          rgba(8, 5, 10, .20),
+          rgba(8, 5, 10, .20)
+        ),
+        url("https://raw.githubusercontent.com/wladiormaza21/Parlar_Radio/main/1793780326819.jpg");
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -1782,8 +1786,6 @@
     document.addEventListener('DOMContentLoaded', () => {
       audio.volume = 1;
 
-      // El navegador móvil requiere una interacción del usuario
-      // para permitir la reproducción de audio.
       updatePlayerUI(false);
       loadAzuraCastData();
 
