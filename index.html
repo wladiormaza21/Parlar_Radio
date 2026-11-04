@@ -1114,6 +1114,104 @@
       margin-bottom: 22px;
     }
 
+    /* =====================================================
+       NUEVO EFECTO NEÓN PARA ICONOS DE REDES SOCIALES
+       ===================================================== */
+
+    @keyframes socialNeon {
+      0%, 100% {
+        filter:
+          drop-shadow(0 0 2px currentColor)
+          drop-shadow(0 0 5px currentColor);
+        opacity: 1;
+      }
+
+      50% {
+        filter:
+          drop-shadow(0 0 5px currentColor)
+          drop-shadow(0 0 12px currentColor)
+          drop-shadow(0 0 19px currentColor);
+        opacity: .82;
+      }
+    }
+
+    /* REDES OFICIALES */
+
+    .social-links a i {
+      animation: socialNeon 2s ease-in-out infinite;
+    }
+
+    .social-links a:nth-child(1) { color: #E1306C; }
+    .social-links a:nth-child(2) { color: #1877F2; }
+    .social-links a:nth-child(3) { color: #25F4EE; }
+    .social-links a:nth-child(4) { color: #FF7A00; }
+    .social-links a:nth-child(5) { color: #25D366; }
+
+    .social-links a:nth-child(1) i { animation-delay: 0s; }
+    .social-links a:nth-child(2) i { animation-delay: .25s; }
+    .social-links a:nth-child(3) i { animation-delay: .5s; }
+    .social-links a:nth-child(4) i { animation-delay: .75s; }
+    .social-links a:nth-child(5) i { animation-delay: 1s; }
+
+    .social-links a:hover i {
+      color: #fff;
+      filter:
+        drop-shadow(0 0 5px #fff)
+        drop-shadow(0 0 12px #fff);
+    }
+
+    /* REDES DE LOS PRESENTADORES */
+
+    .host-socials a i {
+      animation: socialNeon 2.2s ease-in-out infinite;
+    }
+
+    .host-socials a[aria-label="Facebook"] {
+      color: #1877F2;
+    }
+
+    .host-socials a[aria-label="Instagram"] {
+      color: #E1306C;
+    }
+
+    .host-socials a[aria-label="TikTok"] {
+      color: #25F4EE;
+    }
+
+    .host-socials a[aria-label="X"] {
+      color: #FFFFFF;
+    }
+
+    .host-socials a:hover {
+      border-color: currentColor;
+    }
+
+    .host-socials a:hover i {
+      filter:
+        drop-shadow(0 0 5px currentColor)
+        drop-shadow(0 0 12px currentColor);
+    }
+
+    /* REDES DE CONTACTO */
+
+    .contact-social a i {
+      animation: socialNeon 2s ease-in-out infinite;
+    }
+
+    .contact-social a .fa-whatsapp {
+      color: #25D366;
+    }
+
+    .contact-social a .fa-x-twitter {
+      color: #FFFFFF;
+    }
+
+    .contact-social a:hover i {
+      filter:
+        drop-shadow(0 0 5px currentColor)
+        drop-shadow(0 0 12px currentColor);
+    }
+
     /* RESPONSIVE */
 
     @media (max-width: 950px) {
