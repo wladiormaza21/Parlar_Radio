@@ -2,893 +2,196 @@
 <html lang="es" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080308">
+  <meta name="description" content="Parlar Radio - SOMOS MUNDO. Señal digital internacional HD en directo 24/7. Música, cultura, información y lo nuestro.">
   <title>Parlar Radio | SOMOS MUNDO</title>
-  <meta name="description" content="Parlar Radio - SOMOS MUNDO. Señal digital internacional HD con transmisión en directo 24/7, metadatos AzuraCast en vivo, cultura, programas y música.">
-
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#050008">
-
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            obsidian: '#050008',
-            cyber: {
-              cyan: '#ff007f',
-              cyanDim: '#e0006c',
-              indigo: '#9d00ff',
-              violet: '#c026d3',
-              silver: '#fce7f3',
-              muted: '#d4a6c2',
-              card: 'rgba(20, 5, 25, 0.78)',
-              border: 'rgba(255, 0, 127, 0.30)'
-            }
-          },
-          animation: {
-            'spin-slow': 'spin 20s linear infinite',
-            'pulse-laser': 'pulseLaser 3s ease-in-out infinite alternate',
-            'float': 'float 6s ease-in-out infinite',
-            'equalize': 'equalize 1.2s ease-in-out infinite alternate'
-          },
-          keyframes: {
-            pulseLaser: {
-              '0%': { filter: 'drop-shadow(0 0 15px rgba(255, 0, 127, 0.35))' },
-              '100%': { filter: 'drop-shadow(0 0 35px rgba(157, 0, 255, 0.6))' }
-            },
-            float: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-8px)' }
-            },
-            equalize: {
-              '0%': { transform: 'scaleY(0.2)' },
-              '100%': { transform: 'scaleY(1)' }
-            }
-          }
-        }
-      }
-    }
+      theme: { extend: { colors: {
+        obsidian:'#080308',
+        cyber:{ cyan:'#ff007f', cyanDim:'#d90068', indigo:'#c000ff', violet:'#8b20d9',
+          silver:'#f5eaf1', muted:'#c5aebe', card:'rgba(18,5,15,.82)', border:'rgba(255,0,127,.32)' }
+      }, animation:{
+        'spin-slow':'spin 20s linear infinite',
+        'pulse-laser':'pulseLaser 3s ease-in-out infinite alternate',
+        'float':'float 6s ease-in-out infinite',
+        'equalize':'equalize 1.2s ease-in-out infinite alternate'
+      }, keyframes:{
+        pulseLaser:{'0%':{filter:'drop-shadow(0 0 12px rgba(255,0,127,.22))'},'100%':{filter:'drop-shadow(0 0 30px rgba(192,0,255,.42))'}},
+        float:{'0%,100%':{transform:'translateY(0)'},'50%':{transform:'translateY(-7px)'}},
+        equalize:{'0%':{transform:'scaleY(.2)'},'100%':{transform:'scaleY(1)'}}
+      }}}
+    };
   </script>
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,800;0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #050008;
+    :root{--magenta:#ff007f;--magenta2:#d90068;--violet:#9d00ff;--ink:#080308}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Plus Jakarta Sans',sans-serif;color:#f8edf4;overflow-x:hidden;
+      background-color:var(--ink);
       background-image:
-        radial-gradient(ellipse at 12% 12%, rgba(255, 0, 127, 0.15) 0%, transparent 42%),
-        radial-gradient(ellipse at 90% 38%, rgba(157, 0, 255, 0.13) 0%, transparent 45%),
-        radial-gradient(ellipse at 50% 95%, rgba(255, 0, 127, 0.09) 0%, transparent 40%),
-        radial-gradient(rgba(255, 0, 127, 0.07) 1px, transparent 1px),
-        radial-gradient(rgba(157, 0, 255, 0.05) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
-      background-position: 0 0, 0 0, 0 0, 0 0, 16px 16px;
-      background-attachment: fixed;
-      color: #fce7f3;
-      overflow-x: hidden;
+        radial-gradient(ellipse at 12% 12%,rgba(255,0,127,.13),transparent 38%),
+        radial-gradient(ellipse at 88% 38%,rgba(157,0,255,.12),transparent 42%),
+        radial-gradient(ellipse at 48% 90%,rgba(255,0,127,.07),transparent 38%),
+        radial-gradient(rgba(255,0,127,.09) .7px,transparent .7px),
+        repeating-linear-gradient(125deg,rgba(255,255,255,.012) 0,rgba(255,255,255,.012) 1px,transparent 1px,transparent 5px);
+      background-size:auto,auto,auto,27px 27px,100% 100%;
+      background-attachment:fixed;
     }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      opacity: 0.16;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
-    }
-
-    .font-montserrat {
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .glass-panel {
-      background: rgba(10, 3, 15, 0.91);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 0, 127, 0.25);
-    }
-
-    .glass-card {
-      background: linear-gradient(135deg, rgba(27, 5, 25, 0.82), rgba(7, 3, 13, 0.94));
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 0, 127, 0.22);
-      box-shadow: 0 12px 35px -10px rgba(0, 0, 0, 0.9);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .glass-card:hover {
-      border-color: rgba(255, 0, 127, 0.7);
-      box-shadow: 0 20px 45px -10px rgba(255, 0, 127, 0.22), 0 0 25px rgba(157, 0, 255, 0.18);
-      transform: translateY(-4px);
-    }
-
-    .text-glow-cyan {
-      text-shadow: 0 0 15px rgba(255, 0, 127, 0.75), 0 0 30px rgba(255, 0, 127, 0.3);
-    }
-
-    .text-glow-violet {
-      text-shadow: 0 0 15px rgba(157, 0, 255, 0.75), 0 0 30px rgba(157, 0, 255, 0.3);
-    }
-
-    .btn-cyber {
-      background: linear-gradient(135deg, #ff007f 0%, #e0006c 48%, #9d00ff 100%);
-      transition: all 0.3s ease;
-    }
-
-    .btn-cyber:hover {
-      box-shadow: 0 0 25px rgba(255, 0, 127, 0.6), 0 0 35px rgba(157, 0, 255, 0.4);
-    }
-
-    .eq-bar {
-      width: 4px;
-      border-radius: 99px;
-      background: linear-gradient(to top, #ff007f, #9d00ff, #ffffff);
-      transform-origin: bottom;
-    }
-
-    .eq-paused .eq-bar {
-      animation-play-state: paused !important;
-    }
-
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #050008; }
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(to bottom, #ff007f, #9d00ff);
-      border-radius: 4px;
-    }
-
-    #autoplayOverlay {
-      background: rgba(5, 0, 8, 0.96);
-    }
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.22;background:linear-gradient(115deg,transparent 20%,rgba(255,0,127,.045) 50%,transparent 80%)}
+    .font-montserrat{font-family:Montserrat,sans-serif}
+    .glass-panel{background:rgba(10,4,11,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,0,127,.28)}
+    .glass-card{background:linear-gradient(145deg,rgba(28,8,23,.88),rgba(9,4,12,.94));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,0,127,.22);box-shadow:0 14px 38px -18px #000,0 0 20px rgba(255,0,127,.045);transition:transform .3s,border-color .3s,box-shadow .3s}
+    .glass-card:hover{border-color:rgba(255,0,127,.58);box-shadow:0 18px 42px -16px rgba(255,0,127,.18);transform:translateY(-3px)}
+    .text-glow-cyan{text-shadow:0 0 12px rgba(255,0,127,.6),0 0 26px rgba(255,0,127,.24)}
+    .text-glow-violet{text-shadow:0 0 14px rgba(157,0,255,.55)}
+    .btn-cyber{background:linear-gradient(120deg,#ff007f 0%,#e00083 52%,#a000ed 100%);box-shadow:0 0 22px rgba(255,0,127,.2);transition:filter .25s,transform .25s,box-shadow .25s}
+    .btn-cyber:hover{filter:brightness(1.12);box-shadow:0 0 28px rgba(255,0,127,.42)}
+    .eq-bar{width:4px;border-radius:99px;background:linear-gradient(to top,#ff007f,#bd00d9,#fff);transform-origin:bottom}
+    .neon-border{box-shadow:0 0 0 1px rgba(255,0,127,.25),0 0 28px rgba(255,0,127,.10)}
+    ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#080308}::-webkit-scrollbar-thumb{background:linear-gradient(#ff007f,#8b20d9);border-radius:8px}
+    #autoplayOverlay[hidden],#articleModal[hidden]{display:none!important}
+    .sticky-player{padding-bottom:max(12px,env(safe-area-inset-bottom))}
+    button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #ff69b4;outline-offset:3px}
+    @media(max-width:640px){.hero-title{font-size:clamp(2.2rem,10vw,3.4rem)}.hero-content{padding-top:2.2rem}.hero-banner{margin-bottom:2.2rem}.sticky-player{padding-left:12px;padding-right:12px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
   </style>
 </head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-cyber-cyan selection:text-white pb-28">
 
-<body class="min-h-screen flex flex-col antialiased selection:bg-cyber-cyan selection:text-obsidian pb-28">
-
-  <!-- REPRODUCTOR HTML5 -->
+  <!-- Audio: la reproducción se inicia tras una acción del usuario cuando el navegador bloquea autoplay -->
   <audio id="audioStream" preload="none" playsinline>
     <source src="https://stream.parlarradio.com/listen/parlar_radio/radio.mp3" type="audio/mpeg">
     Tu navegador no soporta el reproductor de audio.
   </audio>
 
-  <!-- MODAL DE ACTIVACIÓN -->
-  <div id="autoplayOverlay" class="fixed inset-0 z-50 bg-obsidian/95 backdrop-blur-2xl flex flex-col items-center justify-center p-6 text-center transition-all duration-500 hidden">
-    <div class="max-w-md w-full glass-card p-8 sm:p-10 rounded-3xl border-2 border-cyber-cyan/60 shadow-[0_0_60px_rgba(255,0,127,0.3)] animate-float">
-      <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-tr from-cyber-cyan via-cyber-indigo to-cyber-violet p-1 flex items-center justify-center shadow-xl shadow-cyber-cyan/40">
-        <div class="w-full h-full bg-obsidian rounded-full flex items-center justify-center">
-          <i class="fa-solid fa-tower-broadcast text-4xl text-cyber-cyan animate-pulse"></i>
-        </div>
+  <div id="autoplayOverlay" hidden class="fixed inset-0 z-[60] bg-obsidian/95 backdrop-blur-xl flex flex-col items-center justify-center p-6 text-center">
+    <div class="max-w-md w-full glass-card p-8 rounded-3xl border-2 border-cyber-cyan/60 shadow-2xl">
+      <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-to-tr from-cyber-cyan to-cyber-indigo p-1 flex items-center justify-center">
+        <div class="w-full h-full bg-obsidian rounded-full flex items-center justify-center"><i class="fa-solid fa-tower-broadcast text-3xl text-cyber-cyan"></i></div>
       </div>
-      <span class="text-xs font-montserrat font-extrabold text-cyber-violet tracking-[0.3em] uppercase mb-2 block">Parlar Radio | SOMOS MUNDO</span>
-      <h2 class="font-montserrat font-black text-2xl sm:text-3xl text-white mb-3 italic">ACTIVAR SEÑAL HD</h2>
-      <p class="text-cyber-muted text-xs sm:text-sm mb-8 leading-relaxed">Haz clic para sintonizar en directo la transmisión internacional 24/7 sin interrupciones.</p>
-      <button onclick="iniciarAudioAutoplay()" class="w-full py-4 rounded-full btn-cyber text-obsidian font-montserrat font-black text-xs sm:text-sm tracking-widest uppercase shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
-        <i class="fa-solid fa-play text-base"></i>
-        <span>SINTONIZAR EN VIVO AHORA</span>
-      </button>
+      <span class="text-xs font-montserrat font-extrabold text-cyber-cyan tracking-[.25em] uppercase">Parlar Radio | SOMOS MUNDO</span>
+      <h2 class="font-montserrat font-black text-2xl text-white my-3">ACTIVAR SEÑAL HD</h2>
+      <p class="text-cyber-muted text-sm mb-7">Pulsa para escuchar nuestra transmisión internacional en directo.</p>
+      <button onclick="iniciarAudioAutoplay()" class="w-full py-4 rounded-full btn-cyber text-white font-montserrat font-black text-sm tracking-widest uppercase"><i class="fa-solid fa-play mr-2"></i>Sintonizar en vivo ahora</button>
     </div>
   </div>
 
   <!-- NAVBAR -->
-  <header class="sticky top-0 z-40 glass-panel border-b border-cyber-cyan/20 shadow-2xl shadow-black">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-
-      <!-- LOGO OFICIAL PARLAR RADIO -->
-      <a href="#inicio" class="flex items-center gap-3.5 group">
-        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-cyber-cyan via-cyber-indigo to-cyber-violet p-0.5 shadow-lg shadow-cyber-cyan/30 group-hover:rotate-6 transition-transform flex-shrink-0">
-          <div class="w-full h-full bg-obsidian rounded-[14px] flex items-center justify-center overflow-hidden p-1">
-            <img
-              src="https://raw.githubusercontent.com/wladiormaza21/Parlar_Radio/main/file_000000009ed481f5b70ad2eaadb57b35.png"
-              alt="Logo oficial Parlar Radio"
-              class="w-full h-full object-contain rounded-xl"
-            >
+  <header class="sticky top-0 z-40 glass-panel border-b border-cyber-cyan/25 shadow-2xl shadow-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[88px] flex items-center justify-between gap-3">
+      <a href="#inicio" class="flex items-center gap-3 group min-w-0">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-cyber-cyan via-cyber-indigo to-cyber-violet p-[2px] shadow-[0_0_22px_rgba(255,0,127,.35)] group-hover:rotate-3 transition-transform flex-shrink-0">
+          <div class="w-full h-full bg-obsidian rounded-[14px] flex items-center justify-center overflow-hidden">
+            <img src="https://raw.githubusercontent.com/wladiormaza21/Parlar_Radio/main/file_000000009ed481f5b70ad2eaadb57b35.png" alt="Logotipo Parlar Radio" class="w-full h-full object-contain p-1" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <svg style="display:none" class="w-9 h-9 text-cyber-cyan" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="5"/><path d="M30 76c3-15 13-20 20-20s17 5 20 20M36 42a14 14 0 1 0 28 0 14 14 0 0 0-28 0" stroke="currentColor" stroke-width="6" stroke-linecap="round"/></svg>
           </div>
         </div>
-        <div class="flex flex-col">
-          <span class="font-montserrat font-black text-xl sm:text-2xl tracking-tighter text-white flex items-center gap-1 leading-none">
-            PARLAR<span class="text-cyber-cyan text-glow-cyan">RADIO</span>
-          </span>
-          <span class="font-montserrat font-extrabold text-[9px] tracking-[0.3em] text-cyber-silver uppercase mt-1">SOMOS MUNDO</span>
+        <div class="flex flex-col min-w-0">
+          <span class="font-montserrat font-black text-[clamp(1.1rem,4vw,2rem)] tracking-[-.06em] text-white leading-none whitespace-nowrap">PARLAR <span class="text-cyber-cyan text-glow-cyan">RADIO</span></span>
+          <span class="font-montserrat font-extrabold text-[9px] sm:text-[11px] tracking-[.32em] text-cyber-silver uppercase mt-2">SOMOS MUNDO</span>
         </div>
       </a>
-
-      <nav class="hidden lg:flex items-center gap-8 font-montserrat font-extrabold text-xs tracking-wider uppercase text-cyber-muted">
-        <a href="#inicio" class="hover:text-cyber-cyan transition-colors">Inicio</a>
-        <a href="#pilares" class="hover:text-cyber-cyan transition-colors">Pilares</a>
-        <a href="#programas" class="hover:text-cyber-cyan transition-colors">Radio Shows</a>
-        <a href="#nosotros" class="hover:text-cyber-cyan transition-colors">Nosotros</a>
-        <a href="#contacto" class="hover:text-cyber-cyan transition-colors">Contacto</a>
+      <nav class="hidden lg:flex items-center gap-7 font-montserrat font-extrabold text-[11px] tracking-wider uppercase text-cyber-muted">
+        <a href="#inicio" class="hover:text-cyber-cyan transition-colors">Inicio</a><a href="#pilares" class="hover:text-cyber-cyan transition-colors">Pilares</a><a href="#programas" class="hover:text-cyber-cyan transition-colors">Radio Shows</a><a href="#nosotros" class="hover:text-cyber-cyan transition-colors">Nosotros</a><a href="#contacto" class="hover:text-cyber-cyan transition-colors">Contacto</a>
       </nav>
-
-      <div class="flex items-center gap-3">
-        <div class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan text-xs font-extrabold uppercase tracking-wider">
-          <span class="w-2 h-2 rounded-full bg-cyber-cyan animate-pulse"></span>
-          <span id="navListeners">-- Oyentes</span>
-        </div>
-
-        <button onclick="togglePlay()" class="px-4 sm:px-6 py-2.5 rounded-full text-obsidian font-montserrat font-black text-xs tracking-widest shadow-lg shadow-cyber-cyan/30 hover:scale-105 active:scale-95 transition-all uppercase flex items-center gap-2 bg-gradient-to-r from-cyber-cyan via-cyber-indigo to-cyber-violet">
-          <i id="navPlayIcon" class="fa-solid fa-play text-xs"></i>
-          <span id="navPlayText" class="hidden sm:inline">ESCUCHAR</span>
+      <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+        <div class="hidden sm:flex items-center gap-2 px-3 py-2 rounded-full bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan text-[10px] font-extrabold uppercase"><span class="w-2 h-2 rounded-full bg-cyber-cyan animate-pulse"></span><span id="navListeners">-- Oyentes</span></div>
+        <button onclick="togglePlay()" aria-label="Reproducir o pausar radio" class="btn-cyber w-12 h-12 sm:w-auto sm:px-5 rounded-full text-white font-montserrat font-black text-xs uppercase flex items-center justify-center gap-2">
+          <i id="navPlayIcon" class="fa-solid fa-play"></i><span id="navPlayText" class="hidden sm:inline">ESCUCHAR</span>
         </button>
-
-        <button onclick="toggleMobileMenu()" class="lg:hidden w-10 h-10 rounded-xl bg-slate-900 border border-cyber-cyan/30 text-white flex items-center justify-center">
-          <i id="menuIcon" class="fa-solid fa-bars"></i>
-        </button>
+        <button onclick="toggleMobileMenu()" aria-label="Abrir menú" aria-expanded="false" class="lg:hidden w-11 h-11 rounded-xl bg-slate-950 border border-cyber-cyan/30 text-white flex items-center justify-center"><i id="menuIcon" class="fa-solid fa-bars"></i></button>
       </div>
     </div>
-
-    <div id="mobileMenu" class="hidden lg:hidden border-t border-cyber-cyan/20 bg-obsidian/95 px-6 py-6 space-y-4 font-montserrat font-bold text-xs uppercase">
-      <a href="#inicio" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-cyber-cyan">Inicio</a>
-      <a href="#pilares" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-cyber-cyan">Pilares</a>
-      <a href="#programas" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-cyber-cyan">Radio Shows</a>
-      <a href="#nosotros" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-cyber-cyan">Nosotros</a>
-      <a href="#contacto" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-cyber-cyan">Contacto</a>
-      <div class="pt-2">
-        <a href="https://whatsapp.com/channel/0029Vb8wXsv2P59imKUGxJ46" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-          <i class="fa-brands fa-whatsapp text-base"></i>
-          <span>Canal de WhatsApp</span>
-        </a>
-      </div>
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-cyber-cyan/20 bg-obsidian/95 px-6 py-5 space-y-4 font-montserrat font-bold text-xs uppercase">
+      <a href="#inicio" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-cyber-cyan">Inicio</a><a href="#pilares" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-cyber-cyan">Pilares</a><a href="#programas" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-cyber-cyan">Radio Shows</a><a href="#nosotros" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-cyber-cyan">Nosotros</a><a href="#contacto" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-cyber-cyan">Contacto</a>
+      <a href="https://whatsapp.com/channel/0029Vb8wXsv2P59imKUGxJ46" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30"><i class="fa-brands fa-whatsapp"></i>Canal de WhatsApp</a>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section id="inicio" class="relative py-10 md:py-16 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-      <div class="mb-10 sm:mb-12 rounded-3xl overflow-hidden border-2 border-cyber-cyan/40 shadow-[0_0_50px_rgba(255,0,127,0.2)] relative group bg-obsidian/80">
-        <img src="file_0000000045bc81f49eb7d1a9d6cb3b12.png"
-             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80';"
-             alt="Parlar Radio Banner Oficial"
-             class="w-full h-auto object-cover max-h-[420px] group-hover:scale-[1.01] transition-transform duration-700">
+  <!-- HERO / METADATOS -->
+  <main>
+  <section id="inicio" class="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 hero-content">
+      <div class="hero-banner mb-8 sm:mb-12 rounded-3xl overflow-hidden border border-cyber-cyan/40 neon-border relative group bg-obsidian">
+        <img src="file_0000000045bc81f49eb7d1a9d6cb3b12.png" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80';" alt="Parlar Radio Banner Oficial" class="w-full h-auto object-cover max-h-[420px]">
       </div>
-
       <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-
         <div class="lg:col-span-7 text-center lg:text-left">
-
-          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-cyber-cyan/15 border border-cyber-cyan/40 text-cyber-cyan text-xs font-montserrat font-extrabold uppercase tracking-widest mb-6">
-            <span class="w-2.5 h-2.5 rounded-full bg-cyber-cyan animate-pulse"></span>
-            SEÑAL DIGITAL INTERNACIONAL HD
+          <div class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-cyber-cyan/10 border border-cyber-cyan/35 text-cyber-cyan text-[10px] sm:text-xs font-montserrat font-extrabold uppercase tracking-[.12em] mb-6 max-w-full"> <span class="w-2.5 h-2.5 rounded-full bg-cyber-cyan animate-pulse flex-shrink-0"></span> SEÑAL DIGITAL INTERNACIONAL HD</div>
+          <h1 id="trackTitle" class="hero-title font-montserrat font-black tracking-tight text-white mb-3 leading-[1.08] italic">Sincronizando señal...</h1>
+          <p id="trackArtist" class="font-montserrat font-extrabold text-xl sm:text-3xl text-cyber-cyan mb-6 tracking-wide text-glow-cyan">Parlar Radio - SOMOS MUNDO</p>
+          <p class="text-cyber-muted text-xs sm:text-sm max-w-xl mb-6 inline-flex items-center gap-2 bg-slate-950/75 px-4 py-3 rounded-xl border border-cyber-cyan/25"><i class="fa-solid fa-tower-broadcast text-cyber-cyan"></i><span>Transmisión en directo: <strong id="currentPlaylist" class="text-white">Programación Automática 24/7</strong></span></p>
+          <div class="w-full max-w-lg mb-7 bg-obsidian/75 p-4 rounded-2xl border border-cyber-cyan/20">
+            <div class="flex justify-between text-[10px] font-montserrat font-bold text-cyber-muted mb-2"><span id="timeElapsed">EN VIVO</span><span id="timeDuration">DIRECTO</span></div>
+            <div class="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden"><div id="progressBar" class="h-full bg-gradient-to-r from-cyber-cyan to-cyber-indigo w-0 transition-all duration-700"></div></div>
           </div>
-
-          <h1 id="trackTitle" class="font-montserrat font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white mb-2 leading-tight italic">
-            Sincronizando señal...
-          </h1>
-          <p id="trackArtist" class="font-montserrat font-extrabold text-xl sm:text-3xl text-cyber-cyan mb-6 tracking-wide text-glow-cyan">
-            Parlar Radio - SOMOS MUNDO
-          </p>
-
-          <p id="showName" class="text-cyber-muted text-xs sm:text-sm max-w-xl mb-6 inline-flex items-center gap-2 bg-slate-900/80 px-4 py-2 rounded-xl border border-cyber-cyan/30">
-            <i class="fa-solid fa-tower-broadcast text-cyber-cyan"></i>
-            <span>Transmisión en directo: <strong id="currentPlaylist" class="text-white">Programación Automática 24/7</strong></span>
-          </p>
-
-          <div class="w-full max-w-lg mb-8 bg-obsidian/80 p-4 rounded-2xl border border-cyber-cyan/25 shadow-inner">
-            <div class="flex justify-between text-[11px] font-montserrat font-bold text-cyber-muted mb-2">
-              <span id="timeElapsed">00:00</span>
-              <span id="timeDuration">00:00</span>
-            </div>
-            <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
-              <div id="progressBar" class="h-full bg-gradient-to-r from-cyber-cyan via-cyber-indigo to-cyber-violet w-0 transition-all duration-1000 shadow-lg shadow-cyber-cyan"></div>
-            </div>
-          </div>
-
-          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-            <button onclick="togglePlay()" class="w-full sm:w-auto btn-cyber px-8 py-4 rounded-full text-obsidian font-montserrat font-black text-xs sm:text-sm tracking-widest uppercase shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
-              <i id="heroPlayIcon" class="fa-solid fa-play text-base"></i>
-              <span id="heroPlayText">REPRODUCIR SEÑAL</span>
-            </button>
-
-            <a href="https://whatsapp.com/channel/0029Vb8wXsv2P59imKUGxJ46" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-4 rounded-full bg-slate-900/90 border border-emerald-500/40 text-emerald-400 font-montserrat font-bold text-xs tracking-wider uppercase text-center hover:bg-emerald-500 hover:text-obsidian transition-all flex items-center justify-center gap-2">
-              <i class="fa-brands fa-whatsapp text-lg"></i>
-              <span>Canal de WhatsApp</span>
-            </a>
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
+            <button onclick="togglePlay()" class="w-full sm:w-auto btn-cyber px-8 py-4 rounded-full text-white font-montserrat font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3"><i id="heroPlayIcon" class="fa-solid fa-play"></i><span id="heroPlayText">ESCUCHAR EN VIVO</span></button>
+            <a href="https://whatsapp.com/channel/0029Vb8wXsv2P59imKUGxJ46" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-4 rounded-full bg-slate-950/80 border border-emerald-500/40 text-emerald-400 font-montserrat font-bold text-xs uppercase text-center hover:bg-emerald-500 hover:text-black transition-all flex items-center justify-center gap-2"><i class="fa-brands fa-whatsapp text-lg"></i>Canal de WhatsApp</a>
           </div>
         </div>
-
-        <!-- REPRODUCTOR VISUAL -->
-        <div class="lg:col-span-5 flex flex-col items-center justify-center mt-6 lg:mt-0">
-
-          <div class="glass-card p-6 sm:p-8 rounded-3xl w-full max-w-sm relative text-center border-2 border-cyber-cyan/40 shadow-2xl animate-pulse-laser">
-
+        <div class="lg:col-span-5 flex flex-col items-center justify-center mt-2 lg:mt-0">
+          <div class="glass-card p-6 sm:p-8 rounded-3xl w-full max-w-sm relative text-center border border-cyber-cyan/40 animate-pulse-laser">
             <div class="relative w-48 h-48 sm:w-56 sm:h-56 mx-auto mb-6">
-
-              <div id="vinylRing" class="w-full h-full rounded-full bg-obsidian p-2 border-2 border-cyber-cyan/50 shadow-2xl animate-spin-slow" style="animation-play-state: paused;">
-                <div class="w-full h-full rounded-full border-4 border-dashed border-slate-800 flex items-center justify-center relative overflow-hidden">
-                  <img id="albumArt" src="file_0000000045bc81f49eb7d1a9d6cb3b12.png"
-                       onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80';"
-                       alt="Portada de canción" class="w-full h-full object-cover rounded-full">
-                  <div class="absolute w-12 h-12 rounded-full bg-obsidian border-2 border-white flex items-center justify-center shadow-inner">
-                    <div class="w-3.5 h-3.5 rounded-full bg-cyber-cyan"></div>
-                  </div>
-                </div>
+              <div id="vinylRing" class="w-full h-full rounded-full bg-obsidian p-2 border-2 border-cyber-cyan/55 shadow-2xl animate-spin-slow" style="animation-play-state:paused">
+                <div class="w-full h-full rounded-full border-4 border-dashed border-fuchsia-950 flex items-center justify-center relative overflow-hidden"><img id="albumArt" src="file_0000000045bc81f49eb7d1a9d6cb3b12.png" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80';" alt="Portada de canción" class="w-full h-full object-cover rounded-full"><div class="absolute w-12 h-12 rounded-full bg-obsidian border-2 border-white/80 flex items-center justify-center"><div class="w-3 h-3 rounded-full bg-cyber-cyan"></div></div></div>
               </div>
-
-              <div id="liveBadge" class="absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-slate-900 border border-slate-700 text-[10px] font-montserrat font-black tracking-widest text-cyber-muted uppercase">
-                OFFLINE
-              </div>
+              <div id="liveBadge" class="absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-slate-950 border border-cyber-cyan/40 text-[10px] font-montserrat font-black tracking-widest text-cyber-cyan uppercase">EN ESPERA</div>
             </div>
-
-            <div id="eqVisualizer" class="eq-paused flex items-center justify-center gap-1.5 h-8 mb-4">
-              <div class="eq-bar h-4 animate-equalize"></div>
-              <div class="eq-bar h-7 animate-equalize" style="animation-delay: 0.2s"></div>
-              <div class="eq-bar h-3 animate-equalize" style="animation-delay: 0.4s"></div>
-              <div class="eq-bar h-8 animate-equalize" style="animation-delay: 0.1s"></div>
-              <div class="eq-bar h-5 animate-equalize" style="animation-delay: 0.3s"></div>
+            <div id="eqVisualizer" class="flex items-center justify-center gap-1.5 h-8 mb-4">
+              <div class="eq-bar h-4 animate-equalize"></div><div class="eq-bar h-7 animate-equalize" style="animation-delay:.2s"></div><div class="eq-bar h-3 animate-equalize" style="animation-delay:.4s"></div><div class="eq-bar h-8 animate-equalize" style="animation-delay:.1s"></div><div class="eq-bar h-5 animate-equalize" style="animation-delay:.3s"></div>
             </div>
-
-            <button onclick="togglePlay()" class="w-16 h-16 rounded-full btn-cyber text-obsidian flex items-center justify-center mx-auto shadow-xl hover:scale-110 active:scale-95 transition-transform mb-3">
-              <i id="cardPlayIcon" class="fa-solid fa-play text-2xl ml-1"></i>
-            </button>
-
-            <p id="statusText" class="text-xs text-cyber-muted font-medium">Toca para activar la transmisión HD</p>
+            <button onclick="togglePlay()" aria-label="Reproducir o pausar" class="w-16 h-16 rounded-full btn-cyber text-white flex items-center justify-center mx-auto shadow-xl hover:scale-110 transition-transform mb-3"><i id="cardPlayIcon" class="fa-solid fa-play text-2xl ml-1"></i></button>
+            <p id="statusText" class="text-xs text-cyber-muted font-medium">Pulsa para escuchar Parlar Radio</p>
           </div>
-
-          <!-- REDES SOCIALES -->
-          <div class="w-full max-w-sm mt-4 px-1">
-            <div class="grid grid-cols-5 gap-2">
-              <a href="https://www.instagram.com/parlar.radio" target="_blank" rel="noopener noreferrer" class="h-11 rounded-xl bg-obsidian/80 border border-cyber-cyan/30 text-cyber-cyan flex items-center justify-center text-lg hover:bg-cyber-cyan hover:text-obsidian transition-all shadow-md" title="Instagram">
-                <i class="fa-brands fa-instagram"></i>
-              </a>
-              <a href="https://www.facebook.com/share/1M4d15T72r/" target="_blank" rel="noopener noreferrer" class="h-11 rounded-xl bg-obsidian/80 border border-cyber-cyan/30 text-blue-400 flex items-center justify-center text-lg hover:bg-blue-600 hover:text-white transition-all shadow-md" title="Facebook">
-                <i class="fa-brands fa-facebook-f"></i>
-              </a>
-              <a href="https://www.tiktok.com/@parlar.radio" target="_blank" rel="noopener noreferrer" class="h-11 rounded-xl bg-obsidian/80 border border-cyber-cyan/30 text-white flex items-center justify-center text-lg hover:bg-slate-800 hover:text-cyber-cyan transition-all shadow-md" title="TikTok">
-                <i class="fa-brands fa-tiktok"></i>
-              </a>
-              <a href="https://www.mixcloud.com/ParlarRadio/" target="_blank" rel="noopener noreferrer" class="h-11 rounded-xl bg-obsidian/80 border border-cyber-cyan/30 text-cyber-violet flex items-center justify-center text-lg hover:bg-cyber-violet hover:text-white transition-all shadow-md" title="Podcast Mixcloud">
-                <i class="fa-solid fa-podcast"></i>
-              </a>
-              <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" class="h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-lg hover:bg-emerald-500 hover:text-obsidian transition-all shadow-md" title="WhatsApp">
-                <i class="fa-brands fa-whatsapp"></i>
-              </a>
-            </div>
-          </div>
+          <div class="w-full max-w-sm mt-4 px-1"><div class="grid grid-cols-5 gap-2">
+            <a href="https://www.instagram.com/parlar.radio" target="_blank" rel="noopener noreferrer" aria-label="Instagram Parlar Radio" class="h-11 rounded-xl bg-obsidian/80 border border-cyber-cyan/30 text-cyber-cyan flex items-center justify-center text-lg hover:bg-cyber-cyan hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1M4d15T72r/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Parlar Radio" class="h-11 rounded-xl bg-obsidian/80 border border-cyber-cyan/30 text-blue-400 flex items-center justify-center text-lg hover:bg-blue-600 hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.tiktok.com/@parlar.radio" target="_blank" rel="noopener noreferrer" aria-label="TikTok Parlar Radio" class="h-11 rounded-xl bg-obsidian/80 border border-cyber-cyan/30 text-white flex items-center justify-center text-lg hover:bg-slate-800 hover:text-cyber-cyan transition-all"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://www.mixcloud.com/ParlarRadio/" target="_blank" rel="noopener noreferrer" aria-label="Mixcloud Parlar Radio" class="h-11 rounded-xl bg-obsidian/80 border border-cyber-cyan/30 text-cyber-violet flex items-center justify-center text-lg hover:bg-cyber-violet hover:text-white transition-all"><i class="fa-solid fa-podcast"></i></a>
+            <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Parlar Radio" class="h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-lg hover:bg-emerald-500 hover:text-black transition-all"><i class="fa-brands fa-whatsapp"></i></a>
+          </div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- LOS 4 PILARES -->
+  <!-- PILARES -->
   <section id="pilares" class="py-16 relative border-t border-cyber-cyan/20 bg-obsidian/50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-      <div class="text-center max-w-2xl mx-auto mb-10">
-        <h2 class="font-montserrat font-extrabold text-xs uppercase tracking-[0.3em] text-cyber-cyan mb-2">Fundamentos de la Señal</h2>
-        <h3 class="font-montserrat font-black text-2xl sm:text-3xl text-white">Nuestros 4 Pilares Oficiales</h3>
-      </div>
-
+      <div class="text-center max-w-2xl mx-auto mb-10"><h2 class="font-montserrat font-extrabold text-xs uppercase tracking-[.3em] text-cyber-cyan mb-2">Fundamentos de la Señal</h2><h3 class="font-montserrat font-black text-2xl sm:text-3xl text-white">Nuestros 4 Pilares Oficiales</h3></div>
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-
-        <div onclick="toggleArticleModal()" class="glass-card p-5 sm:p-6 rounded-2xl text-center group cursor-pointer relative overflow-hidden" title="Haz clic para leer el artículo especial">
-          <div class="absolute top-2 right-2 px-2 py-0.5 rounded bg-cyber-cyan/20 border border-cyber-cyan/40 text-[9px] text-white font-bold uppercase tracking-wider animate-pulse">Artículo</div>
-          <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-2xl bg-cyber-cyan/15 border border-cyber-cyan/40 flex items-center justify-center text-cyber-cyan group-hover:scale-110 group-hover:bg-cyber-cyan group-hover:text-obsidian transition-all">
-            <i class="fa-solid fa-music text-xl sm:text-2xl"></i>
-          </div>
-          <h4 class="font-montserrat font-extrabold text-xs sm:text-base text-white tracking-wider uppercase mb-1">MÚSICA</h4>
-          <p class="text-[11px] sm:text-xs text-cyber-muted">Selección global</p>
-        </div>
-
-        <div class="glass-card p-5 sm:p-6 rounded-2xl text-center group">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-2xl bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-obsidian transition-all">
-            <i class="fa-solid fa-users text-xl sm:text-2xl"></i>
-          </div>
-          <h4 class="font-montserrat font-extrabold text-xs sm:text-base text-white tracking-wider uppercase mb-1">CULTURA</h4>
-          <p class="text-[11px] sm:text-xs text-cyber-muted">Voces diversas</p>
-        </div>
-
-        <div class="glass-card p-5 sm:p-6 rounded-2xl text-center group">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-obsidian transition-all">
-            <i class="fa-solid fa-circle-info text-xl sm:text-2xl"></i>
-          </div>
-          <h4 class="font-montserrat font-extrabold text-xs sm:text-base text-white tracking-wider uppercase mb-1">INFORMACIÓN</h4>
-          <p class="text-[11px] sm:text-xs text-cyber-muted">Veracidad global</p>
-        </div>
-
-        <div class="glass-card p-5 sm:p-6 rounded-2xl text-center group">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-2xl bg-cyber-violet/15 border border-cyber-violet/40 flex items-center justify-center text-cyber-violet group-hover:scale-110 group-hover:bg-cyber-violet group-hover:text-white transition-all">
-            <i class="fa-solid fa-globe text-xl sm:text-2xl"></i>
-          </div>
-          <h4 class="font-montserrat font-extrabold text-xs sm:text-base text-white tracking-wider uppercase mb-1">LO NUESTRO</h4>
-          <p class="text-[11px] sm:text-xs text-cyber-muted">Identidad propia</p>
-        </div>
-
+        <button type="button" onclick="toggleArticleModal()" class="glass-card p-5 sm:p-6 rounded-2xl text-center group cursor-pointer relative overflow-hidden">
+          <span class="absolute top-2 right-2 px-2 py-1 rounded bg-cyber-cyan/20 border border-cyber-cyan/40 text-[9px] text-white font-bold uppercase">Artículo</span>
+          <span class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4 rounded-2xl bg-cyber-cyan/15 border border-cyber-cyan/40 flex items-center justify-center text-cyber-cyan group-hover:bg-cyber-cyan group-hover:text-white transition-all"><i class="fa-solid fa-music text-xl"></i></span>
+          <span class="block font-montserrat font-extrabold text-xs sm:text-base text-white uppercase mb-1">MÚSICA</span><span class="text-[11px] sm:text-xs text-cyber-muted">Selección global</span>
+        </button>
+        <article class="glass-card p-5 sm:p-6 rounded-2xl text-center group"><div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4 rounded-2xl bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-amber-400"><i class="fa-solid fa-users text-xl"></i></div><h4 class="font-montserrat font-extrabold text-xs sm:text-base text-white uppercase mb-1">CULTURA</h4><p class="text-[11px] sm:text-xs text-cyber-muted">Voces diversas</p></article>
+        <article class="glass-card p-5 sm:p-6 rounded-2xl text-center group"><div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center text-emerald-400"><i class="fa-solid fa-circle-info text-xl"></i></div><h4 class="font-montserrat font-extrabold text-xs sm:text-base text-white uppercase mb-1">INFORMACIÓN</h4><p class="text-[11px] sm:text-xs text-cyber-muted">Veracidad global</p></article>
+        <article class="glass-card p-5 sm:p-6 rounded-2xl text-center group"><div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4 rounded-2xl bg-cyber-violet/15 border border-cyber-violet/40 flex items-center justify-center text-cyber-violet"><i class="fa-solid fa-globe text-xl"></i></div><h4 class="font-montserrat font-extrabold text-xs sm:text-base text-white uppercase mb-1">LO NUESTRO</h4><p class="text-[11px] sm:text-xs text-cyber-muted">Identidad propia</p></article>
       </div>
     </div>
   </section>
 
   <!-- RADIO SHOWS -->
-  <section id="programas" class="py-20 relative">
+  <section id="programas" class="py-16 sm:py-20 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-      <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-        <h2 class="font-montserrat font-extrabold text-xs uppercase tracking-[0.3em] text-cyber-cyan mb-2">Parrilla Oficial</h2>
-        <h3 class="font-montserrat font-black text-3xl sm:text-4xl text-white">Nuestros Radio Shows</h3>
-      </div>
-
+      <div class="text-center max-w-3xl mx-auto mb-12"><h2 class="font-montserrat font-extrabold text-xs uppercase tracking-[.3em] text-cyber-cyan mb-2">Parrilla Oficial</h2><h3 class="font-montserrat font-black text-3xl sm:text-4xl text-white">Nuestros Radio Shows</h3></div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-        <!-- Quinta Sinfonía -->
-        <div class="glass-card p-6 rounded-3xl flex flex-col justify-between">
-          <div>
-            <div class="rounded-2xl overflow-hidden mb-4 border border-cyber-cyan/30 shadow-md">
-              <img src="file_000000008f3881f5b848a6eb82a8f56e.png"
-                   onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80';"
-                   alt="Quinta Sinfonía" class="w-full h-44 object-cover">
-            </div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-2xl">🇪🇨</span>
-              <span class="text-[10px] font-black px-3 py-1 rounded-full bg-cyber-cyan/25 text-cyber-cyan border border-cyber-cyan/40 uppercase">Ecuador</span>
-            </div>
-            <h4 class="font-montserrat font-black text-xl text-white">Quinta Sinfonía</h4>
-            <p class="text-xs font-semibold text-slate-300 mt-1 mb-3">Conduce: <strong class="text-cyber-cyan">Wladimir Ormaza</strong></p>
-            <div class="flex items-center gap-2 mb-3">
-              <a href="https://www.facebook.com/share/1EAGcbVPCv/" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-slate-700 text-blue-400 flex items-center justify-center text-xs"><i class="fa-brands fa-facebook-f"></i></a>
-              <a href="https://x.com/wladiradio" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-slate-700 text-white flex items-center justify-center text-xs"><i class="fa-brands fa-x-twitter"></i></a>
-              <a href="https://www.instagram.com/wladiradio" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-slate-700 text-cyber-cyan flex items-center justify-center text-xs"><i class="fa-brands fa-instagram"></i></a>
-              <a href="https://www.tiktok.com/@wladi.ormaza" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-slate-700 text-white flex items-center justify-center text-xs"><i class="fa-brands fa-tiktok"></i></a>
-            </div>
-            <p class="text-xs text-cyber-muted leading-relaxed">Grandes éxitos musicales, clásicos imperecederos y la mejor selección sonora.</p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-cyber-cyan font-bold">
-            <span>Parlar Radio</span>
-            <i class="fa-solid fa-microphone"></i>
-          </div>
-        </div>
-
-        <!-- Ni Chicha Ni Limonada -->
-        <div class="glass-card p-6 rounded-3xl flex flex-col justify-between">
-          <div>
-            <div class="rounded-2xl overflow-hidden mb-4 border border-cyber-cyan/30 shadow-md">
-              <img src="file_00000000b1a4823085e7474fbbd00707.png"
-                   onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=600&q=80';"
-                   alt="Ni Chicha Ni Limonada" class="w-full h-44 object-cover">
-            </div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-2xl">🇦🇷</span>
-              <span class="text-[10px] font-black px-3 py-1 rounded-full bg-cyber-violet/25 text-cyber-violet border border-cyber-violet/40 uppercase">Argentina</span>
-            </div>
-            <h4 class="font-montserrat font-black text-xl text-white">Ni Chicha Ni Limonada</h4>
-            <p class="text-xs font-semibold text-slate-300 mt-1 mb-3">Conduce: <strong class="text-cyber-violet">Ramiro Parisi</strong></p>
-            <div class="flex items-center gap-2 mb-3">
-              <a href="https://www.facebook.com/share/19jUGohqcg/" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-slate-700 text-blue-400 flex items-center justify-center text-xs"><i class="fa-brands fa-facebook-f"></i></a>
-              <a href="https://www.instagram.com/ramiro.parisi" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-slate-900 border border-slate-700 text-cyber-cyan flex items-center justify-center text-xs"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-            <p class="text-xs text-cyber-muted leading-relaxed">Entretenimiento, cultura, humor y temas variados sin etiquetas.</p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-cyber-cyan font-bold">
-            <span>Parlar Radio</span>
-            <i class="fa-solid fa-microphone"></i>
-          </div>
-        </div>
-
-        <!-- Jarrito Café -->
-        <div class="glass-card p-6 rounded-3xl flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-3xl">🇲🇽</span>
-              <span class="text-[10px] font-black px-3 py-1 rounded-full bg-amber-500/25 text-amber-400 border border-amber-500/40 uppercase">México</span>
-            </div>
-            <h4 class="font-montserrat font-black text-xl text-white">Jarrito Café</h4>
-            <p class="text-xs font-semibold text-slate-300 mt-1 mb-4">Conduce: <strong class="text-amber-400">Bertiux Solano</strong></p>
-            <p class="text-xs text-cyber-muted leading-relaxed">Historias, calidez y buena energía para acompañar tus mañanas.</p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-cyber-cyan font-bold">
-            <span>Parlar Radio</span>
-            <i class="fa-solid fa-microphone"></i>
-          </div>
-        </div>
-
-        <!-- Prisma -->
-        <div class="glass-card p-6 rounded-3xl flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-3xl">🇪🇸</span>
-              <span class="text-[10px] font-black px-3 py-1 rounded-full bg-indigo-500/25 text-indigo-300 border border-indigo-500/40 uppercase">España</span>
-            </div>
-            <h4 class="font-montserrat font-black text-xl text-white">Prisma</h4>
-            <p class="text-xs font-semibold text-slate-300 mt-1 mb-4">Conduce: <strong class="text-indigo-300">Vladimir Hernández Solís</strong></p>
-            <p class="text-xs text-cyber-muted leading-relaxed">Enfoques diversos sobre música, actualidad y análisis cultural.</p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-cyber-cyan font-bold">
-            <span>Parlar Radio</span>
-            <i class="fa-solid fa-microphone"></i>
-          </div>
-        </div>
-
+        <article class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between"><div><div class="rounded-2xl overflow-hidden mb-4 border border-cyber-cyan/30"><img src="file_000000008f3881f5b848a6eb82a8f56e.png" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80';" alt="Quinta Sinfonía" class="w-full h-44 object-cover"></div><div class="flex items-center justify-between mb-3"><span class="text-2xl">🇪🇨</span><span class="text-[10px] font-black px-3 py-1 rounded-full bg-cyber-cyan/20 text-cyber-cyan border border-cyber-cyan/40 uppercase">Ecuador</span></div><h4 class="font-montserrat font-black text-xl text-white">Quinta Sinfonía</h4><p class="text-xs font-semibold text-slate-300 mt-1 mb-3">Conduce: <strong class="text-cyber-cyan">Wladimir Ormaza</strong></p><div class="flex items-center gap-2 mb-3"><a href="https://www.facebook.com/share/1EAGcbVPCv/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Wladimir" class="w-8 h-8 rounded-lg bg-slate-950 border border-slate-700 text-blue-400 flex items-center justify-center text-xs"><i class="fa-brands fa-facebook-f"></i></a><a href="https://x.com/wladiradio" target="_blank" rel="noopener noreferrer" aria-label="X Wladimir" class="w-8 h-8 rounded-lg bg-slate-950 border border-slate-700 text-white flex items-center justify-center text-xs"><i class="fa-brands fa-x-twitter"></i></a><a href="https://www.instagram.com/wladiradio" target="_blank" rel="noopener noreferrer" aria-label="Instagram Wladimir" class="w-8 h-8 rounded-lg bg-slate-950 border border-slate-700 text-cyber-cyan flex items-center justify-center text-xs"><i class="fa-brands fa-instagram"></i></a><a href="https://www.tiktok.com/@wladi.ormaza" target="_blank" rel="noopener noreferrer" aria-label="TikTok Wladimir" class="w-8 h-8 rounded-lg bg-slate-950 border border-slate-700 text-white flex items-center justify-center text-xs"><i class="fa-brands fa-tiktok"></i></a></div><p class="text-xs text-cyber-muted leading-relaxed">Grandes éxitos musicales, clásicos imperecederos y la mejor selección sonora.</p></div><div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-cyber-cyan font-bold"><span>Parlar Radio</span><i class="fa-solid fa-microphone"></i></div></article>
+        <article class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between"><div><div class="rounded-2xl overflow-hidden mb-4 border border-cyber-cyan/30"><img src="file_00000000b1a4823085e7474fbbd00707.png" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=600&q=80';" alt="Ni Chicha Ni Limonada" class="w-full h-44 object-cover"></div><div class="flex items-center justify-between mb-3"><span class="text-2xl">🇦🇷</span><span class="text-[10px] font-black px-3 py-1 rounded-full bg-cyber-violet/20 text-purple-300 border border-cyber-violet/40 uppercase">Argentina</span></div><h4 class="font-montserrat font-black text-xl text-white">Ni Chicha Ni Limonada</h4><p class="text-xs font-semibold text-slate-300 mt-1 mb-3">Conduce: <strong class="text-cyber-violet">Ramiro Parisi</strong></p><div class="flex items-center gap-2 mb-3"><a href="https://www.facebook.com/share/19jUGohqcg/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Ramiro" class="w-8 h-8 rounded-lg bg-slate-950 border border-slate-700 text-blue-400 flex items-center justify-center text-xs"><i class="fa-brands fa-facebook-f"></i></a><a href="https://www.instagram.com/ramiro.parisi" target="_blank" rel="noopener noreferrer" aria-label="Instagram Ramiro" class="w-8 h-8 rounded-lg bg-slate-950 border border-slate-700 text-cyber-cyan flex items-center justify-center text-xs"><i class="fa-brands fa-instagram"></i></a></div><p class="text-xs text-cyber-muted leading-relaxed">Entretenimiento, cultura, humor y temas variados sin etiquetas.</p></div><div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-cyber-cyan font-bold"><span>Parlar Radio</span><i class="fa-solid fa-microphone"></i></div></article>
+        <article class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between"><div><div class="flex items-center justify-between mb-4"><span class="text-3xl">🇲🇽</span><span class="text-[10px] font-black px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40 uppercase">México</span></div><h4 class="font-montserrat font-black text-xl text-white">Jarrito Café</h4><p class="text-xs font-semibold text-slate-300 mt-1 mb-4">Conduce: <strong class="text-amber-400">Bertiux Solano</strong></p><p class="text-xs text-cyber-muted leading-relaxed">Historias, calidez y buena energía para acompañar tus mañanas.</p></div><div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-cyber-cyan font-bold"><span>Parlar Radio</span><i class="fa-solid fa-microphone"></i></div></article>
+        <article class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between"><div><div class="flex items-center justify-between mb-4"><span class="text-3xl">🇪🇸</span><span class="text-[10px] font-black px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 uppercase">España</span></div><h4 class="font-montserrat font-black text-xl text-white">Prisma</h4><p class="text-xs font-semibold text-slate-300 mt-1 mb-4">Conduce: <strong class="text-indigo-300">Vladimir Hernández Solís</strong></p><p class="text-xs text-cyber-muted leading-relaxed">Enfoques diversos sobre música, actualidad y análisis cultural.</p></div><div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-cyber-cyan font-bold"><span>Parlar Radio</span><i class="fa-solid fa-microphone"></i></div></article>
       </div>
     </div>
   </section>
-
-  <!-- MANIFIESTO Y CONTACTO -->
-  <section id="nosotros" class="py-20 relative border-t border-cyber-cyan/20 bg-obsidian/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-2 gap-10 items-center">
-
-        <div>
-          <h2 class="font-montserrat font-extrabold text-xs uppercase tracking-[0.3em] text-cyber-cyan mb-2">Manifiesto</h2>
-          <h3 class="font-montserrat font-black text-3xl sm:text-4xl text-white mb-6">Parlar Radio: SOMOS MUNDO</h3>
-          <p class="text-cyber-muted leading-relaxed text-sm mb-6">
-            Conectamos locutores desde Ecuador, Argentina, México y España para transmitir una voz verdaderamente global y de vanguardia.
-          </p>
-
-          <div class="flex flex-wrap gap-3" id="contacto">
-            <a href="https://whatsapp.com/channel/0029Vb8wXsv2P59imKUGxJ46" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-xl bg-emerald-600/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-600/30 font-bold text-xs flex items-center gap-2 uppercase">
-              <i class="fa-brands fa-whatsapp text-lg"></i>
-              <span>Canal Oficial</span>
-            </a>
-            <a href="https://x.com/ParlarRadiOfi" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white hover:bg-slate-800 font-bold text-xs flex items-center gap-2 uppercase">
-              <i class="fa-brands fa-x-twitter text-lg"></i>
-              <span>@ParlarRadiOfi</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="glass-card p-6 sm:p-8 rounded-3xl relative border-cyber-cyan/40">
-          <h4 class="font-montserrat font-bold text-lg sm:text-xl text-white mb-2">Contacto Oficial</h4>
-          <p class="text-xs text-cyber-muted mb-6">Escríbenos directamente a nuestra casilla digital.</p>
-
-          <div class="bg-obsidian p-4 rounded-xl border border-cyber-cyan/30 flex items-center justify-between gap-2 overflow-x-auto">
-            <span class="text-xs sm:text-sm font-mono text-white font-bold truncate">parlar.radio@live.com</span>
-            <button onclick="copiarEmail()" class="px-4 py-2 rounded-lg btn-cyber text-obsidian text-xs font-montserrat font-black hover:opacity-90 uppercase flex-shrink-0">Copiar</button>
-          </div>
-          <span id="copyMessage" class="text-[11px] text-emerald-400 mt-2 block opacity-0 transition-opacity font-bold">¡Correo copiado al portapapeles!</span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- MODAL ARTÍCULO -->
-  <div id="articleModal" class="fixed inset-0 z-50 hidden bg-obsidian/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-    <div class="glass-panel max-w-3xl w-full max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-10 relative border-2 border-cyber-cyan/40 shadow-2xl my-8">
-
-      <button onclick="toggleArticleModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-900 border border-cyber-cyan/30 text-white flex items-center justify-center hover:bg-cyber-cyan hover:text-obsidian transition-colors shadow-lg">
-        <i class="fa-solid fa-xmark text-lg"></i>
-      </button>
-
-      <div class="space-y-6 text-cyber-muted">
-        <div class="border-b border-cyber-cyan/20 pb-4">
-          <span class="text-[10px] font-black px-3 py-1 rounded-full bg-cyber-cyan/20 text-cyber-cyan border border-cyber-cyan/30 uppercase tracking-widest inline-block mb-3">Especial Musical</span>
-          <h2 class="font-montserrat font-black text-2xl sm:text-3xl text-white leading-tight">El latido de la nueva era musical: Por qué el talento independiente está conquistando el mundo</h2>
-        </div>
-
-        <div class="rounded-2xl overflow-hidden border border-cyber-cyan/30">
-          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80" alt="Estudio de radio" class="w-full h-56 sm:h-72 object-cover">
-          <p class="text-[11px] text-cyber-muted p-3 italic bg-obsidian text-center">La creatividad ya no necesita grandes corporaciones; solo un espacio propio y mucha pasión.</p>
-        </div>
-
-        <p class="text-sm sm:text-base leading-relaxed">
-          La industria musical vive una de sus transformaciones más fascinantes y dinámicas de las últimas décadas. Lo que antes dependía exclusivamente de los grandes estudios de grabación, hoy se alimenta de la autenticidad y la inmediatez de artistas independientes de todo el planeta.
-        </p>
-      </div>
-
-      <div class="mt-8 text-center border-t border-cyber-cyan/20 pt-6">
-        <button onclick="toggleArticleModal()" class="px-8 py-3 rounded-full btn-cyber text-obsidian font-montserrat font-black text-xs tracking-widest uppercase shadow-lg">Cerrar Artículo</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="py-8 text-center text-xs text-cyber-muted border-t border-cyber-cyan/25">
-    <div class="max-w-7xl mx-auto px-4">
-      <p class="mb-2">© 2026 <strong class="text-slate-300">Parlar Radio</strong>. Todos los derechos reservados.</p>
-      <p class="font-montserrat font-extrabold text-cyber-cyan tracking-widest uppercase text-glow-cyan">SOMOS MUNDO</p>
-    </div>
-  </footer>
-
-  <!-- REPRODUCTOR INFERIOR -->
-  <div class="fixed bottom-0 left-0 right-0 z-50 glass-panel border-t border-cyber-cyan/40 px-4 py-3 shadow-2xl">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
-
-      <div class="flex items-center gap-3 min-w-0 max-w-[280px] sm:max-w-md">
-        <img id="stickyArt" src="file_0000000045bc81f49eb7d1a9d6cb3b12.png"
-             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=200&q=80';"
-             alt="Cover" class="w-11 h-11 rounded-xl object-cover border border-cyber-cyan/40 flex-shrink-0">
-        <div class="truncate">
-          <h5 id="stickyTitle" class="font-montserrat font-black text-xs sm:text-sm text-white truncate leading-none">Cargando señal...</h5>
-          <span id="stickyArtist" class="font-montserrat font-bold text-[10px] text-cyber-cyan uppercase truncate block mt-1">Parlar Radio</span>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-3">
-        <button onclick="togglePlay()" class="w-11 h-11 sm:w-12 sm:h-12 rounded-full btn-cyber text-obsidian flex items-center justify-center shadow-lg shadow-cyber-cyan/40 hover:scale-105 active:scale-95 transition-transform">
-          <i id="stickyPlayIcon" class="fa-solid fa-play text-base sm:text-lg ml-0.5"></i>
-        </button>
-      </div>
-
-      <div class="hidden md:flex items-center gap-3">
-        <i class="fa-solid fa-volume-high text-xs text-cyber-muted"></i>
-        <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)" class="w-20 accent-cyber-cyan h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
-      </div>
-
-    </div>
-  </div>
-
-  <!-- SCRIPT: AUDIO Y AZURACAST -->
-  <script>
-    const audio = document.getElementById('audioStream');
-    const overlay = document.getElementById('autoplayOverlay');
-
-    const STREAM_URL = 'https://stream.parlarradio.com/listen/parlar_radio/radio.mp3';
-    const AZURACAST_URL = 'https://stream.parlarradio.com/api/nowplaying/parlar_radio';
-
-    let isPlaying = false;
-    let metadataTimer = null;
-
-    window.addEventListener('DOMContentLoaded', () => {
-      audio.volume = 1;
-
-      // No forzamos autoplay: los navegadores móviles suelen bloquearlo.
-      updateUI(false);
-      fetchAzuraCastData();
-
-      metadataTimer = setInterval(fetchAzuraCastData, 10000);
-    });
-
-    // El evento playing confirma que el audio realmente comenzó.
-    audio.addEventListener('playing', () => {
-      isPlaying = true;
-      overlay.classList.add('hidden');
-      updateUI(true);
-    });
-
-    audio.addEventListener('pause', () => {
-      if (!audio.ended) {
-        isPlaying = false;
-        updateUI(false);
-      }
-    });
-
-    audio.addEventListener('waiting', () => {
-      if (isPlaying) {
-        const status = document.getElementById('statusText');
-        status.textContent = 'Conectando con la señal...';
-      }
-    });
-
-    audio.addEventListener('error', () => {
-      isPlaying = false;
-      updateUI(false);
-
-      const status = document.getElementById('statusText');
-      status.textContent = 'No se pudo conectar. Intenta nuevamente.';
-      console.error('Error de audio:', audio.error);
-    });
-
-    async function iniciarAudioAutoplay() {
-      await reproducirAudio();
-    }
-
-    async function reproducirAudio() {
-      try {
-        if (!audio.src || audio.src === window.location.href) {
-          audio.src = STREAM_URL;
-        }
-
-        await audio.play();
-        // La interfaz se actualiza mediante el evento "playing".
-      } catch (error) {
-        console.error('No se pudo iniciar el streaming:', error);
-
-        const status = document.getElementById('statusText');
-
-        if (error.name === 'NotAllowedError') {
-          status.textContent = 'Tu navegador bloqueó la reproducción. Pulsa nuevamente.';
-        } else {
-          status.textContent = 'No se pudo conectar con la señal. Verifica tu conexión.';
-        }
-
-        isPlaying = false;
-        updateUI(false);
-      }
-    }
-
-    async function togglePlay() {
-      if (isPlaying || !audio.paused) {
-        audio.pause();
-        return;
-      }
-
-      await reproducirAudio();
-    }
-
-    function setVolume(val) {
-      audio.volume = Math.max(0, Math.min(1, Number(val)));
-    }
-
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobileMenu');
-      const icon = document.getElementById('menuIcon');
-
-      menu.classList.toggle('hidden');
-      icon.className = menu.classList.contains('hidden')
-        ? 'fa-solid fa-bars'
-        : 'fa-solid fa-xmark';
-    }
-
-    function toggleArticleModal() {
-      document.getElementById('articleModal').classList.toggle('hidden');
-    }
-
-    function updateUI(playing) {
-      const navPlayIcon = document.getElementById('navPlayIcon');
-      const navPlayText = document.getElementById('navPlayText');
-      const heroPlayIcon = document.getElementById('heroPlayIcon');
-      const heroPlayText = document.getElementById('heroPlayText');
-      const cardPlayIcon = document.getElementById('cardPlayIcon');
-      const stickyPlayIcon = document.getElementById('stickyPlayIcon');
-      const liveBadge = document.getElementById('liveBadge');
-      const statusText = document.getElementById('statusText');
-      const vinylRing = document.getElementById('vinylRing');
-      const eqVisualizer = document.getElementById('eqVisualizer');
-
-      isPlaying = playing;
-
-      if (playing) {
-        navPlayIcon.className = 'fa-solid fa-pause text-xs';
-        navPlayText.innerText = 'PAUSAR';
-
-        heroPlayIcon.className = 'fa-solid fa-pause text-base';
-        heroPlayText.innerText = 'PAUSAR SEÑAL';
-
-        cardPlayIcon.className = 'fa-solid fa-pause text-2xl';
-        stickyPlayIcon.className = 'fa-solid fa-pause text-base sm:text-lg';
-
-        liveBadge.className = 'absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-emerald-500 text-[10px] font-montserrat font-black tracking-widest text-obsidian uppercase animate-pulse shadow-lg shadow-emerald-500/50';
-        liveBadge.innerText = 'EN VIVO';
-
-        statusText.innerText = 'Transmitiendo en vivo desde AzuraCast HD';
-        statusText.className = 'text-xs text-emerald-400 font-bold';
-
-        vinylRing.style.animationPlayState = 'running';
-        eqVisualizer.classList.remove('eq-paused');
-
-      } else {
-        navPlayIcon.className = 'fa-solid fa-play text-xs';
-        navPlayText.innerText = 'ESCUCHAR';
-
-        heroPlayIcon.className = 'fa-solid fa-play text-base';
-        heroPlayText.innerText = 'REPRODUCIR SEÑAL';
-
-        cardPlayIcon.className = 'fa-solid fa-play text-2xl ml-1';
-        stickyPlayIcon.className = 'fa-solid fa-play text-base sm:text-lg ml-0.5';
-
-        liveBadge.className = 'absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-slate-900 border border-slate-700 text-[10px] font-montserrat font-black tracking-widest text-cyber-muted uppercase';
-        liveBadge.innerText = 'OFFLINE';
-
-        statusText.innerText = 'Toca para activar la transmisión HD';
-        statusText.className = 'text-xs text-cyber-muted font-medium';
-
-        vinylRing.style.animationPlayState = 'paused';
-        eqVisualizer.classList.add('eq-paused');
-      }
-    }
-
-    async function fetchAzuraCastData() {
-      try {
-        const response = await fetch(AZURACAST_URL, {
-          method: 'GET',
-          cache: 'no-store'
-        });
-
-        if (!response.ok) {
-          throw new Error('Respuesta AzuraCast: ' + response.status);
-        }
-
-        const data = await response.json();
-
-        if (!data) return;
-
-        const song = data.now_playing?.song || {};
-
-        const title = song.title || 'Señal Digital En Vivo';
-        const artist = song.artist || 'Parlar Radio';
-        const artUrl = song.art || '';
-        const listeners = data.listeners?.total ?? 0;
-        const playlist = data.now_playing?.playlist || 'Programación 24/7';
-
-        document.getElementById('trackTitle').textContent = title;
-        document.getElementById('trackArtist').textContent = artist;
-        document.getElementById('stickyTitle').textContent = title;
-        document.getElementById('stickyArtist').textContent = artist;
-        document.getElementById('navListeners').textContent = `${listeners} Oyentes`;
-        document.getElementById('currentPlaylist').textContent = playlist;
-
-        if (artUrl) {
-          document.getElementById('albumArt').src = artUrl;
-          document.getElementById('stickyArt').src = artUrl;
-        }
-
-        const elapsed = Number(data.now_playing?.elapsed || 0);
-        const duration = Number(data.now_playing?.duration || 0);
-
-        if (duration > 0) {
-          const pct = Math.min(100, (elapsed / duration) * 100);
-
-          document.getElementById('progressBar').style.width = `${pct}%`;
-          document.getElementById('timeElapsed').textContent = formatTime(elapsed);
-          document.getElementById('timeDuration').textContent = formatTime(duration);
-        } else {
-          document.getElementById('progressBar').style.width = '100%';
-          document.getElementById('timeElapsed').textContent = 'EN VIVO';
-          document.getElementById('timeDuration').textContent = 'DIRECTO';
-        }
-
-      } catch (error) {
-        console.warn('No se pudieron actualizar los metadatos AzuraCast:', error);
-      }
-    }
-
-    function formatTime(sec) {
-      const minutes = Math.floor(sec / 60);
-      const seconds = Math.floor(sec % 60);
-
-      return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    }
-
-    async function copiarEmail() {
-      const text = 'parlar.radio@live.com';
-      const msg = document.getElementById('copyMessage');
-
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
-        } else {
-          const textArea = document.createElement('textarea');
-          textArea.value = text;
-          textArea.style.position = 'fixed';
-          textArea.style.opacity = '0';
-          document.body.appendChild(textArea);
-          textArea.select();
-
-          const copied = document.execCommand('copy');
-          document.body.removeChild(textArea);
-
-          if (!copied) throw new Error('No se pudo copiar el correo.');
-        }
-
-        msg.textContent = '¡Correo copiado al portapapeles!';
-        msg.style.opacity = '1';
-
-      } catch (error) {
-        msg.textContent = 'No se pudo copiar. Correo: parlar.radio@live.com';
-        msg.style.opacity = '1';
-      }
-
-      setTimeout(() => {
-        msg.style.opacity = '0';
-      }, 2500);
-    }
-
-    // Cierra el artículo con la tecla Escape.
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        document.getElementById('articleModal').classList.add('hidden');
-        document.getElementById('mobileMenu').classList.add('hidden');
-      }
-    });
-  </script>
-
-  <!-- SERVICE WORKER PWA -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .catch(error => console.warn('Service Worker:', error));
-      });
-    }
-  </script>
-
-</body>
-</html>
