@@ -631,6 +631,136 @@
       font-size: 23px;
     }
 
+    /* =====================================================
+       ICONOS DE LOS 4 PILARES: COLORES NEÓN Y DESTELLOS
+       ===================================================== */
+
+    @keyframes pillarNeon {
+      0%, 100% {
+        filter:
+          drop-shadow(0 0 3px currentColor)
+          drop-shadow(0 0 7px currentColor);
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        filter:
+          drop-shadow(0 0 6px currentColor)
+          drop-shadow(0 0 13px currentColor)
+          drop-shadow(0 0 21px currentColor);
+        opacity: .85;
+        transform: scale(1.08);
+      }
+    }
+
+    @keyframes pillarBoxGlow {
+      0%, 100% {
+        box-shadow:
+          0 0 7px var(--pillar-color),
+          inset 0 0 5px var(--pillar-color);
+      }
+
+      50% {
+        box-shadow:
+          0 0 15px var(--pillar-color),
+          0 0 27px var(--pillar-glow),
+          inset 0 0 12px var(--pillar-glow);
+      }
+    }
+
+    /* MÚSICA: MAGENTA */
+
+    .pillar:nth-child(1) .pillar-icon {
+      --pillar-color: #ff007f;
+      --pillar-glow: rgba(255, 0, 127, .55);
+      color: #ff168f;
+      background: rgba(255, 0, 127, .13);
+      border-color: rgba(255, 0, 127, .65);
+    }
+
+    /* CULTURA: AZUL ELÉCTRICO */
+
+    .pillar:nth-child(2) .pillar-icon {
+      --pillar-color: #00c8ff;
+      --pillar-glow: rgba(0, 200, 255, .55);
+      color: #00d9ff;
+      background: rgba(0, 200, 255, .12);
+      border-color: rgba(0, 200, 255, .65);
+    }
+
+    /* INFORMACIÓN: VIOLETA */
+
+    .pillar:nth-child(3) .pillar-icon {
+      --pillar-color: #a855ff;
+      --pillar-glow: rgba(168, 85, 255, .55);
+      color: #b56aff;
+      background: rgba(168, 85, 255, .13);
+      border-color: rgba(168, 85, 255, .65);
+    }
+
+    /* LO NUESTRO: VERDE NEÓN */
+
+    .pillar:nth-child(4) .pillar-icon {
+      --pillar-color: #00ff9d;
+      --pillar-glow: rgba(0, 255, 157, .55);
+      color: #00ffad;
+      background: rgba(0, 255, 157, .12);
+      border-color: rgba(0, 255, 157, .65);
+    }
+
+    /* ANIMACIÓN INDIVIDUAL DE LOS ICONOS */
+
+    .pillar-icon i {
+      animation: pillarNeon 2.2s ease-in-out infinite;
+      will-change: filter, opacity, transform;
+    }
+
+    .pillar:nth-child(1) .pillar-icon {
+      animation: pillarBoxGlow 2.6s ease-in-out infinite;
+    }
+
+    .pillar:nth-child(2) .pillar-icon {
+      animation: pillarBoxGlow 2.6s ease-in-out infinite;
+      animation-delay: .35s;
+    }
+
+    .pillar:nth-child(3) .pillar-icon {
+      animation: pillarBoxGlow 2.6s ease-in-out infinite;
+      animation-delay: .7s;
+    }
+
+    .pillar:nth-child(4) .pillar-icon {
+      animation: pillarBoxGlow 2.6s ease-in-out infinite;
+      animation-delay: 1.05s;
+    }
+
+    .pillar:nth-child(2) .pillar-icon i {
+      animation-delay: .3s;
+    }
+
+    .pillar:nth-child(3) .pillar-icon i {
+      animation-delay: .6s;
+    }
+
+    .pillar:nth-child(4) .pillar-icon i {
+      animation-delay: .9s;
+    }
+
+    /* BRILLO INTENSO AL PASAR EL CURSOR */
+
+    .pillar:hover .pillar-icon {
+      transform: scale(1.1);
+      filter: brightness(1.25);
+    }
+
+    .pillar:hover .pillar-icon i {
+      filter:
+        drop-shadow(0 0 8px currentColor)
+        drop-shadow(0 0 17px currentColor)
+        drop-shadow(0 0 28px currentColor);
+    }
+
     .pillar h3 {
       font-family: Montserrat, sans-serif;
       font-size: 12px;
@@ -1112,104 +1242,6 @@
       font-size: 12px;
       line-height: 1.7;
       margin-bottom: 22px;
-    }
-
-    /* =====================================================
-       NUEVO EFECTO NEÓN PARA ICONOS DE REDES SOCIALES
-       ===================================================== */
-
-    @keyframes socialNeon {
-      0%, 100% {
-        filter:
-          drop-shadow(0 0 2px currentColor)
-          drop-shadow(0 0 5px currentColor);
-        opacity: 1;
-      }
-
-      50% {
-        filter:
-          drop-shadow(0 0 5px currentColor)
-          drop-shadow(0 0 12px currentColor)
-          drop-shadow(0 0 19px currentColor);
-        opacity: .82;
-      }
-    }
-
-    /* REDES OFICIALES */
-
-    .social-links a i {
-      animation: socialNeon 2s ease-in-out infinite;
-    }
-
-    .social-links a:nth-child(1) { color: #E1306C; }
-    .social-links a:nth-child(2) { color: #1877F2; }
-    .social-links a:nth-child(3) { color: #25F4EE; }
-    .social-links a:nth-child(4) { color: #FF7A00; }
-    .social-links a:nth-child(5) { color: #25D366; }
-
-    .social-links a:nth-child(1) i { animation-delay: 0s; }
-    .social-links a:nth-child(2) i { animation-delay: .25s; }
-    .social-links a:nth-child(3) i { animation-delay: .5s; }
-    .social-links a:nth-child(4) i { animation-delay: .75s; }
-    .social-links a:nth-child(5) i { animation-delay: 1s; }
-
-    .social-links a:hover i {
-      color: #fff;
-      filter:
-        drop-shadow(0 0 5px #fff)
-        drop-shadow(0 0 12px #fff);
-    }
-
-    /* REDES DE LOS PRESENTADORES */
-
-    .host-socials a i {
-      animation: socialNeon 2.2s ease-in-out infinite;
-    }
-
-    .host-socials a[aria-label="Facebook"] {
-      color: #1877F2;
-    }
-
-    .host-socials a[aria-label="Instagram"] {
-      color: #E1306C;
-    }
-
-    .host-socials a[aria-label="TikTok"] {
-      color: #25F4EE;
-    }
-
-    .host-socials a[aria-label="X"] {
-      color: #FFFFFF;
-    }
-
-    .host-socials a:hover {
-      border-color: currentColor;
-    }
-
-    .host-socials a:hover i {
-      filter:
-        drop-shadow(0 0 5px currentColor)
-        drop-shadow(0 0 12px currentColor);
-    }
-
-    /* REDES DE CONTACTO */
-
-    .contact-social a i {
-      animation: socialNeon 2s ease-in-out infinite;
-    }
-
-    .contact-social a .fa-whatsapp {
-      color: #25D366;
-    }
-
-    .contact-social a .fa-x-twitter {
-      color: #FFFFFF;
-    }
-
-    .contact-social a:hover i {
-      filter:
-        drop-shadow(0 0 5px currentColor)
-        drop-shadow(0 0 12px currentColor);
     }
 
     /* RESPONSIVE */
