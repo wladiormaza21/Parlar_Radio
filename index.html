@@ -195,3 +195,229 @@
       </div>
     </div>
   </section>
+HTML
+  <script>
+    'use strict';
+    const STREAM_URL = 'https://stream.parlarradio.com/listen/parlar_radio/radio.mp3';
+    const NOWPLAYING_URL = 'https://stream.parlarradio.com/api/nowplaying/parlar_radio';
+    const FALLBACK_ART = 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80';
+    const audio = document.getElementById('audioStream');
+    const overlay = document.getElementById('autoplayOverlay');
+    let isPlaying = false;
+    let metadataTimer = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      audio.volume = 1;
+      // No forzamos autoplay: los navegadores móviles suelen bloquearlo.
+      overlay.hidden = false;
+      updateUI(false, 'Pulsa para activar la transmisión HD');
+      fetchAzuraCastData();
+      metadataTimer = window.setInterval(fetchAzuraCastData, 15000);
+    });
+
+    async function iniciarAudioAutoplay() {
+      await playStream();
+    }
+
+    async function playStream() {
+      try {
+        if (!audio.src || audio.src !== STREAM_URL) audio.src = STREAM_URL;
+        audio.load();
+        await audio.play();
+        // El evento "playing" confirma el inicio real de reproducción.
+      } catch (error) {
+        console.error('No fue posible iniciar el streaming:', error);
+        isPlaying = false;
+        updateUI(false, error && error.name === 'NotAllowedError'
+          ? 'El navegador bloqueó el audio. Pulsa nuevamente para escuchar.'
+          : 'No se pudo conectar. Comprueba tu conexión e inténtalo otra vez.');
+        overlay.hidden = false;
+      }
+    }
+
+    function togglePlay() {
+      if (audio.paused) {
+        playStream();
+      } else {
+        audio.pause();
+      }
+    }
+
+    audio.addEventListener('playing', () => {
+      isPlaying = true;
+      overlay.hidden = true;
+      updateUI(true);
+    });
+
+    audio.addEventListener('pause', () => {
+      isPlaying = false;
+      updateUI(false);
+    });
+
+    audio.addEventListener('waiting', () => {
+      if (!audio.paused) updateUI(false, 'Conectando con la señal...');
+    });
+
+    audio.addEventListener('error', () => {
+      isPlaying = false;
+      updateUI(false, 'No se pudo cargar la señal. Inténtalo nuevamente.');
+      console.error('Error de audio:', audio.error);
+    });
+
+    function setVolume(value) {
+      const volume = Math.max(0, Math.min(1, Number(value)));
+      audio.volume = volume;
+      audio.muted = volume === 0;
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const icon = document.getElementById('menuIcon');
+      const button = document.querySelector('button[aria-label="Abrir menú"]');
+      menu.classList.toggle('hidden');
+      const open = !menu.classList.contains('hidden');
+      icon.className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+      if (button) button.setAttribute('aria-expanded', String(open));
+    }
+
+    function toggleArticleModal() {
+      const modal = document.getElementById('articleModal');
+      modal.hidden = !modal.hidden;
+      modal.classList.toggle('flex', !modal.hidden);
+      document.body.style.overflow = modal.hidden ? '' : 'hidden';
+    }
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        const modal = document.getElementById('articleModal');
+        if (!modal.hidden) toggleArticleModal();
+        const menu = document.getElementById('mobileMenu');
+        if (!menu.classList.contains('hidden')) toggleMobileMenu();
+      }
+    });
+
+    function updateUI(playing, customMessage = '') {
+      isPlaying = Boolean(playing);
+      const ids = ['navPlayIcon','heroPlayIcon','cardPlayIcon','stickyPlayIcon'];
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.className = playing
+          ? (id === 'cardPlayIcon' ? 'fa-solid fa-pause text-2xl' : id === 'stickyPlayIcon' ? 'fa-solid fa-pause text-lg' : id === 'heroPlayIcon' ? 'fa-solid fa-pause' : 'fa-solid fa-pause')
+          : (id === 'cardPlayIcon' ? 'fa-solid fa-play text-2xl ml-1' : id === 'stickyPlayIcon' ? 'fa-solid fa-play text-lg ml-0.5' : id === 'heroPlayIcon' ? 'fa-solid fa-play' : 'fa-solid fa-play');
+      });
+      const navText = document.getElementById('navPlayText');
+      const heroText = document.getElementById('heroPlayText');
+      if (navText) navText.textContent = playing ? 'PAUSAR' : 'ESCUCHAR';
+      if (heroText) heroText.textContent = playing ? 'PAUSAR SEÑAL' : 'ESCUCHAR EN VIVO';
+      const badge = document.getElementById('liveBadge');
+      const status = document.getElementById('statusText');
+      const vinyl = document.getElementById('vinylRing');
+      const eq = document.getElementById('eqVisualizer');
+      if (badge) {
+        badge.textContent = playing ? 'EN VIVO' : 'OFFLINE';
+        badge.className = playing
+          ? 'absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-cyber-cyan text-white text-[10px] font-montserrat font-black tracking-widest uppercase shadow-lg shadow-cyber-cyan/30'
+          : 'absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-slate-900 border border-slate-700 text-[10px] font-montserrat font-black tracking-widest text-cyber-muted uppercase';
+      }
+      if (status) {
+        status.textContent = customMessage || (playing ? 'Transmitiendo en vivo desde AzuraCast HD' : 'Pulsa escuchar para activar la transmisión HD');
+        status.className = playing ? 'text-xs text-cyber-cyan font-bold' : 'text-xs text-cyber-muted font-medium';
+      }
+      if (vinyl) vinyl.style.animationPlayState = playing ? 'running' : 'paused';
+      if (eq) eq.style.opacity = playing ? '1' : '.4';
+    }
+
+    async function fetchAzuraCastData() {
+      try {
+        const response = await fetch(NOWPLAYING_URL, { cache: 'no-store' });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const data = await response.json();
+        const song = data.now_playing && data.now_playing.song ? data.now_playing.song : {};
+        const title = song.title || 'Señal Digital En Vivo';
+        const artist = song.artist || 'Parlar Radio';
+        const artUrl = song.art || FALLBACK_ART;
+        const listeners = Number(data.listeners && data.listeners.total) || 0;
+        const playlist = (data.now_playing && data.now_playing.playlist) || 'Programación 24/7';
+
+        setText('trackTitle', title);
+        setText('trackArtist', artist);
+        setText('stickyTitle', title);
+        setText('stickyArtist', artist);
+        setText('navListeners', listeners + ' Oyentes');
+        setText('currentPlaylist', playlist);
+
+        setImage('albumArt', artUrl);
+        setImage('stickyArt', artUrl);
+
+        const elapsed = Number(data.now_playing && data.now_playing.elapsed) || 0;
+        const duration = Number(data.now_playing && data.now_playing.duration) || 0;
+        const progress = document.getElementById('progressBar');
+        if (duration > 0) {
+          if (progress) progress.style.width = Math.min(100, (elapsed / duration) * 100) + '%';
+          setText('timeElapsed', formatTime(elapsed));
+          setText('timeDuration', formatTime(duration));
+        } else {
+          if (progress) progress.style.width = '100%';
+          setText('timeElapsed', 'EN VIVO');
+          setText('timeDuration', 'DIRECTO');
+        }
+      } catch (error) {
+        // Si la API no responde, el reproductor puede seguir funcionando: no se interrumpe el audio.
+        console.warn('Metadatos AzuraCast no disponibles temporalmente:', error);
+      }
+    }
+
+    function setText(id, value) {
+      const element = document.getElementById(id);
+      if (element) element.textContent = value;
+    }
+
+    function setImage(id, url) {
+      const element = document.getElementById(id);
+      if (!element || !url) return;
+      element.onerror = () => { element.onerror = null; element.src = FALLBACK_ART; };
+      element.src = url;
+    }
+
+    function formatTime(seconds) {
+      const sec = Math.max(0, Math.floor(Number(seconds) || 0));
+      const minutes = Math.floor(sec / 60);
+      const remainder = sec % 60;
+      return String(minutes).padStart(2, '0') + ':' + String(remainder).padStart(2, '0');
+    }
+
+    async function copiarEmail() {
+      const text = 'parlar.radio@live.com';
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const area = document.createElement('textarea');
+          area.value = text;
+          area.style.position = 'fixed';
+          area.style.opacity = '0';
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand('copy');
+          area.remove();
+        }
+        const message = document.getElementById('copyMessage');
+        message.style.opacity = '1';
+        window.setTimeout(() => { message.style.opacity = '0'; }, 2500);
+      } catch (error) {
+        alert('Copia este correo: ' + text);
+      }
+    }
+  </script>
+
+  <!-- Service worker opcional: se registra solo si existe /sw.js en el repositorio -->
+  <script>
+    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(error => console.warn('Service Worker no registrado:', error));
+      });
+    }
+  </script>
+</body>
+</html>
