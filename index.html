@@ -1,172 +1,1932 @@
-<script>
-    'use strict';
-    const STREAM_URL = 'https://stream.parlarradio.com/listen/parlar_radio/radio.mp3';
-    const NOWPLAYING_URL = 'https://stream.parlarradio.com/api/nowplaying/parlar_radio';
-    const FALLBACK_ART = 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80';
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08050a">
+
+  <title>Parlar Radio | SOMOS MUNDO</title>
+  <meta name="description" content="Parlar Radio. Somos Mundo. Música, cultura, información y lo nuestro en una señal digital internacional 24/7.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #08050a;
+      --bg-soft: #100813;
+      --panel: rgba(20, 9, 23, .88);
+      --panel-light: rgba(32, 13, 35, .76);
+      --magenta: #ff007f;
+      --magenta-light: #ff3b9d;
+      --purple: #a000ff;
+      --violet: #7500bd;
+      --white: #fff;
+      --muted: #b9a9ba;
+      --border: rgba(255, 0, 127, .25);
+      --glow: 0 0 28px rgba(255, 0, 127, .22);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+      padding-bottom: 100px;
+      background-image:
+        radial-gradient(ellipse at 15% 10%, rgba(255,0,127,.13), transparent 35%),
+        radial-gradient(ellipse at 90% 35%, rgba(130,0,180,.12), transparent 38%),
+        radial-gradient(ellipse at 50% 85%, rgba(255,0,127,.07), transparent 35%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
+      background-attachment: fixed;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    .section {
+      padding: 82px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--magenta-light);
+      font-family: Montserrat, sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-heading h2 {
+      font-family: Montserrat, sans-serif;
+      font-size: clamp(27px, 4vw, 39px);
+      font-weight: 900;
+      letter-spacing: -1.3px;
+    }
+
+    .section-heading p {
+      max-width: 620px;
+      margin: 12px auto 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* ENCABEZADO */
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 5, 10, .93);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .navbar {
+      min-height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 68px;
+      height: 68px;
+      flex-shrink: 0;
+      padding: 4px;
+      border-radius: 19px;
+      background: linear-gradient(140deg, var(--magenta), var(--purple));
+      box-shadow: 0 0 22px rgba(255,0,127,.28);
+      display: grid;
+      place-items: center;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 15px;
+      background: #09050c;
+    }
+
+    .brand-name {
+      font-family: Montserrat, sans-serif;
+      font-size: clamp(19px, 3vw, 27px);
+      font-weight: 900;
+      letter-spacing: -1.2px;
+      line-height: 1.05;
+      white-space: nowrap;
+    }
+
+    .brand-name span {
+      color: var(--magenta);
+      text-shadow: 0 0 16px rgba(255,0,127,.45);
+    }
+
+    .brand-tagline {
+      color: #e9dce9;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 5px;
+      margin-top: 7px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      color: #d2c4d3;
+      font-family: Montserrat, sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--magenta);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .listener-count {
+      color: var(--magenta-light);
+      border: 1px solid var(--border);
+      background: rgba(255,0,127,.07);
+      border-radius: 30px;
+      padding: 9px 13px;
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .play-button {
+      border: 0;
+      color: white;
+      background: linear-gradient(135deg, var(--magenta), #c000d9);
+      box-shadow: 0 0 22px rgba(255,0,127,.3);
+      transition: .25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .play-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(255,0,127,.48);
+    }
+
+    .header-play {
+      width: 53px;
+      height: 47px;
+      border-radius: 16px;
+      font-size: 16px;
+    }
+
+    .menu-button {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      color: white;
+      background: #160c1b;
+      font-size: 19px;
+    }
+
+    .mobile-menu {
+      display: none;
+      padding: 10px 20px 22px;
+      border-top: 1px solid var(--border);
+      background: #0c0710;
+    }
+
+    .mobile-menu.open {
+      display: grid;
+      gap: 0;
+    }
+
+    .mobile-menu a {
+      padding: 14px 4px;
+      color: #e8dce9;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* HERO Y BANNER */
+
+    .hero {
+      padding: 42px 0 60px;
+    }
+
+    .banner {
+      border-radius: 25px;
+      overflow: hidden;
+      border: 1px solid rgba(255,0,127,.4);
+      box-shadow: 0 0 38px rgba(255,0,127,.12);
+      margin-bottom: 54px;
+      background: #100713;
+    }
+
+    .banner img {
+      width: 100%;
+      max-height: 410px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .live-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255,0,127,.4);
+      color: var(--magenta-light);
+      background: rgba(255,0,127,.09);
+      border-radius: 40px;
+      padding: 11px 18px;
+      font-family: Montserrat, sans-serif;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.8px;
+      margin-bottom: 27px;
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--magenta);
+      box-shadow: 0 0 12px var(--magenta);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      50% { opacity: .35; transform: scale(.75); }
+    }
+
+    .hero h1 {
+      font-family: Montserrat, sans-serif;
+      font-size: clamp(39px, 6vw, 68px);
+      font-weight: 900;
+      letter-spacing: -2.5px;
+      line-height: 1.08;
+      margin-bottom: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .hero-artist {
+      color: var(--magenta);
+      font-size: clamp(17px, 2.5vw, 25px);
+      font-weight: 800;
+      line-height: 1.4;
+      margin-bottom: 25px;
+      text-shadow: 0 0 18px rgba(255,0,127,.23);
+    }
+
+    .program-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 100%;
+      padding: 14px 17px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(24,12,29,.85);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .program-label i {
+      color: var(--magenta);
+      font-size: 17px;
+    }
+
+    .program-label strong {
+      color: white;
+    }
+
+    .track-progress {
+      max-width: 520px;
+      padding: 16px 18px;
+      border: 1px solid rgba(255,0,127,.18);
+      background: rgba(12,7,15,.8);
+      border-radius: 15px;
+      margin-bottom: 25px;
+    }
+
+    .time-row {
+      display: flex;
+      justify-content: space-between;
+      color: #a994a9;
+      font-size: 10px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .progress-track {
+      height: 5px;
+      border-radius: 10px;
+      background: #302032;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--magenta), var(--purple));
+      box-shadow: 0 0 12px var(--magenta);
+      transition: width .6s linear;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .hero-play {
+      min-height: 52px;
+      padding: 0 26px;
+      border-radius: 40px;
+      font-family: Montserrat, sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .whatsapp-button {
+      min-height: 52px;
+      padding: 0 22px;
+      border: 1px solid rgba(37,211,102,.35);
+      background: rgba(37,211,102,.08);
+      color: #5de99a;
+      border-radius: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 800;
+      transition: .2s;
+    }
+
+    .whatsapp-button:hover {
+      background: rgba(37,211,102,.18);
+    }
+
+    /* TARJETA VISUAL DEL REPRODUCTOR */
+
+    .player-card {
+      width: 100%;
+      max-width: 390px;
+      margin: auto;
+      padding: 27px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,0,127,.32);
+      background: linear-gradient(145deg, rgba(35,13,38,.94), rgba(12,7,16,.96));
+      box-shadow: 0 20px 55px rgba(0,0,0,.45), var(--glow);
+      text-align: center;
+    }
+
+    .record-wrap {
+      width: min(245px, 75vw);
+      aspect-ratio: 1;
+      margin: 0 auto 23px;
+      padding: 9px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,0,127,.65);
+      background: repeating-radial-gradient(circle, #151018 0 5px, #29202b 6px 7px);
+      box-shadow: 0 0 25px rgba(255,0,127,.2);
+      animation: rotate 18s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .record-wrap.playing {
+      animation-play-state: running;
+    }
+
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    .record-art {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #09060c;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 15px;
+      border-radius: 30px;
+      color: var(--magenta-light);
+      background: rgba(255,0,127,.1);
+      border: 1px solid rgba(255,0,127,.3);
+      font-family: Montserrat, sans-serif;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      margin-bottom: 20px;
+    }
+
+    .equalizer {
+      height: 27px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 17px;
+    }
+
+    .equalizer span {
+      width: 4px;
+      height: 8px;
+      border-radius: 5px;
+      background: var(--magenta);
+      animation: equalize .8s ease-in-out infinite alternate;
+      animation-play-state: paused;
+    }
+
+    .equalizer.active span {
+      animation-play-state: running;
+    }
+
+    .equalizer span:nth-child(2) { animation-delay: .2s; }
+    .equalizer span:nth-child(3) { animation-delay: .4s; }
+    .equalizer span:nth-child(4) { animation-delay: .1s; }
+    .equalizer span:nth-child(5) { animation-delay: .3s; }
+
+    @keyframes equalize {
+      to { height: 25px; }
+    }
+
+    .round-play {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      font-size: 21px;
+      margin: 0 auto 15px;
+    }
+
+    .player-status {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+      min-height: 18px;
+    }
+
+    /* REDES SOCIALES */
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      width: 43px;
+      height: 43px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      color: var(--magenta-light);
+      background: rgba(255,0,127,.07);
+      border: 1px solid rgba(255,0,127,.22);
+      font-size: 17px;
+      transition: .2s;
+    }
+
+    .social-links a:hover {
+      background: var(--magenta);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 0 18px rgba(255,0,127,.35);
+    }
+
+    /* PILARES */
+
+    .pillars {
+      background: linear-gradient(180deg, rgba(20,8,23,.62), rgba(8,5,10,.25));
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 17px;
+    }
+
+    .pillar {
+      padding: 27px 17px;
+      text-align: center;
+      border-radius: 20px;
+      border: 1px solid rgba(255,0,127,.17);
+      background: rgba(25,12,29,.72);
+      transition: .25s;
+    }
+
+    .pillar:hover {
+      transform: translateY(-5px);
+      border-color: var(--magenta);
+      box-shadow: var(--glow);
+    }
+
+    .pillar-icon {
+      width: 55px;
+      height: 55px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      border-radius: 17px;
+      background: rgba(255,0,127,.12);
+      border: 1px solid rgba(255,0,127,.3);
+      color: var(--magenta);
+      font-size: 23px;
+    }
+
+    .pillar h3 {
+      font-family: Montserrat, sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 7px;
+    }
+
+    .pillar p {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* PROGRAMAS */
+
+    .shows-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 19px;
+    }
+
+    .show-card {
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(255,0,127,.2);
+      background: linear-gradient(155deg, rgba(35,15,39,.88), rgba(13,8,17,.96));
+      transition: .3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .show-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,0,127,.65);
+      box-shadow: 0 15px 35px rgba(0,0,0,.35), var(--glow);
+    }
+
+    .show-image {
+      height: 175px;
+      overflow: hidden;
+      background: #160b1a;
+    }
+
+    .show-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s;
+    }
+
+    .show-card:hover .show-image img {
+      transform: scale(1.05);
+    }
+
+    .show-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .show-country {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 13px;
+    }
+
+    .flag {
+      font-size: 23px;
+    }
+
+    .country-label {
+      color: var(--magenta-light);
+      background: rgba(255,0,127,.1);
+      border: 1px solid rgba(255,0,127,.22);
+      padding: 5px 9px;
+      border-radius: 30px;
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .show-content h3 {
+      font-family: Montserrat, sans-serif;
+      font-size: 17px;
+      line-height: 1.3;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .host {
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 14px;
+    }
+
+    .host strong {
+      color: var(--magenta-light);
+    }
+
+    .host-socials {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .host-socials a {
+      width: 29px;
+      height: 29px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      color: #eee;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      font-size: 12px;
+      transition: .2s;
+    }
+
+    .host-socials a:hover {
+      color: var(--magenta);
+      border-color: var(--magenta);
+    }
+
+    .show-description {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.8;
+      flex: 1;
+    }
+
+    .show-footer {
+      margin-top: 18px;
+      padding-top: 13px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      justify-content: space-between;
+      color: var(--magenta-light);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    /* NOSOTROS Y CONTACTO */
+
+    .about {
+      border-top: 1px solid var(--border);
+      background: linear-gradient(120deg, rgba(28,9,31,.7), rgba(8,5,10,.65));
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .about-copy h2 {
+      font-family: Montserrat, sans-serif;
+      font-size: clamp(29px, 4vw, 43px);
+      line-height: 1.15;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .about-copy h2 span {
+      color: var(--magenta);
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+      margin-bottom: 23px;
+    }
+
+    .contact-social {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .contact-social a {
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: rgba(255,0,127,.09);
+      border: 1px solid var(--border);
+      color: #f7dce9;
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      transition: .2s;
+    }
+
+    .contact-social a:hover {
+      background: rgba(255,0,127,.2);
+    }
+
+    .contact-card {
+      padding: 30px;
+      border-radius: 23px;
+      border: 1px solid rgba(255,0,127,.28);
+      background: rgba(25,11,29,.88);
+      box-shadow: var(--glow);
+    }
+
+    .contact-card h3 {
+      font-family: Montserrat, sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .email-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      background: #0b070e;
+      border: 1px solid rgba(255,0,127,.22);
+      border-radius: 12px;
+    }
+
+    .email-row span {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .copy-button {
+      flex-shrink: 0;
+      border: 0;
+      border-radius: 9px;
+      padding: 10px 14px;
+      color: white;
+      background: var(--magenta);
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    #copyMessage {
+      display: block;
+      color: #65e7a1;
+      font-size: 11px;
+      margin-top: 10px;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    /* ARTÍCULO */
+
+    .article-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(0,0,0,.85);
+      backdrop-filter: blur(12px);
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .article-modal.open {
+      display: flex;
+    }
+
+    .article-content {
+      width: min(760px, 100%);
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 35px;
+      border-radius: 23px;
+      border: 1px solid var(--magenta);
+      background: #120a16;
+      box-shadow: 0 0 40px rgba(255,0,127,.2);
+      position: relative;
+    }
+
+    .article-close {
+      position: sticky;
+      float: right;
+      top: 0;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: white;
+      background: #26132a;
+      font-size: 17px;
+    }
+
+    .article-content h2 {
+      font-family: Montserrat, sans-serif;
+      font-size: clamp(22px, 4vw, 30px);
+      line-height: 1.35;
+      font-weight: 900;
+      margin: 22px 0;
+    }
+
+    .article-content p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+      margin: 17px 0;
+    }
+
+    .article-content img {
+      width: 100%;
+      max-height: 310px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin: 20px 0;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      padding: 35px 0 125px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .footer strong {
+      color: white;
+    }
+
+    .footer-tagline {
+      margin-top: 10px;
+      color: var(--magenta);
+      font-family: Montserrat, sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 4px;
+    }
+
+    /* REPRODUCTOR INFERIOR */
+
+    .sticky-player {
+      position: fixed;
+      z-index: 150;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 0;
+      background: rgba(10,6,13,.97);
+      border-top: 1px solid rgba(255,0,127,.48);
+      box-shadow: 0 -12px 35px rgba(0,0,0,.45);
+      backdrop-filter: blur(18px);
+    }
+
+    .sticky-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .sticky-track {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      flex: 1;
+    }
+
+    .sticky-art {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid rgba(255,0,127,.45);
+    }
+
+    .sticky-info {
+      min-width: 0;
+    }
+
+    .sticky-info h4 {
+      font-family: Montserrat, sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sticky-info p {
+      color: var(--magenta-light);
+      font-size: 10px;
+      font-weight: 800;
+      margin-top: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sticky-play {
+      width: 53px;
+      height: 53px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      font-size: 17px;
+    }
+
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .volume-control input {
+      width: 85px;
+      accent-color: var(--magenta);
+    }
+
+    /* OVERLAY PARA ACTIVAR AUDIO */
+
+    .audio-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 250;
+      background: rgba(5,2,8,.94);
+      backdrop-filter: blur(15px);
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+    }
+
+    .audio-overlay.show {
+      display: flex;
+    }
+
+    .audio-box {
+      width: min(420px, 100%);
+      padding: 35px 27px;
+      text-align: center;
+      border-radius: 25px;
+      border: 1px solid var(--magenta);
+      background: #160a19;
+      box-shadow: 0 0 45px rgba(255,0,127,.2);
+    }
+
+    .audio-box img {
+      width: 95px;
+      height: 95px;
+      object-fit: contain;
+      margin: 0 auto 20px;
+      border-radius: 20px;
+    }
+
+    .audio-box h2 {
+      font-family: Montserrat, sans-serif;
+      font-size: 23px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .audio-box p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 950px) {
+      .nav-links { gap: 14px; font-size: 10px; }
+      .listener-count { display: none; }
+      .hero-grid { gap: 30px; }
+      .shows-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 720px) {
+      body { padding-bottom: 86px; }
+
+      .container {
+        width: min(100% - 30px, 560px);
+      }
+
+      .section { padding: 62px 0; }
+
+      .navbar {
+        min-height: 76px;
+        gap: 10px;
+      }
+
+      .brand { gap: 10px; }
+
+      .brand-logo {
+        width: 53px;
+        height: 53px;
+        border-radius: 15px;
+      }
+
+      .brand-name {
+        font-size: clamp(17px, 5vw, 22px);
+        letter-spacing: -1px;
+      }
+
+      .brand-tagline {
+        font-size: 8px;
+        letter-spacing: 3.7px;
+      }
+
+      .nav-links { display: none; }
+
+      .header-play {
+        width: 45px;
+        height: 43px;
+        border-radius: 14px;
+      }
+
+      .menu-button {
+        display: block;
+        width: 43px;
+        height: 43px;
+      }
+
+      .hero { padding-top: 25px; }
+
+      .banner {
+        margin-bottom: 38px;
+        border-radius: 19px;
+      }
+
+      .banner img {
+        max-height: 270px;
+        min-height: 155px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 38px;
+      }
+
+      .hero-copy { text-align: center; }
+
+      .hero h1 {
+        font-size: clamp(36px, 10vw, 53px);
+        letter-spacing: -1.8px;
+      }
+
+      .hero-artist {
+        font-size: 19px;
+        margin-bottom: 20px;
+      }
+
+      .program-label {
+        justify-content: center;
+        text-align: left;
+      }
+
+      .track-progress { margin: 0 auto 22px; }
+
+      .hero-buttons { justify-content: center; }
+
+      .hero-play, .whatsapp-button {
+        min-height: 48px;
+      }
+
+      .player-card {
+        max-width: 360px;
+        padding: 23px 18px;
+      }
+
+      .record-wrap { width: 205px; }
+
+      .pillar-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .pillar { padding: 22px 10px; }
+
+      .shows-grid { gap: 13px; }
+
+      .show-image { height: 135px; }
+
+      .show-content { padding: 14px; }
+
+      .show-content h3 { font-size: 15px; }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .contact-card { padding: 23px 18px; }
+
+      .sticky-player { padding: 9px 0; }
+
+      .sticky-inner { gap: 10px; }
+
+      .sticky-art {
+        width: 46px;
+        height: 46px;
+      }
+
+      .sticky-play {
+        width: 47px;
+        height: 47px;
+      }
+
+      .sticky-info h4 { font-size: 11px; }
+      .sticky-info p { font-size: 9px; }
+
+      .volume-control { display: none; }
+
+      .article-content { padding: 25px 20px; }
+    }
+
+    @media (max-width: 390px) {
+      .brand-name { font-size: 16px; }
+      .brand-tagline { letter-spacing: 3px; }
+      .brand-logo { width: 48px; height: 48px; }
+      .header-actions { gap: 7px; }
+      .shows-grid { grid-template-columns: 1fr; }
+      .show-image { height: 190px; }
+      .hero-buttons { flex-direction: column; }
+      .hero-play, .whatsapp-button { width: 100%; justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <audio id="audioStream" preload="none" playsinline>
+    <source src="https://stream.parlarradio.com/listen/parlar_radio/radio.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
+  <!-- ACTIVACIÓN DE AUDIO -->
+  <div class="audio-overlay" id="autoplayOverlay">
+    <div class="audio-box">
+      <img src="https://raw.githubusercontent.com/wladiormaza21/Parlar_Radio/main/file_000000009ed481f5b70ad2eaadb57b35.png" alt="Parlar Radio">
+      <span class="eyebrow">Parlar Radio · Somos Mundo</span>
+      <h2>ACTIVA LA SEÑAL</h2>
+      <p>Conéctate con nuestra programación internacional. Música, cultura, información y lo nuestro, las 24 horas.</p>
+      <button class="play-button hero-play" onclick="togglePlay()">
+        <i class="fa-solid fa-play"></i> ESCUCHAR EN VIVO
+      </button>
+    </div>
+  </div>
+
+  <!-- ENCABEZADO -->
+  <header class="header">
+    <div class="container navbar">
+
+      <a href="#inicio" class="brand">
+        <div class="brand-logo">
+          <img
+            src="https://raw.githubusercontent.com/wladiormaza21/Parlar_Radio/main/file_000000009ed481f5b70ad2eaadb57b35.png"
+            alt="Logotipo oficial de Parlar Radio">
+        </div>
+
+        <div>
+          <div class="brand-name">PARLAR <span>RADIO</span></div>
+          <div class="brand-tagline">SOMOS MUNDO</div>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#pilares">Pilares</a>
+        <a href="#programas">Radio Shows</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="listener-count">
+          <i class="fa-solid fa-headphones"></i>
+          <span id="navListeners">-- Oyentes</span>
+        </div>
+
+        <button class="play-button header-play" onclick="togglePlay()" aria-label="Reproducir o pausar radio">
+          <i id="navPlayIcon" class="fa-solid fa-play"></i>
+        </button>
+
+        <button class="menu-button" onclick="toggleMobileMenu()" aria-label="Abrir menú" aria-expanded="false">
+          <i id="menuIcon" class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <nav id="mobileMenu" class="mobile-menu">
+      <a href="#inicio" onclick="toggleMobileMenu()">Inicio</a>
+      <a href="#pilares" onclick="toggleMobileMenu()">Pilares</a>
+      <a href="#programas" onclick="toggleMobileMenu()">Radio Shows</a>
+      <a href="#nosotros" onclick="toggleMobileMenu()">Nosotros</a>
+      <a href="#contacto" onclick="toggleMobileMenu()">Contacto</a>
+      <a href="https://whatsapp.com/channel/0029Vb8wXsv2P59imKUGxJ46" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp"></i> Canal de WhatsApp
+      </a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- INICIO -->
+    <section class="hero" id="inicio">
+      <div class="container">
+
+        <div class="banner">
+          <img
+            src="file_0000000045bc81f49eb7d1a9d6cb3b12.png"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80';"
+            alt="Parlar Radio - Banner oficial">
+        </div>
+
+        <div class="hero-grid">
+
+          <!-- METADATOS -->
+          <div class="hero-copy">
+
+            <div class="live-label">
+              <span class="live-dot"></span>
+              SEÑAL DIGITAL INTERNACIONAL HD
+            </div>
+
+            <h1 id="trackTitle">Parlar Radio</h1>
+
+            <p class="hero-artist" id="trackArtist">SOMOS MUNDO</p>
+
+            <div class="program-label">
+              <i class="fa-solid fa-tower-broadcast"></i>
+              <span>Transmisión en directo:
+                <strong id="currentPlaylist">Programación 24/7</strong>
+              </span>
+            </div>
+
+            <div class="track-progress">
+              <div class="time-row">
+                <span id="timeElapsed">EN VIVO</span>
+                <span id="timeDuration">DIRECTO</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="progressBar"></div>
+              </div>
+            </div>
+
+            <div class="hero-buttons">
+              <button class="play-button hero-play" onclick="togglePlay()">
+                <i id="heroPlayIcon" class="fa-solid fa-play"></i>
+                <span id="heroPlayText">ESCUCHAR EN VIVO</span>
+              </button>
+
+              <a class="whatsapp-button"
+                 href="https://whatsapp.com/channel/0029Vb8wXsv2P59imKUGxJ46"
+                 target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-whatsapp"></i>
+                CANAL DE WHATSAPP
+              </a>
+            </div>
+          </div>
+
+          <!-- REPRODUCTOR VISUAL -->
+          <div>
+            <div class="player-card">
+
+              <div class="record-wrap" id="vinylRing">
+                <img
+                  class="record-art"
+                  id="albumArt"
+                  src="https://raw.githubusercontent.com/wladiormaza21/Parlar_Radio/main/file_000000009ed481f5b70ad2eaadb57b35.png"
+                  alt="Portada de Parlar Radio">
+              </div>
+
+              <div class="live-badge" id="liveBadge">
+                <span class="live-dot"></span>
+                <span>SEÑAL LISTA</span>
+              </div>
+
+              <div class="equalizer" id="eqVisualizer">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+
+              <button class="play-button round-play" onclick="togglePlay()" aria-label="Reproducir o pausar">
+                <i id="cardPlayIcon" class="fa-solid fa-play"></i>
+              </button>
+
+              <p class="player-status" id="statusText">Pulsa para escuchar Parlar Radio</p>
+            </div>
+
+            <!-- REDES OFICIALES -->
+            <div class="social-links">
+              <a href="https://www.instagram.com/parlar.radio" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="https://www.facebook.com/share/1M4d15T72r/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="https://www.tiktok.com/@parlar.radio" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <i class="fa-brands fa-tiktok"></i>
+              </a>
+              <a href="https://www.mixcloud.com/ParlarRadio/" target="_blank" rel="noopener noreferrer" aria-label="Mixcloud">
+                <i class="fa-solid fa-podcast"></i>
+              </a>
+              <a href="https://whatsapp.com/channel/0029VbDdGFG4o7qOvD34MV3t" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PILARES -->
+    <section class="section pillars" id="pilares">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">Nuestra esencia</span>
+          <h2>Los 4 pilares de Parlar Radio</h2>
+          <p>Una plataforma internacional construida sobre la diversidad, la libertad de expresión y la pasión por comunicar.</p>
+        </div>
+
+        <div class="pillar-grid">
+
+          <div class="pillar" onclick="toggleArticleModal()" style="cursor:pointer">
+            <div class="pillar-icon"><i class="fa-solid fa-music"></i></div>
+            <h3>MÚSICA</h3>
+            <p>Selección global</p>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-icon"><i class="fa-solid fa-users"></i></div>
+            <h3>CULTURA</h3>
+            <p>Voces diversas</p>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-icon"><i class="fa-solid fa-circle-info"></i></div>
+            <h3>INFORMACIÓN</h3>
+            <p>Veracidad global</p>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-icon"><i class="fa-solid fa-globe"></i></div>
+            <h3>LO NUESTRO</h3>
+            <p>Identidad propia</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAMAS -->
+    <section class="section" id="programas">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">Conectamos el mundo</span>
+          <h2>Nuestros Radio Shows</h2>
+          <p>Distintas voces, culturas y estilos. Una sola señal que conecta al mundo.</p>
+        </div>
+
+        <div class="shows-grid">
+
+          <!-- QUINTA SINFONÍA -->
+          <article class="show-card">
+            <div class="show-image">
+              <img
+                src="file_000000008f3881f5b848a6eb82a8f56e.png"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80';"
+                alt="Quinta Sinfonía">
+            </div>
+
+            <div class="show-content">
+              <div class="show-country">
+                <span class="flag">🇪🇨</span>
+                <span class="country-label">Ecuador</span>
+              </div>
+
+              <h3>Quinta Sinfonía</h3>
+              <p class="host">Conduce: <strong>Wladimir Ormaza</strong></p>
+
+              <div class="host-socials">
+                <a href="https://www.facebook.com/share/1EAGcbVPCv/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://x.com/wladiradio" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/wladiradio" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@wladi.ormaza" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+              </div>
+
+              <p class="show-description">Grandes éxitos musicales, clásicos imperecederos y la mejor selección sonora.</p>
+
+              <div class="show-footer">
+                <span>PARLAR RADIO</span>
+                <i class="fa-solid fa-microphone"></i>
+              </div>
+            </div>
+          </article>
+
+          <!-- NI CHICHA NI LIMONADA -->
+          <article class="show-card">
+            <div class="show-image">
+              <img
+                src="file_00000000b1a4823085e7474fbbd00707.png"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=600&q=80';"
+                alt="Ni Chicha Ni Limonada">
+            </div>
+
+            <div class="show-content">
+              <div class="show-country">
+                <span class="flag">🇦🇷</span>
+                <span class="country-label">Argentina</span>
+              </div>
+
+              <h3>Ni Chicha Ni Limonada</h3>
+              <p class="host">Conduce: <strong>Ramiro Parisi</strong></p>
+
+              <div class="host-socials">
+                <a href="https://www.facebook.com/share/19jUGohqcg/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/ramiro.parisi" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              </div>
+
+              <p class="show-description">Entretenimiento, cultura, humor y temas variados sin etiquetas.</p>
+
+              <div class="show-footer">
+                <span>PARLAR RADIO</span>
+                <i class="fa-solid fa-microphone"></i>
+              </div>
+            </div>
+          </article>
+
+          <!-- JARRITO CAFÉ -->
+          <article class="show-card">
+            <div class="show-image">
+              <img
+                src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80"
+                alt="Jarrito Café">
+            </div>
+
+            <div class="show-content">
+              <div class="show-country">
+                <span class="flag">🇲🇽</span>
+                <span class="country-label">México</span>
+              </div>
+
+              <h3>Jarrito Café</h3>
+              <p class="host">Conduce: <strong>Bertiux Solano</strong></p>
+
+              <p class="show-description">Historias, calidez y buena energía para acompañar tus mañanas.</p>
+
+              <div class="show-footer">
+                <span>PARLAR RADIO</span>
+                <i class="fa-solid fa-microphone"></i>
+              </div>
+            </div>
+          </article>
+
+          <!-- PRISMA -->
+          <article class="show-card">
+            <div class="show-image">
+              <img
+                src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80"
+                alt="Prisma">
+            </div>
+
+            <div class="show-content">
+              <div class="show-country">
+                <span class="flag">🇪🇸</span>
+                <span class="country-label">España</span>
+              </div>
+
+              <h3>Prisma</h3>
+              <p class="host">Conduce: <strong>Vladimir Hernández Solís</strong></p>
+
+              <p class="show-description">Enfoques diversos sobre música, actualidad y análisis cultural.</p>
+
+              <div class="show-footer">
+                <span>PARLAR RADIO</span>
+                <i class="fa-solid fa-microphone"></i>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- NOSOTROS Y CONTACTO -->
+    <section class="section about" id="nosotros">
+      <div class="container about-grid">
+
+        <div class="about-copy">
+          <span class="eyebrow">Nuestra identidad</span>
+          <h2>Parlar Radio:<br><span>SOMOS MUNDO</span></h2>
+
+          <p>
+            Conectamos locutores desde Ecuador, Argentina, México y España para transmitir una voz verdaderamente global y de vanguardia.
+            Somos una plataforma radial internacional que une fronteras a través de la música, el arte y la libre expresión.
+          </p>
+
+          <div class="contact-social">
+            <a href="https://whatsapp.com/channel/0029Vb8wXsv2P59imKUGxJ46" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-whatsapp"></i> Canal Oficial
+            </a>
+
+            <a href="https://x.com/ParlarRadiOfi" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-x-twitter"></i> @ParlarRadiOfi
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-card" id="contacto">
+          <span class="eyebrow">Estamos para escucharte</span>
+          <h3>Contacto Oficial</h3>
+          <p>Escríbenos directamente a nuestra casilla digital.</p>
+
+          <div class="email-row">
+            <span id="emailAddress">parlar.radio@live.com</span>
+            <button class="copy-button" onclick="copiarEmail()">Copiar</button>
+          </div>
+
+          <span id="copyMessage">¡Correo copiado al portapapeles!</span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ARTÍCULO MUSICAL -->
+  <div class="article-modal" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="articleTitle">
+    <div class="article-content">
+
+      <button class="article-close" onclick="toggleArticleModal()" aria-label="Cerrar artículo">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <span class="eyebrow">Especial musical</span>
+
+      <h2 id="articleTitle">El latido de la nueva era musical: Por qué el talento independiente está conquistando el mundo</h2>
+
+      <img
+        src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80"
+        alt="Estudio de radio">
+
+      <p>
+        La industria musical vive una de sus transformaciones más fascinantes y dinámicas de las últimas décadas. Lo que antes dependía exclusivamente de los grandes estudios de grabación, hoy se alimenta de la autenticidad y la inmediatez de artistas independientes de todo el planeta.
+      </p>
+
+      <p>
+        La música es un lenguaje universal. En Parlar Radio creemos en las nuevas voces, en la diversidad sonora y en el talento que merece ser escuchado sin importar las fronteras.
+      </p>
+
+      <p>
+        Nuestra señal es un espacio para descubrir, compartir y conectar culturas a través de la música.
+      </p>
+
+    </div>
+  </div>
+
+  <!-- REPRODUCTOR FIJO INFERIOR -->
+  <div class="sticky-player">
+    <div class="container sticky-inner">
+
+      <div class="sticky-track">
+        <img
+          id="stickyArt"
+          class="sticky-art"
+          src="https://raw.githubusercontent.com/wladiormaza21/Parlar_Radio/main/file_000000009ed481f5b70ad2eaadb57b35.png"
+          alt="Parlar Radio">
+
+        <div class="sticky-info">
+          <h4 id="stickyTitle">Parlar Radio</h4>
+          <p id="stickyArtist">SOMOS MUNDO · RADIO EN VIVO</p>
+        </div>
+      </div>
+
+      <button class="play-button sticky-play" onclick="togglePlay()" aria-label="Reproducir o pausar">
+        <i id="stickyPlayIcon" class="fa-solid fa-play"></i>
+      </button>
+
+      <div class="volume-control">
+        <i class="fa-solid fa-volume-high"></i>
+        <input
+          type="range"
+          id="volumeSlider"
+          min="0"
+          max="1"
+          step="0.05"
+          value="1"
+          oninput="setVolume(this.value)"
+          aria-label="Volumen">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 <strong>Parlar Radio</strong>. Todos los derechos reservados.</p>
+      <div class="footer-tagline">SOMOS MUNDO</div>
+    </div>
+  </footer>
+
+  <script>
+    const STREAM_URL =
+      'https://stream.parlarradio.com/listen/parlar_radio/radio.mp3';
+
+    const API_URL =
+      'https://stream.parlarradio.com/api/nowplaying/parlar_radio';
+
+    const LOGO_URL =
+      'https://raw.githubusercontent.com/wladiormaza21/Parlar_Radio/main/file_000000009ed481f5b70ad2eaadb57b35.png';
+
     const audio = document.getElementById('audioStream');
     const overlay = document.getElementById('autoplayOverlay');
+
     let isPlaying = false;
-    let metadataTimer = null;
+    let metadataInterval = null;
 
     document.addEventListener('DOMContentLoaded', () => {
       audio.volume = 1;
-      // No forzamos autoplay: los navegadores móviles suelen bloquearlo.
-      overlay.hidden = false;
-      updateUI(false, 'Pulsa para activar la transmisión HD');
-      fetchAzuraCastData();
-      metadataTimer = window.setInterval(fetchAzuraCastData, 15000);
+
+      // El navegador móvil requiere una interacción del usuario
+      // para permitir la reproducción de audio.
+      updatePlayerUI(false);
+      loadAzuraCastData();
+
+      metadataInterval = setInterval(loadAzuraCastData, 15000);
     });
 
-    async function iniciarAudioAutoplay() {
-      await playStream();
-    }
-
-    async function playStream() {
-      try {
-        if (!audio.src || audio.src !== STREAM_URL) audio.src = STREAM_URL;
-        audio.load();
-        await audio.play();
-        // El evento "playing" confirma el inicio real de reproducción.
-      } catch (error) {
-        console.error('No fue posible iniciar el streaming:', error);
-        isPlaying = false;
-        updateUI(false, error && error.name === 'NotAllowedError'
-          ? 'El navegador bloqueó el audio. Pulsa nuevamente para escuchar.'
-          : 'No se pudo conectar. Comprueba tu conexión e inténtalo otra vez.');
-        overlay.hidden = false;
-      }
-    }
-
-    function togglePlay() {
-      if (audio.paused) {
-        playStream();
-      } else {
+    async function togglePlay() {
+      if (!audio.paused) {
         audio.pause();
+        return;
+      }
+
+      try {
+        if (!audio.src || !audio.src.includes('/listen/parlar_radio/radio.mp3')) {
+          audio.src = STREAM_URL;
+        }
+
+        await audio.play();
+      } catch (error) {
+        console.error('Error al iniciar la transmisión:', error);
+
+        updatePlayerUI(false, 'No se pudo conectar. Pulsa para intentar nuevamente.');
+        overlay.classList.add('show');
       }
     }
 
     audio.addEventListener('playing', () => {
       isPlaying = true;
-      overlay.hidden = true;
-      updateUI(true);
+      overlay.classList.remove('show');
+      updatePlayerUI(true);
     });
 
     audio.addEventListener('pause', () => {
       isPlaying = false;
-      updateUI(false);
+      updatePlayerUI(false);
     });
 
     audio.addEventListener('waiting', () => {
-      if (!audio.paused) updateUI(false, 'Conectando con la señal...');
+      if (!audio.paused) {
+        document.getElementById('statusText').textContent = 'Conectando con Parlar Radio...';
+      }
     });
 
     audio.addEventListener('error', () => {
       isPlaying = false;
-      updateUI(false, 'No se pudo cargar la señal. Inténtalo nuevamente.');
-      console.error('Error de audio:', audio.error);
+      updatePlayerUI(false, 'Problemas de conexión con la señal.');
+      console.error('Error del reproductor:', audio.error);
     });
 
-    function setVolume(value) {
-      const volume = Math.max(0, Math.min(1, Number(value)));
-      audio.volume = volume;
-      audio.muted = volume === 0;
-    }
+    function updatePlayerUI(playing, message = '') {
+      isPlaying = playing;
 
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobileMenu');
-      const icon = document.getElementById('menuIcon');
-      const button = document.querySelector('button[aria-label="Abrir menú"]');
-      menu.classList.toggle('hidden');
-      const open = !menu.classList.contains('hidden');
-      icon.className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
-      if (button) button.setAttribute('aria-expanded', String(open));
-    }
+      const iconIds = [
+        'navPlayIcon',
+        'heroPlayIcon',
+        'cardPlayIcon',
+        'stickyPlayIcon'
+      ];
 
-    function toggleArticleModal() {
-      const modal = document.getElementById('articleModal');
-      modal.hidden = !modal.hidden;
-      modal.classList.toggle('flex', !modal.hidden);
-      document.body.style.overflow = modal.hidden ? '' : 'hidden';
-    }
+      iconIds.forEach(id => {
+        const element = document.getElementById(id);
+        if (!element) return;
 
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') {
-        const modal = document.getElementById('articleModal');
-        if (!modal.hidden) toggleArticleModal();
-        const menu = document.getElementById('mobileMenu');
-        if (!menu.classList.contains('hidden')) toggleMobileMenu();
-      }
-    });
-
-    function updateUI(playing, customMessage = '') {
-      isPlaying = Boolean(playing);
-      const ids = ['navPlayIcon','heroPlayIcon','cardPlayIcon','stickyPlayIcon'];
-      ids.forEach(id => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.className = playing
-          ? (id === 'cardPlayIcon' ? 'fa-solid fa-pause text-2xl' : id === 'stickyPlayIcon' ? 'fa-solid fa-pause text-lg' : id === 'heroPlayIcon' ? 'fa-solid fa-pause' : 'fa-solid fa-pause')
-          : (id === 'cardPlayIcon' ? 'fa-solid fa-play text-2xl ml-1' : id === 'stickyPlayIcon' ? 'fa-solid fa-play text-lg ml-0.5' : id === 'heroPlayIcon' ? 'fa-solid fa-play' : 'fa-solid fa-play');
+        element.className = playing
+          ? 'fa-solid fa-pause'
+          : 'fa-solid fa-play';
       });
-      const navText = document.getElementById('navPlayText');
+
       const heroText = document.getElementById('heroPlayText');
-      if (navText) navText.textContent = playing ? 'PAUSAR' : 'ESCUCHAR';
-      if (heroText) heroText.textContent = playing ? 'PAUSAR SEÑAL' : 'ESCUCHAR EN VIVO';
+
+      if (heroText) {
+        heroText.textContent = playing
+          ? 'PAUSAR SEÑAL'
+          : 'ESCUCHAR EN VIVO';
+      }
+
       const badge = document.getElementById('liveBadge');
       const status = document.getElementById('statusText');
       const vinyl = document.getElementById('vinylRing');
-      const eq = document.getElementById('eqVisualizer');
+      const equalizer = document.getElementById('eqVisualizer');
+
       if (badge) {
-        badge.textContent = playing ? 'EN VIVO' : 'OFFLINE';
-        badge.className = playing
-          ? 'absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-cyber-cyan text-white text-[10px] font-montserrat font-black tracking-widest uppercase shadow-lg shadow-cyber-cyan/30'
-          : 'absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-slate-900 border border-slate-700 text-[10px] font-montserrat font-black tracking-widest text-cyber-muted uppercase';
+        badge.innerHTML = playing
+          ? '<span class="live-dot"></span><span>EN VIVO</span>'
+          : '<span class="live-dot"></span><span>SEÑAL LISTA</span>';
       }
+
       if (status) {
-        status.textContent = customMessage || (playing ? 'Transmitiendo en vivo desde AzuraCast HD' : 'Pulsa escuchar para activar la transmisión HD');
-        status.className = playing ? 'text-xs text-cyber-cyan font-bold' : 'text-xs text-cyber-muted font-medium';
+        status.textContent = message || (
+          playing
+            ? 'Transmitiendo en directo desde AzuraCast HD'
+            : 'Pulsa para escuchar Parlar Radio'
+        );
       }
-      if (vinyl) vinyl.style.animationPlayState = playing ? 'running' : 'paused';
-      if (eq) eq.style.opacity = playing ? '1' : '.4';
+
+      if (vinyl) {
+        vinyl.classList.toggle('playing', playing);
+      }
+
+      if (equalizer) {
+        equalizer.classList.toggle('active', playing);
+      }
     }
 
-    async function fetchAzuraCastData() {
+    async function loadAzuraCastData() {
       try {
-        const response = await fetch(NOWPLAYING_URL, { cache: 'no-store' });
-        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const response = await fetch(API_URL, {
+          cache: 'no-store'
+        });
+
+        if (!response.ok) {
+          throw new Error('API HTTP ' + response.status);
+        }
+
         const data = await response.json();
-        const song = data.now_playing && data.now_playing.song ? data.now_playing.song : {};
-        const title = song.title || 'Señal Digital En Vivo';
-        const artist = song.artist || 'Parlar Radio';
-        const artUrl = song.art || FALLBACK_ART;
-        const listeners = Number(data.listeners && data.listeners.total) || 0;
-        const playlist = (data.now_playing && data.now_playing.playlist) || 'Programación 24/7';
+
+        const nowPlaying = data.now_playing || {};
+        const song = nowPlaying.song || {};
+
+        const title = song.title || 'Parlar Radio';
+        const artist = song.artist || 'SOMOS MUNDO';
+        const art = song.art || LOGO_URL;
+        const playlist = nowPlaying.playlist || 'Programación 24/7';
 
         setText('trackTitle', title);
         setText('trackArtist', artist);
+
         setText('stickyTitle', title);
         setText('stickyArtist', artist);
-        setText('navListeners', listeners + ' Oyentes');
+
+        setText(
+          'navListeners',
+          (data.listeners?.total ?? '--') + ' Oyentes'
+        );
+
         setText('currentPlaylist', playlist);
 
-        setImage('albumArt', artUrl);
-        setImage('stickyArt', artUrl);
+        setImage('albumArt', art);
+        setImage('stickyArt', art);
 
-        const elapsed = Number(data.now_playing && data.now_playing.elapsed) || 0;
-        const duration = Number(data.now_playing && data.now_playing.duration) || 0;
-        const progress = document.getElementById('progressBar');
+        const elapsed = Number(nowPlaying.elapsed) || 0;
+        const duration = Number(nowPlaying.duration) || 0;
+
         if (duration > 0) {
-          if (progress) progress.style.width = Math.min(100, (elapsed / duration) * 100) + '%';
+          const percentage = Math.min(100, (elapsed / duration) * 100);
+
+          const progress = document.getElementById('progressBar');
+          if (progress) progress.style.width = percentage + '%';
+
           setText('timeElapsed', formatTime(elapsed));
           setText('timeDuration', formatTime(duration));
         } else {
+          const progress = document.getElementById('progressBar');
           if (progress) progress.style.width = '100%';
+
           setText('timeElapsed', 'EN VIVO');
           setText('timeDuration', 'DIRECTO');
         }
+
       } catch (error) {
-        // Si la API no responde, el reproductor puede seguir funcionando: no se interrumpe el audio.
-        console.warn('Metadatos AzuraCast no disponibles temporalmente:', error);
+        console.warn('Metadatos AzuraCast temporalmente no disponibles:', error);
       }
     }
 
@@ -178,48 +1938,105 @@
     function setImage(id, url) {
       const element = document.getElementById(id);
       if (!element || !url) return;
-      element.onerror = () => { element.onerror = null; element.src = FALLBACK_ART; };
+
+      element.onerror = () => {
+        element.onerror = null;
+        element.src = LOGO_URL;
+      };
+
       element.src = url;
     }
 
     function formatTime(seconds) {
-      const sec = Math.max(0, Math.floor(Number(seconds) || 0));
-      const minutes = Math.floor(sec / 60);
-      const remainder = sec % 60;
-      return String(minutes).padStart(2, '0') + ':' + String(remainder).padStart(2, '0');
+      const total = Math.max(0, Math.floor(Number(seconds) || 0));
+      const minutes = Math.floor(total / 60);
+      const remainder = total % 60;
+
+      return (
+        String(minutes).padStart(2, '0') +
+        ':' +
+        String(remainder).padStart(2, '0')
+      );
     }
 
+    function setVolume(value) {
+      const volume = Math.max(0, Math.min(1, Number(value)));
+
+      audio.volume = volume;
+      audio.muted = volume === 0;
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const button = document.querySelector('.menu-button');
+      const icon = document.getElementById('menuIcon');
+
+      menu.classList.toggle('open');
+
+      const opened = menu.classList.contains('open');
+
+      button.setAttribute('aria-expanded', String(opened));
+      icon.className = opened
+        ? 'fa-solid fa-xmark'
+        : 'fa-solid fa-bars';
+    }
+
+    function toggleArticleModal() {
+      const modal = document.getElementById('articleModal');
+      const opened = modal.classList.toggle('open');
+
+      document.body.style.overflow = opened ? 'hidden' : '';
+    }
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        const modal = document.getElementById('articleModal');
+
+        if (modal.classList.contains('open')) {
+          toggleArticleModal();
+        }
+
+        const menu = document.getElementById('mobileMenu');
+
+        if (menu.classList.contains('open')) {
+          toggleMobileMenu();
+        }
+      }
+    });
+
     async function copiarEmail() {
-      const text = 'parlar.radio@live.com';
+      const email = 'parlar.radio@live.com';
+      const message = document.getElementById('copyMessage');
+
       try {
         if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
+          await navigator.clipboard.writeText(email);
         } else {
-          const area = document.createElement('textarea');
-          area.value = text;
-          area.style.position = 'fixed';
-          area.style.opacity = '0';
-          document.body.appendChild(area);
-          area.select();
-          document.execCommand('copy');
-          area.remove();
+          const input = document.createElement('textarea');
+          input.value = email;
+          input.style.position = 'fixed';
+          input.style.opacity = '0';
+
+          document.body.appendChild(input);
+          input.select();
+
+          const copied = document.execCommand('copy');
+          input.remove();
+
+          if (!copied) throw new Error('No se pudo copiar');
         }
-        const message = document.getElementById('copyMessage');
+
         message.style.opacity = '1';
-        window.setTimeout(() => { message.style.opacity = '0'; }, 2500);
+
+        setTimeout(() => {
+          message.style.opacity = '0';
+        }, 2500);
+
       } catch (error) {
-        alert('Copia este correo: ' + text);
+        alert('Puedes copiar este correo: ' + email);
       }
     }
   </script>
 
-  <!-- Service worker opcional: se registra solo si existe /sw.js en el repositorio -->
-  <script>
-    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(error => console.warn('Service Worker no registrado:', error));
-      });
-    }
-  </script>
 </body>
 </html>
