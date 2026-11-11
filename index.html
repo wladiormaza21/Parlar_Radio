@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -6,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#08050a">
 
-  <title>Parlar Radio | SOMOS MUNDO</title>
-  <meta name="description" content="Parlar Radio. Somos Mundo. Música, cultura, información y lo nuestro en una señal digital internacional 24/7.">
+  <title>Parlar Radio | SOMOS MUNDO - Especial Navideño</title>
+  <meta name="description" content="Parlar Radio. Somos Mundo. Música, cultura, información y lo nuestro en una señal digital internacional 24/7. ¡Disfruta nuestra programación navideña!">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +29,10 @@
       --border: rgba(255, 0, 127, .25);
       --glow: 0 0 28px rgba(255, 0, 127, .22);
       --radius: 22px;
+      /* Colores Navideños */
+      --christmas-red: #ff2247;
+      --christmas-green: #00d26a;
+      --christmas-gold: #ffcc00;
     }
 
     * {
@@ -43,8 +46,6 @@
       scroll-padding-top: 100px;
       background-color: var(--bg);
     }
-
-    /* ÚNICO CAMBIO: BACKGROUND MÁS OSCURO */
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -70,6 +71,41 @@
       background-attachment: fixed;
 
       opacity: 0.05;
+    }
+
+    /* EFECTO DE COPOS DE NIEVE ANIMADOS */
+    .snow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 99;
+      overflow: hidden;
+    }
+
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10px) translateX(0);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translateY(50vh) translateX(15px);
+        opacity: 0.4;
+      }
+      100% {
+        transform: translateY(105vh) translateX(-15px);
+        opacity: 0;
+      }
     }
 
     a {
@@ -103,13 +139,14 @@
 
     .eyebrow {
       display: inline-block;
-      color: var(--magenta-light);
+      color: var(--christmas-gold);
       font-family: Montserrat, sans-serif;
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 3px;
       text-transform: uppercase;
       margin-bottom: 12px;
+      text-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
     }
 
     .section-heading h2 {
@@ -127,16 +164,17 @@
       line-height: 1.8;
     }
 
-    /* ENCABEZADO */
+    /* ENCABEZADO CON TOQUE NAVIDEÑO */
 
     .header {
       position: sticky;
       top: 0;
       z-index: 100;
       background: rgba(8, 5, 10, .93);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(255, 34, 71, 0.35);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 4px 20px rgba(255, 34, 71, 0.1);
     }
 
     .navbar {
@@ -152,6 +190,19 @@
       align-items: center;
       gap: 14px;
       min-width: 0;
+      position: relative;
+    }
+
+    /* GORRO NAVIDEÑO SOBRE EL LOGO */
+    .brand-logo::after {
+      content: "🎅";
+      position: absolute;
+      top: -12px;
+      right: -8px;
+      font-size: 24px;
+      transform: rotate(15deg);
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+      z-index: 5;
     }
 
     .brand-logo {
@@ -160,10 +211,11 @@
       flex-shrink: 0;
       padding: 4px;
       border-radius: 19px;
-      background: linear-gradient(140deg, var(--magenta), var(--purple));
-      box-shadow: 0 0 22px rgba(255,0,127,.28);
+      background: linear-gradient(140deg, var(--christmas-red), var(--purple));
+      box-shadow: 0 0 22px rgba(255,34,71,.35);
       display: grid;
       place-items: center;
+      position: relative;
     }
 
     .brand-logo img {
@@ -184,8 +236,8 @@
     }
 
     .brand-name span {
-      color: var(--magenta);
-      text-shadow: 0 0 16px rgba(255,0,127,.45);
+      color: var(--christmas-red);
+      text-shadow: 0 0 16px rgba(255,34,71,.5);
     }
 
     .brand-tagline {
@@ -212,7 +264,7 @@
     }
 
     .nav-links a:hover {
-      color: var(--magenta);
+      color: var(--christmas-gold);
     }
 
     .header-actions {
@@ -222,9 +274,9 @@
     }
 
     .listener-count {
-      color: var(--magenta-light);
-      border: 1px solid var(--border);
-      background: rgba(255,0,127,.07);
+      color: var(--christmas-gold);
+      border: 1px solid rgba(255, 204, 0, 0.3);
+      background: rgba(255,204,0,.08);
       border-radius: 30px;
       padding: 9px 13px;
       font-size: 10px;
@@ -235,8 +287,8 @@
     .play-button {
       border: 0;
       color: white;
-      background: linear-gradient(135deg, var(--magenta), #c000d9);
-      box-shadow: 0 0 22px rgba(255,0,127,.3);
+      background: linear-gradient(135deg, var(--christmas-red), #c000d9);
+      box-shadow: 0 0 22px rgba(255,34,71,.35);
       transition: .25s ease;
       display: inline-flex;
       align-items: center;
@@ -246,7 +298,7 @@
 
     .play-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 30px rgba(255,0,127,.48);
+      box-shadow: 0 0 30px rgba(255,34,71,.55);
     }
 
     .header-play {
@@ -296,8 +348,8 @@
     .banner {
       border-radius: 25px;
       overflow: hidden;
-      border: 1px solid rgba(255,0,127,.4);
-      box-shadow: 0 0 38px rgba(255,0,127,.12);
+      border: 1px solid rgba(255,34,71,.45);
+      box-shadow: 0 0 38px rgba(255,34,71,.18);
       margin-bottom: 54px;
       background: #100713;
     }
@@ -320,9 +372,9 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      border: 1px solid rgba(255,0,127,.4);
-      color: var(--magenta-light);
-      background: rgba(255,0,127,.09);
+      border: 1px solid rgba(255,204,0,.4);
+      color: var(--christmas-gold);
+      background: rgba(255,204,0,.09);
       border-radius: 40px;
       padding: 11px 18px;
       font-family: Montserrat, sans-serif;
@@ -336,8 +388,8 @@
       width: 9px;
       height: 9px;
       border-radius: 50%;
-      background: var(--magenta);
-      box-shadow: 0 0 12px var(--magenta);
+      background: var(--christmas-red);
+      box-shadow: 0 0 12px var(--christmas-red);
       animation: pulse 1.5s infinite;
     }
 
@@ -356,12 +408,12 @@
     }
 
     .hero-artist {
-      color: var(--magenta);
+      color: var(--christmas-gold);
       font-size: clamp(17px, 2.5vw, 25px);
       font-weight: 800;
       line-height: 1.4;
       margin-bottom: 25px;
-      text-shadow: 0 0 18px rgba(255,0,127,.23);
+      text-shadow: 0 0 18px rgba(255,204,0,.3);
     }
 
     .program-label {
@@ -380,7 +432,7 @@
     }
 
     .program-label i {
-      color: var(--magenta);
+      color: var(--christmas-red);
       font-size: 17px;
     }
 
@@ -391,7 +443,7 @@
     .track-progress {
       max-width: 520px;
       padding: 16px 18px;
-      border: 1px solid rgba(255,0,127,.18);
+      border: 1px solid rgba(255,34,71,.25);
       background: rgba(12,7,15,.8);
       border-radius: 15px;
       margin-bottom: 25px;
@@ -416,8 +468,8 @@
     .progress-fill {
       height: 100%;
       width: 0;
-      background: linear-gradient(90deg, var(--magenta), var(--purple));
-      box-shadow: 0 0 12px var(--magenta);
+      background: linear-gradient(90deg, var(--christmas-red), var(--christmas-green));
+      box-shadow: 0 0 12px var(--christmas-red);
       transition: width .6s linear;
     }
 
@@ -464,9 +516,9 @@
       margin: auto;
       padding: 27px;
       border-radius: 28px;
-      border: 1px solid rgba(255,0,127,.32);
+      border: 1px solid rgba(255,34,71,.38);
       background: linear-gradient(145deg, rgba(35,13,38,.94), rgba(12,7,16,.96));
-      box-shadow: 0 20px 55px rgba(0,0,0,.45), var(--glow);
+      box-shadow: 0 20px 55px rgba(0,0,0,.45), 0 0 30px rgba(255,34,71,.2);
       text-align: center;
     }
 
@@ -476,9 +528,9 @@
       margin: 0 auto 23px;
       padding: 9px;
       border-radius: 50%;
-      border: 2px solid rgba(255,0,127,.65);
+      border: 2px solid rgba(255,204,0,.7);
       background: repeating-radial-gradient(circle, #151018 0 5px, #29202b 6px 7px);
-      box-shadow: 0 0 25px rgba(255,0,127,.2);
+      box-shadow: 0 0 25px rgba(255,204,0,.25);
       animation: rotate 18s linear infinite;
       animation-play-state: paused;
     }
@@ -505,9 +557,9 @@
       gap: 8px;
       padding: 8px 15px;
       border-radius: 30px;
-      color: var(--magenta-light);
-      background: rgba(255,0,127,.1);
-      border: 1px solid rgba(255,0,127,.3);
+      color: var(--christmas-gold);
+      background: rgba(255,204,0,.1);
+      border: 1px solid rgba(255,204,0,.35);
       font-family: Montserrat, sans-serif;
       font-size: 10px;
       font-weight: 900;
@@ -528,7 +580,7 @@
       width: 4px;
       height: 8px;
       border-radius: 5px;
-      background: var(--magenta);
+      background: var(--christmas-green);
       animation: equalize .8s ease-in-out infinite alternate;
       animation-play-state: paused;
     }
@@ -537,10 +589,10 @@
       animation-play-state: running;
     }
 
-    .equalizer span:nth-child(2) { animation-delay: .2s; }
-    .equalizer span:nth-child(3) { animation-delay: .4s; }
-    .equalizer span:nth-child(4) { animation-delay: .1s; }
-    .equalizer span:nth-child(5) { animation-delay: .3s; }
+    .equalizer span:nth-child(2) { animation-delay: .2s; background: var(--christmas-red); }
+    .equalizer span:nth-child(3) { animation-delay: .4s; background: var(--christmas-gold); }
+    .equalizer span:nth-child(4) { animation-delay: .1s; background: var(--christmas-green); }
+    .equalizer span:nth-child(5) { animation-delay: .3s; background: var(--christmas-red); }
 
     @keyframes equalize {
       to { height: 25px; }
@@ -583,13 +635,6 @@
       transition: .2s;
     }
 
-    .social-links a:hover {
-      background: var(--magenta);
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 0 18px rgba(255,0,127,.35);
-    }
-
     /* PILARES */
 
     .pillars {
@@ -608,15 +653,15 @@
       padding: 27px 17px;
       text-align: center;
       border-radius: 20px;
-      border: 1px solid rgba(255,0,127,.17);
+      border: 1px solid rgba(255,34,71,.22);
       background: rgba(25,12,29,.72);
       transition: .25s;
     }
 
     .pillar:hover {
       transform: translateY(-5px);
-      border-color: var(--magenta);
-      box-shadow: var(--glow);
+      border-color: var(--christmas-red);
+      box-shadow: 0 0 25px rgba(255,34,71,0.25);
     }
 
     .pillar-icon {
@@ -626,15 +671,11 @@
       place-items: center;
       margin: 0 auto 16px;
       border-radius: 17px;
-      background: rgba(255,0,127,.12);
-      border: 1px solid rgba(255,0,127,.3);
-      color: var(--magenta);
+      background: rgba(255,34,71,.12);
+      border: 1px solid rgba(255,34,71,.35);
+      color: var(--christmas-red);
       font-size: 23px;
     }
-
-    /* =====================================================
-       ICONOS DE LOS 4 PILARES: COLORES NEÓN Y DESTELLOS
-       ===================================================== */
 
     @keyframes pillarNeon {
       0%, 100% {
@@ -670,85 +711,55 @@
       }
     }
 
-    /* MÚSICA: MAGENTA */
-
+    /* MÚSICA: ROJO NAVIDEÑO */
     .pillar:nth-child(1) .pillar-icon {
-      --pillar-color: #ff007f;
-      --pillar-glow: rgba(255, 0, 127, .55);
-      color: #ff168f;
-      background: rgba(255, 0, 127, .13);
-      border-color: rgba(255, 0, 127, .65);
+      --pillar-color: #ff2247;
+      --pillar-glow: rgba(255, 34, 71, .55);
+      color: #ff2247;
+      background: rgba(255, 34, 71, .13);
+      border-color: rgba(255, 34, 71, .65);
     }
 
-    /* CULTURA: AZUL ELÉCTRICO */
-
+    /* CULTURA: VERDE NAVIDEÑO */
     .pillar:nth-child(2) .pillar-icon {
-      --pillar-color: #00c8ff;
-      --pillar-glow: rgba(0, 200, 255, .55);
-      color: #00d9ff;
-      background: rgba(0, 200, 255, .12);
-      border-color: rgba(0, 200, 255, .65);
+      --pillar-color: #00d26a;
+      --pillar-glow: rgba(0, 210, 106, .55);
+      color: #00d26a;
+      background: rgba(0, 210, 106, .12);
+      border-color: rgba(0, 210, 106, .65);
     }
 
-    /* INFORMACIÓN: VIOLETA */
-
+    /* INFORMACIÓN: DORADO NAVIDEÑO */
     .pillar:nth-child(3) .pillar-icon {
+      --pillar-color: #ffcc00;
+      --pillar-glow: rgba(255, 204, 0, .55);
+      color: #ffcc00;
+      background: rgba(255, 204, 0, .13);
+      border-color: rgba(255, 204, 0, .65);
+    }
+
+    /* LO NUESTRO: VIOLETA/MAGENTA FESTIVO */
+    .pillar:nth-child(4) .pillar-icon {
       --pillar-color: #a855ff;
       --pillar-glow: rgba(168, 85, 255, .55);
       color: #b56aff;
-      background: rgba(168, 85, 255, .13);
+      background: rgba(168, 85, 255, .12);
       border-color: rgba(168, 85, 255, .65);
     }
-
-    /* LO NUESTRO: VERDE NEÓN */
-
-    .pillar:nth-child(4) .pillar-icon {
-      --pillar-color: #00ff9d;
-      --pillar-glow: rgba(0, 255, 157, .55);
-      color: #00ffad;
-      background: rgba(0, 255, 157, .12);
-      border-color: rgba(0, 255, 157, .65);
-    }
-
-    /* ANIMACIÓN INDIVIDUAL DE LOS ICONOS */
 
     .pillar-icon i {
       animation: pillarNeon 2.2s ease-in-out infinite;
       will-change: filter, opacity, transform;
     }
 
-    .pillar:nth-child(1) .pillar-icon {
-      animation: pillarBoxGlow 2.6s ease-in-out infinite;
-    }
+    .pillar:nth-child(1) .pillar-icon { animation: pillarBoxGlow 2.6s ease-in-out infinite; }
+    .pillar:nth-child(2) .pillar-icon { animation: pillarBoxGlow 2.6s ease-in-out infinite; animation-delay: .35s; }
+    .pillar:nth-child(3) .pillar-icon { animation: pillarBoxGlow 2.6s ease-in-out infinite; animation-delay: .7s; }
+    .pillar:nth-child(4) .pillar-icon { animation: pillarBoxGlow 2.6s ease-in-out infinite; animation-delay: 1.05s; }
 
-    .pillar:nth-child(2) .pillar-icon {
-      animation: pillarBoxGlow 2.6s ease-in-out infinite;
-      animation-delay: .35s;
-    }
-
-    .pillar:nth-child(3) .pillar-icon {
-      animation: pillarBoxGlow 2.6s ease-in-out infinite;
-      animation-delay: .7s;
-    }
-
-    .pillar:nth-child(4) .pillar-icon {
-      animation: pillarBoxGlow 2.6s ease-in-out infinite;
-      animation-delay: 1.05s;
-    }
-
-    .pillar:nth-child(2) .pillar-icon i {
-      animation-delay: .3s;
-    }
-
-    .pillar:nth-child(3) .pillar-icon i {
-      animation-delay: .6s;
-    }
-
-    .pillar:nth-child(4) .pillar-icon i {
-      animation-delay: .9s;
-    }
-
-    /* BRILLO INTENSO AL PASAR EL CURSOR */
+    .pillar:nth-child(2) .pillar-icon i { animation-delay: .3s; }
+    .pillar:nth-child(3) .pillar-icon i { animation-delay: .6s; }
+    .pillar:nth-child(4) .pillar-icon i { animation-delay: .9s; }
 
     .pillar:hover .pillar-icon {
       transform: scale(1.1);
@@ -786,7 +797,7 @@
       min-width: 0;
       overflow: hidden;
       border-radius: 22px;
-      border: 1px solid rgba(255,0,127,.2);
+      border: 1px solid rgba(255,34,71,.25);
       background: linear-gradient(155deg, rgba(35,15,39,.88), rgba(13,8,17,.96));
       transition: .3s;
       display: flex;
@@ -795,8 +806,8 @@
 
     .show-card:hover {
       transform: translateY(-6px);
-      border-color: rgba(255,0,127,.65);
-      box-shadow: 0 15px 35px rgba(0,0,0,.35), var(--glow);
+      border-color: rgba(255,34,71,.75);
+      box-shadow: 0 15px 35px rgba(0,0,0,.35), 0 0 25px rgba(255,34,71,.25);
     }
 
     .show-image {
@@ -835,9 +846,9 @@
     }
 
     .country-label {
-      color: var(--magenta-light);
-      background: rgba(255,0,127,.1);
-      border: 1px solid rgba(255,0,127,.22);
+      color: var(--christmas-gold);
+      background: rgba(255,204,0,.1);
+      border: 1px solid rgba(255,204,0,.25);
       padding: 5px 9px;
       border-radius: 30px;
       font-size: 9px;
@@ -860,7 +871,7 @@
     }
 
     .host strong {
-      color: var(--magenta-light);
+      color: var(--christmas-gold);
     }
 
     .host-socials {
@@ -883,8 +894,8 @@
     }
 
     .host-socials a:hover {
-      color: var(--magenta);
-      border-color: var(--magenta);
+      color: var(--christmas-gold);
+      border-color: var(--christmas-gold);
     }
 
     .show-description {
@@ -900,7 +911,7 @@
       border-top: 1px solid rgba(255,255,255,.08);
       display: flex;
       justify-content: space-between;
-      color: var(--magenta-light);
+      color: var(--christmas-gold);
       font-size: 10px;
       font-weight: 800;
     }
@@ -928,7 +939,8 @@
     }
 
     .about-copy h2 span {
-      color: var(--magenta);
+      color: var(--christmas-red);
+      text-shadow: 0 0 15px rgba(255,34,71,.4);
     }
 
     .about-copy p {
@@ -947,8 +959,8 @@
     .contact-social a {
       padding: 12px 16px;
       border-radius: 12px;
-      background: rgba(255,0,127,.09);
-      border: 1px solid var(--border);
+      background: rgba(255,34,71,.09);
+      border: 1px solid rgba(255,34,71,.3);
       color: #f7dce9;
       font-size: 11px;
       font-weight: 800;
@@ -959,15 +971,15 @@
     }
 
     .contact-social a:hover {
-      background: rgba(255,0,127,.2);
+      background: rgba(255,34,71,.2);
     }
 
     .contact-card {
       padding: 30px;
       border-radius: 23px;
-      border: 1px solid rgba(255,0,127,.28);
+      border: 1px solid rgba(255,34,71,.35);
       background: rgba(25,11,29,.88);
-      box-shadow: var(--glow);
+      box-shadow: 0 0 30px rgba(255,34,71,.2);
     }
 
     .contact-card h3 {
@@ -990,7 +1002,7 @@
       gap: 10px;
       padding: 12px;
       background: #0b070e;
-      border: 1px solid rgba(255,0,127,.22);
+      border: 1px solid rgba(255,34,71,.28);
       border-radius: 12px;
     }
 
@@ -1008,7 +1020,7 @@
       border-radius: 9px;
       padding: 10px 14px;
       color: white;
-      background: var(--magenta);
+      background: var(--christmas-red);
       font-size: 10px;
       font-weight: 900;
       text-transform: uppercase;
@@ -1016,7 +1028,7 @@
 
     #copyMessage {
       display: block;
-      color: #65e7a1;
+      color: var(--christmas-green);
       font-size: 11px;
       margin-top: 10px;
       opacity: 0;
@@ -1047,9 +1059,9 @@
       overflow-y: auto;
       padding: 35px;
       border-radius: 23px;
-      border: 1px solid var(--magenta);
+      border: 1px solid var(--christmas-red);
       background: #120a16;
-      box-shadow: 0 0 40px rgba(255,0,127,.2);
+      box-shadow: 0 0 40px rgba(255,34,71,.3);
       position: relative;
     }
 
@@ -1094,7 +1106,7 @@
     .footer {
       padding: 35px 0 125px;
       text-align: center;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(255,34,71,.3);
       color: var(--muted);
       font-size: 11px;
     }
@@ -1105,7 +1117,7 @@
 
     .footer-tagline {
       margin-top: 10px;
-      color: var(--magenta);
+      color: var(--christmas-gold);
       font-family: Montserrat, sans-serif;
       font-size: 12px;
       font-weight: 900;
@@ -1122,8 +1134,8 @@
       right: 0;
       padding: 12px 0;
       background: rgba(10,6,13,.97);
-      border-top: 1px solid rgba(255,0,127,.48);
-      box-shadow: 0 -12px 35px rgba(0,0,0,.45);
+      border-top: 1px solid rgba(255,34,71,.55);
+      box-shadow: 0 -12px 35px rgba(0,0,0,.45), 0 -4px 20px rgba(255,34,71,.15);
       backdrop-filter: blur(18px);
     }
 
@@ -1148,7 +1160,7 @@
       flex-shrink: 0;
       object-fit: cover;
       border-radius: 12px;
-      border: 1px solid rgba(255,0,127,.45);
+      border: 1px solid rgba(255,204,0,.5);
     }
 
     .sticky-info {
@@ -1165,7 +1177,7 @@
     }
 
     .sticky-info p {
-      color: var(--magenta-light);
+      color: var(--christmas-gold);
       font-size: 10px;
       font-weight: 800;
       margin-top: 5px;
@@ -1192,7 +1204,7 @@
 
     .volume-control input {
       width: 85px;
-      accent-color: var(--magenta);
+      accent-color: var(--christmas-red);
     }
 
     /* OVERLAY PARA ACTIVAR AUDIO */
@@ -1218,9 +1230,9 @@
       padding: 35px 27px;
       text-align: center;
       border-radius: 25px;
-      border: 1px solid var(--magenta);
+      border: 1px solid var(--christmas-red);
       background: #160a19;
-      box-shadow: 0 0 45px rgba(255,0,127,.2);
+      box-shadow: 0 0 45px rgba(255,34,71,.3);
     }
 
     .audio-box img {
@@ -1273,7 +1285,6 @@
     }
 
     /* INSTAGRAM */
-
     .social-links a[aria-label="Instagram"] {
       color: #E1306C;
       border-color: rgba(225, 48, 108, .55);
@@ -1281,7 +1292,6 @@
     }
 
     /* FACEBOOK */
-
     .social-links a[aria-label="Facebook"] {
       color: #1877F2;
       border-color: rgba(24, 119, 242, .55);
@@ -1290,7 +1300,6 @@
     }
 
     /* TIKTOK */
-
     .social-links a[aria-label="TikTok"] {
       color: #25F4EE;
       border-color: rgba(37, 244, 238, .55);
@@ -1299,7 +1308,6 @@
     }
 
     /* MIXCLOUD */
-
     .social-links a[aria-label="Mixcloud"] {
       color: #FF7A00;
       border-color: rgba(255, 122, 0, .55);
@@ -1308,7 +1316,6 @@
     }
 
     /* WHATSAPP */
-
     .social-links a[aria-label="WhatsApp"] {
       color: #25D366;
       border-color: rgba(37, 211, 102, .55);
@@ -1563,6 +1570,9 @@
 
 <body>
 
+  <!-- CONTENEDOR DE COPOS DE NIEVE -->
+  <div class="snow-container" id="snowContainer"></div>
+
   <audio id="audioStream" preload="none" playsinline>
     <source src="https://stream.parlarradio.com/listen/parlar_radio/radio.mp3" type="audio/mpeg">
     Tu navegador no soporta audio HTML5.
@@ -1573,9 +1583,9 @@
   <div class="audio-overlay" id="autoplayOverlay">
     <div class="audio-box">
       <img src="https://raw.githubusercontent.com/wladiormaza21/Parlar_Radio/main/file_000000009ed481f5b70ad2eaadb57b35.png" alt="Parlar Radio">
-      <span class="eyebrow">Parlar Radio · Somos Mundo</span>
+      <span class="eyebrow">🎄 Parlar Radio · Especial Navidad</span>
       <h2>ACTIVA LA SEÑAL</h2>
-      <p>Conéctate con nuestra programación internacional. Música, cultura, información y lo nuestro, las 24 horas.</p>
+      <p>Conéctate con nuestra programación internacional navideña. Música, cultura, información y lo nuestro, las 24 horas.</p>
       <button class="play-button hero-play" onclick="togglePlay()">
         <i class="fa-solid fa-play"></i> ESCUCHAR EN VIVO
       </button>
@@ -1596,7 +1606,7 @@
 
         <div>
           <div class="brand-name">PARLAR <span>RADIO</span></div>
-          <div class="brand-tagline">SOMOS MUNDO</div>
+          <div class="brand-tagline">ESPECIAL NAVIDAD</div>
         </div>
       </a>
 
@@ -1647,7 +1657,7 @@
           <img
             src="file_0000000045bc81f49eb7d1a9d6cb3b12.png"
             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80';"
-            alt="Parlar Radio - Banner oficial">
+            alt="Parlar Radio - Banner oficial Navidad">
         </div>
 
         <div class="hero-grid">
@@ -1658,17 +1668,17 @@
 
             <div class="live-label">
               <span class="live-dot"></span>
-              SEÑAL Digital ULTRA HD
+              🎄 SEÑAL NAVIDEÑA ULTRA HD
             </div>
 
             <h1 id="trackTitle">Parlar Radio</h1>
 
-            <p class="hero-artist" id="trackArtist">SOMOS MUNDO</p>
+            <p class="hero-artist" id="trackArtist">ESPECIAL NAVIDAD · SOMOS MUNDO</p>
 
             <div class="program-label">
               <i class="fa-solid fa-tower-broadcast"></i>
               <span>Transmisión en directo:
-                <strong id="currentPlaylist">Programación 24/7</strong>
+                <strong id="currentPlaylist">Programación Navideña 24/7</strong>
               </span>
             </div>
 
@@ -1712,7 +1722,7 @@
 
               <div class="live-badge" id="liveBadge">
                 <span class="live-dot"></span>
-                <span>SEÑAL LISTA</span>
+                <span>SEÑAL NAVIDEÑA LISTA</span>
               </div>
 
               <div class="equalizer" id="eqVisualizer">
@@ -1723,7 +1733,7 @@
                 <i id="cardPlayIcon" class="fa-solid fa-play"></i>
               </button>
 
-              <p class="player-status" id="statusText">Pulsa para escuchar Parlar Radio</p>
+              <p class="player-status" id="statusText">Pulsa para escuchar la Navidad en Parlar Radio</p>
             </div>
 
             <!-- REDES OFICIALES -->
@@ -1757,9 +1767,9 @@
       <div class="container">
 
         <div class="section-heading">
-          <span class="eyebrow">Nuestra esencia</span>
-          <h2>Los 4 pilares de Parlar Radio</h2>
-          <p>Una plataforma internacional construida sobre la diversidad, la libertad de expresión y la pasión por comunicar.</p>
+          <span class="eyebrow">Espíritu festivo</span>
+          <h2>Los 4 pilares en Navidad</h2>
+          <p>Una plataforma internacional unida por la magia, la música y la unión familiar en estas fechas especiales.</p>
         </div>
 
         <div class="pillar-grid">
@@ -1767,25 +1777,25 @@
           <div class="pillar" onclick="toggleArticleModal()" style="cursor:pointer">
             <div class="pillar-icon"><i class="fa-solid fa-music"></i></div>
             <h3>MÚSICA</h3>
-            <p>Selección global</p>
+            <p>Clásicos y villancicos</p>
           </div>
 
           <div class="pillar">
             <div class="pillar-icon"><i class="fa-solid fa-users"></i></div>
             <h3>CULTURA</h3>
-            <p>Voces diversas</p>
+            <p>Tradiciones del mundo</p>
           </div>
 
           <div class="pillar">
             <div class="pillar-icon"><i class="fa-solid fa-circle-info"></i></div>
             <h3>INFORMACIÓN</h3>
-            <p>Veracidad global</p>
+            <p>Actualidad global</p>
           </div>
 
           <div class="pillar">
             <div class="pillar-icon"><i class="fa-solid fa-globe"></i></div>
             <h3>LO NUESTRO</h3>
-            <p>Identidad propia</p>
+            <p>Nuestra identidad</p>
           </div>
 
         </div>
@@ -1800,7 +1810,7 @@
         <div class="section-heading">
           <span class="eyebrow">Conectamos el mundo</span>
           <h2>Nuestros Radio Shows</h2>
-          <p>Distintas voces, culturas y estilos. Una sola señal que conecta al mundo.</p>
+          <p>Distintas voces, culturas y estilos unidos en esta temporada navideña.</p>
         </div>
 
         <div class="shows-grid">
@@ -1831,7 +1841,7 @@
                 <a href="https://www.tiktok.com/@wladi.ormaza" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
               </div>
 
-              <p class="show-description">Grandes éxitos musicales, clásicos imperecederos y la mejor selección sonora.</p>
+              <p class="show-description">Especiales navideños, grandes éxitos y la mejor selección sonora para estas fiestas.</p>
 
               <div class="show-footer">
                 <span>PARLAR RADIO</span>
@@ -1864,7 +1874,7 @@
                 <a href="https://www.instagram.com/ramiro.parisi" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
               </div>
 
-              <p class="show-description">Entretenimiento, cultura, humor y temas variados sin etiquetas.</p>
+              <p class="show-description">Entretenimiento, cultura, humor y vivencias festivas sin etiquetas.</p>
 
               <div class="show-footer">
                 <span>PARLAR RADIO</span>
@@ -1891,7 +1901,7 @@
               <h3>Jarrito Café</h3>
               <p class="host">Conduce: <strong>Bertiux Solano</strong></p>
 
-              <p class="show-description">Historias, calidez y buena energía para acompañar tus mañanas.</p>
+              <p class="show-description">Historias navideñas, calidez y buena energía para acompañar tus mañanas.</p>
 
               <div class="show-footer">
                 <span>PARLAR RADIO</span>
@@ -1918,7 +1928,7 @@
               <h3>Prisma</h3>
               <p class="host">Conduce: <strong>Vladimir Hernández Solís</strong></p>
 
-              <p class="show-description">Enfoques diversos sobre música, actualidad y análisis cultural.</p>
+              <p class="show-description">Enfoques diversos sobre música, actualidad y tradiciones navideñas globales.</p>
 
               <div class="show-footer">
                 <span>PARLAR RADIO</span>
@@ -1941,8 +1951,8 @@
           <h2>Parlar Radio:<br><span>SOMOS MUNDO</span></h2>
 
           <p>
-            Conectamos locutores desde Ecuador, Argentina, México y España para transmitir una voz verdaderamente global y de vanguardia.
-            Somos una plataforma radial internacional que une fronteras a través de la música, el arte y la libre expresión.
+            Conectamos locutores desde Ecuador, Argentina, México y España para transmitir una voz verdaderamente global y festiva.
+            Somos una plataforma radial internacional que une fronteras a través de la música, el arte y la libre expresión en esta Navidad.
           </p>
 
           <div class="contact-social">
@@ -1983,24 +1993,24 @@
         <i class="fa-solid fa-xmark"></i>
       </button>
 
-      <span class="eyebrow">Especial musical</span>
+      <span class="eyebrow">Especial musical navideño</span>
 
-      <h2 id="articleTitle">El latido de la nueva era musical: Por qué el talento independiente está conquistando el mundo</h2>
+      <h2 id="articleTitle">La magia de la música en Navidad: Cómo las melodías unen al mundo entero</h2>
 
       <img
         src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80"
         alt="Estudio de radio">
 
       <p>
-        La industria musical vive una de sus transformaciones más fascinantes y dinámicas de las últimas décadas. Lo que antes dependía exclusivamente de los grandes estudios de grabación, hoy se alimenta de la autenticidad y la inmediatez de artistas independientes de todo el planeta.
+        La temporada navideña trae consigo una transformación sonora inigualable. Las melodías tradicionales y contemporáneas logran evocar recuerdos, fomentar la unión y cruzar cualquier frontera cultural.
       </p>
 
       <p>
-        La música es un lenguaje universal. En Parlar Radio creemos en las nuevas voces, en la diversidad sonora y en el talento que merece ser escuchado sin importar las fronteras.
+        En Parlar Radio celebramos esta época compartiendo el talento independiente y la mejor selección musical para acompañar cada hogar del mundo.
       </p>
 
       <p>
-        Nuestra señal es un espacio para descubrir, compartir y conectar culturas a través de la música.
+        Nuestra señal es un espacio para vivir la magia de la radio con identidad propia.
       </p>
 
     </div>
@@ -2020,7 +2030,7 @@
 
         <div class="sticky-info">
           <h4 id="stickyTitle">Parlar Radio</h4>
-          <p id="stickyArtist">SOMOS MUNDO · RADIO EN VIVO</p>
+          <p id="stickyArtist">ESPECIAL NAVIDAD · RADIO EN VIVO</p>
         </div>
       </div>
 
@@ -2049,7 +2059,7 @@
   <footer class="footer">
     <div class="container">
       <p>© 2026 <strong>Parlar Radio</strong>. Todos los derechos reservados.</p>
-      <div class="footer-tagline">SOMOS MUNDO</div>
+      <div class="footer-tagline">SOMOS MUNDO 🎄 FELIZ NAVIDAD</div>
     </div>
   </footer>
 
@@ -2069,11 +2079,30 @@
     let isPlaying = false;
     let metadataInterval = null;
 
+    // Generador dinámico de copos de nieve
+    function createSnowflakes() {
+      const container = document.getElementById('snowContainer');
+      const snowflakeCount = 35;
+
+      for (let i = 0; i < snowflakeCount; i++) {
+        const star = document.createElement('div');
+        star.classList.add('snowflake');
+        star.style.left = `${Math.random() * 100}vw`;
+        star.style.top = `-${Math.random() * 20}px`;
+        const size = Math.random() * 5 + 2;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.opacity = Math.random() * 0.7 + 0.3;
+        star.style.animationDuration = `${Math.random() * 8 + 5}s`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(star);
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       audio.volume = 1;
+      createSnowflakes();
 
-      // El navegador móvil requiere una interacción del usuario
-      // para permitir la reproducción de audio.
       updatePlayerUI(false);
       loadAzuraCastData();
 
@@ -2157,15 +2186,15 @@
 
       if (badge) {
         badge.innerHTML = playing
-          ? '<span class="live-dot"></span><span>EN VIVO</span>'
-          : '<span class="live-dot"></span><span>SEÑAL LISTA</span>';
+          ? '<span class="live-dot"></span><span>EN VIVO NAVIDEÑO</span>'
+          : '<span class="live-dot"></span><span>SEÑAL NAVIDEÑA LISTA</span>';
       }
 
       if (status) {
         status.textContent = message || (
           playing
-            ? 'Transmitiendo en directo Ultra HD'
-            : 'Pulsa para escuchar Parlar Radio'
+            ? 'Transmitiendo especial navideño Ultra HD'
+            : 'Pulsa para escuchar la Navidad en Parlar Radio'
         );
       }
 
@@ -2194,9 +2223,9 @@
         const song = nowPlaying.song || {};
 
         const title = song.title || 'Parlar Radio';
-        const artist = song.artist || 'SOMOS MUNDO';
+        const artist = song.artist || 'ESPECIAL NAVIDAD';
         const art = song.art || LOGO_URL;
-        const playlist = nowPlaying.playlist || 'Programación 24/7';
+        const playlist = nowPlaying.playlist || 'Programación Navideña 24/7';
 
         setText('trackTitle', title);
         setText('trackArtist', artist);
