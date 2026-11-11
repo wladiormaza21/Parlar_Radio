@@ -193,17 +193,34 @@
       position: relative;
     }
 
-    /* RODOLFO EL RENO EN EL LADO IZQUIERDO DEL LOGOTIPO CON NARIZ BRILLANTE */
+    /* RODOLFO EL RENO BRINCHANDO Y CORRIENDO EN EL LOGOTIPO */
     .brand-logo::after {
       content: "🦌";
       position: absolute;
-      top: -14px;
-      left: -8px;
+      top: -18px;
+      left: -10px;
       font-size: 26px;
-      transform: rotate(-15deg);
-      filter: drop-shadow(0 0 6px rgba(255, 34, 71, 0.9));
       z-index: 5;
-      animation: noseGlow 1.5s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 6px rgba(255, 34, 71, 0.9));
+      animation: reindeerRunJump 1.2s ease-in-out infinite, noseGlow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes reindeerRunJump {
+      0% {
+        transform: translateY(0) translateX(0) rotate(-15deg) scale(1);
+      }
+      25% {
+        transform: translateY(-8px) translateX(4px) rotate(-5deg) scale(1.1);
+      }
+      50% {
+        transform: translateY(-14px) translateX(8px) rotate(5deg) scale(1.15);
+      }
+      75% {
+        transform: translateY(-4px) translateX(12px) rotate(15deg) scale(1.05);
+      }
+      100% {
+        transform: translateY(0) translateX(0) rotate(-15deg) scale(1);
+      }
     }
 
     @keyframes noseGlow {
