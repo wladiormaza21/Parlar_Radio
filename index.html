@@ -205,6 +205,18 @@
       z-index: 5;
     }
 
+    /* ANIMACIÓN DE PULSO Y RESPLANDOR PARA EL LOGOTIPO */
+    @keyframes logoPulseGlow {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 18px rgba(255,34,71,.35), 0 0 5px rgba(255,204,0,.2);
+      }
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 32px rgba(255,34,71,.65), 0 0 15px rgba(255,204,0,.5);
+      }
+    }
+
     .brand-logo {
       width: 68px;
       height: 68px;
@@ -212,10 +224,10 @@
       padding: 4px;
       border-radius: 19px;
       background: linear-gradient(140deg, var(--christmas-red), var(--purple));
-      box-shadow: 0 0 22px rgba(255,34,71,.35);
       display: grid;
       place-items: center;
       position: relative;
+      animation: logoPulseGlow 3s ease-in-out infinite;
     }
 
     .brand-logo img {
@@ -339,19 +351,33 @@
       font-weight: 700;
     }
 
-    /* HERO Y BANNER */
+    /* HERO Y BANNER CON ANIMACIÓN */
 
     .hero {
       padding: 42px 0 60px;
+    }
+
+    /* ANIMACIÓN ELEGANTE PARA EL BANNER */
+    @keyframes bannerAnimation {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(255,34,71,.2), 0 0 10px rgba(0,210,106,.1);
+        border-color: rgba(255,34,71,.45);
+      }
+      50% {
+        transform: scale(1.012);
+        box-shadow: 0 0 45px rgba(255,34,71,.4), 0 0 20px rgba(255,204,0,.25);
+        border-color: rgba(255,204,0,.65);
+      }
     }
 
     .banner {
       border-radius: 25px;
       overflow: hidden;
       border: 1px solid rgba(255,34,71,.45);
-      box-shadow: 0 0 38px rgba(255,34,71,.18);
       margin-bottom: 54px;
       background: #100713;
+      animation: bannerAnimation 6s ease-in-out infinite;
     }
 
     .banner img {
@@ -359,6 +385,11 @@
       max-height: 410px;
       object-fit: cover;
       object-position: center;
+      transition: transform 0.5s ease;
+    }
+
+    .banner:hover img {
+      transform: scale(1.03);
     }
 
     .hero-grid {
