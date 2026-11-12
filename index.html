@@ -73,7 +73,7 @@
       opacity: 0.05;
     }
 
-    /* EFECTO DE COPOS DE NIEVE ANIMADOS */
+    /* EFECTO DE COPOS DE NIEVE GENERALES */
     .snow-container {
       position: fixed;
       top: 0;
@@ -164,7 +164,7 @@
       line-height: 1.8;
     }
 
-    /* ENCABEZADO CON LOGOTIPO ACTUALIZADO */
+    /* ENCABEZADO CON LOGOTIPO INTERIORMENTE NEVADO */
 
     .header {
       position: sticky;
@@ -193,7 +193,6 @@
       position: relative;
     }
 
-    /* ANIMACIÓN DE PULSO Y RESPLANDOR PARA EL LOGOTIPO */
     @keyframes logoPulseGlow {
       0%, 100% {
         transform: scale(1);
@@ -216,7 +215,7 @@
       place-items: center;
       position: relative;
       animation: logoPulseGlow 3s ease-in-out infinite;
-      overflow: hidden;
+      overflow: hidden; /* Esto recorta los copos dentro de la forma redondeada del logo */
     }
 
     .brand-logo img {
@@ -226,6 +225,35 @@
       object-position: center;
       border-radius: 15px;
       background: #09050c;
+    }
+
+    /* CONTENEDOR DE NIEVE EXCLUSIVO PARA EL LOGOTIPO */
+    .logo-snow-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      overflow: hidden;
+      border-radius: 15px;
+    }
+
+    .logo-snowflake {
+      position: absolute;
+      top: -5px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      animation: logoSnowFall linear infinite;
+    }
+
+    @keyframes logoSnowFall {
+      0% {
+        transform: translateY(-5px) translateX(0);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(75px) translateX(4px);
+        opacity: 0.1;
+      }
     }
 
     .brand-name {
@@ -1549,7 +1577,7 @@
 
 <body>
 
-  <!-- CONTENEDOR DE COPOS DE NIEVE -->
+  <!-- CONTENEDOR DE COPOS DE NIEVE GENERALES -->
   <div class="snow-container" id="snowContainer"></div>
 
   <audio id="audioStream" preload="none" playsinline>
@@ -1571,13 +1599,15 @@
     </div>
   </div>
 
-  <!-- ENCABEZADO CON NUEVO LOGOTIPO -->
+  <!-- ENCABEZADO CON LOGOTIPO NEVADO EN SU INTERIOR -->
 
   <header class="header">
     <div class="container navbar">
 
       <a href="#inicio" class="brand">
         <div class="brand-logo">
+          <!-- Capa interna de nieve cayendo sobre el logo -->
+          <div class="logo-snow-layer" id="logoSnowLayer"></div>
           <img
             src="https://raw.githubusercontent.com/wladiormaza21/Parlar_Radio/refs/heads/main/file_00000000905c820ea8af303756c20784.png"
             alt="Logotipo oficial navideño de Parlar Radio">
@@ -2058,7 +2088,7 @@
     let isPlaying = false;
     let metadataInterval = null;
 
-    // Generador dinámico de copos de nieve
+    // Generador dinámico de copos de nieve generales en pantalla
     function createSnowflakes() {
       const container = document.getElementById('snowContainer');
       const snowflakeCount = 35;
@@ -2078,9 +2108,30 @@
       }
     }
 
+    // Generador dinámico de copos de nieve exclusivos dentro del logotipo
+    function createLogoSnowflakes() {
+      const container = document.getElementById('logoSnowLayer');
+      if (!container) return;
+      const count = 7;
+
+      for (let i = 0; i < count; i++) {
+        const flake = document.createElement('div');
+        flake.classList.add('logo-snowflake');
+        flake.style.left = `${Math.random() * 100}%`;
+        flake.style.top = `-${Math.random() * 10}px`;
+        const size = Math.random() * 2.5 + 1.5;
+        flake.style.width = `${size}px`;
+        flake.style.height = `${size}px`;
+        flake.style.animationDuration = `${Math.random() * 2 + 1.5}s`;
+        flake.style.animationDelay = `${Math.random() * 2}s`;
+        container.appendChild(flake);
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       audio.volume = 1;
       createSnowflakes();
+      createLogoSnowflakes();
 
       updatePlayerUI(false);
       loadAzuraCastData();
