@@ -215,7 +215,7 @@
       place-items: center;
       position: relative;
       animation: logoPulseGlow 3s ease-in-out infinite;
-      overflow: hidden; /* Esto recorta los copos dentro de la forma redondeada del logo */
+      overflow: hidden;
     }
 
     .brand-logo img {
@@ -271,11 +271,12 @@
     }
 
     .brand-tagline {
-      color: #e9dce9;
+      color: var(--christmas-gold);
       font-size: 10px;
       font-weight: 800;
-      letter-spacing: 5px;
-      margin-top: 7px;
+      letter-spacing: 2px;
+      margin-top: 6px;
+      text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
     }
 
     .nav-links {
@@ -1443,7 +1444,7 @@
 
       .brand-tagline {
         font-size: 8px;
-        letter-spacing: 3.7px;
+        letter-spacing: 1.5px;
       }
 
       .nav-links { display: none; }
@@ -1555,7 +1556,7 @@
 
     @media (max-width: 390px) {
       .brand-name { font-size: 16px; }
-      .brand-tagline { letter-spacing: 3px; }
+      .brand-tagline { letter-spacing: 1px; }
       .brand-logo { width: 48px; height: 48px; }
       .header-actions { gap: 7px; }
       .shows-grid { grid-template-columns: 1fr; }
@@ -1590,7 +1591,7 @@
   <div class="audio-overlay" id="autoplayOverlay">
     <div class="audio-box">
       <img src="https://raw.githubusercontent.com/wladiormaza21/Parlar_Radio/refs/heads/main/file_00000000905c820ea8af303756c20784.png" alt="Parlar Radio">
-      <span class="eyebrow">🎄 Parlar Radio · Especial Navidad</span>
+      <span class="eyebrow">🎄 Parlar Radio · Somos un Mundo Navideño</span>
       <h2>ACTIVA LA SEÑAL</h2>
       <p>Conéctate con nuestra programación internacional navideña. Música, cultura, información y lo nuestro, las 24 horas.</p>
       <button class="play-button hero-play" onclick="togglePlay()">
@@ -1615,7 +1616,7 @@
 
         <div>
           <div class="brand-name">PARLAR <span>RADIO</span></div>
-          <div class="brand-tagline">ESPECIAL NAVIDAD</div>
+          <div class="brand-tagline">Somos un Mundo Navideño</div>
         </div>
       </a>
 
@@ -1682,7 +1683,7 @@
 
             <h1 id="trackTitle">Parlar Radio</h1>
 
-            <p class="hero-artist" id="trackArtist">ESPECIAL NAVIDAD · SOMOS MUNDO</p>
+            <p class="hero-artist" id="trackArtist">SOMOS UN MUNDO NAVIDEÑO</p>
 
             <div class="program-label">
               <i class="fa-solid fa-tower-broadcast"></i>
@@ -2039,7 +2040,7 @@
 
         <div class="sticky-info">
           <h4 id="stickyTitle">Parlar Radio</h4>
-          <p id="stickyArtist">ESPECIAL NAVIDAD · RADIO EN VIVO</p>
+          <p id="stickyArtist">SOMOS UN MUNDO NAVIDEÑO · RADIO EN VIVO</p>
         </div>
       </div>
 
@@ -2253,7 +2254,7 @@
         const song = nowPlaying.song || {};
 
         const title = song.title || 'Parlar Radio';
-        const artist = song.artist || 'ESPECIAL NAVIDAD';
+        const artist = song.artist || 'SOMOS UN MUNDO NAVIDEÑO';
         const art = song.art || LOGO_URL;
         const playlist = nowPlaying.playlist || 'Programación Navideña 24/7';
 
