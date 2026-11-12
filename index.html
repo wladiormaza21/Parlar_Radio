@@ -370,7 +370,7 @@
       font-weight: 700;
     }
 
-    /* HERO Y BANNER CON ANIMACIÓN */
+    /* HERO Y BANNER PROFESIONAL Y ADAPTADO A PC */
 
     .hero {
       padding: 42px 0 60px;
@@ -390,24 +390,45 @@
     }
 
     .banner {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto 54px auto;
       border-radius: 25px;
       overflow: hidden;
       border: 1px solid rgba(255,34,71,.45);
-      margin-bottom: 54px;
-      background: #100713;
+      background: #08040a;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 16 / 6.5;
       animation: bannerAnimation 6s ease-in-out infinite;
     }
 
+    .banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--banner-img);
+      background-position: center;
+      background-size: cover;
+      filter: blur(22px) brightness(0.45);
+      transform: scale(1.1);
+      z-index: 0;
+    }
+
     .banner img {
+      position: relative;
+      z-index: 1;
       width: 100%;
-      max-height: 410px;
-      object-fit: cover;
+      height: 100%;
+      object-fit: contain;
       object-position: center;
       transition: transform 0.5s ease;
     }
 
     .banner:hover img {
-      transform: scale(1.03);
+      transform: scale(1.02);
     }
 
     .hero-grid {
@@ -1466,11 +1487,7 @@
       .banner {
         margin-bottom: 38px;
         border-radius: 19px;
-      }
-
-      .banner img {
-        max-height: 270px;
-        min-height: 155px;
+        aspect-ratio: 16 / 9;
       }
 
       .hero-grid {
@@ -1663,7 +1680,8 @@
     <section class="hero" id="inicio">
       <div class="container">
 
-        <div class="banner">
+        <!-- BANNER AJUSTADO Y PROFESIONAL PARA PC Y MÓVIL -->
+        <div class="banner" style="--banner-img: url('file_0000000045bc81f49eb7d1a9d6cb3b12.png');">
           <img
             src="file_0000000045bc81f49eb7d1a9d6cb3b12.png"
             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80';"
