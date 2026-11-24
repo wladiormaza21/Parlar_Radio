@@ -566,6 +566,42 @@
       background: rgba(37,211,102,.18);
     }
 
+    .share-song-button {
+      min-height: 52px;
+      padding: 0 22px;
+      border: 1px solid rgba(255,204,0,.4);
+      background: rgba(255,204,0,.09);
+      color: var(--christmas-gold);
+      border-radius: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: Montserrat, sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .6px;
+      transition: .2s;
+    }
+
+    .share-song-button:hover {
+      background: rgba(255,204,0,.18);
+      transform: translateY(-2px);
+    }
+
+    .share-feedback {
+      margin-top: 12px;
+      min-height: 18px;
+      color: var(--christmas-green);
+      font-size: 12px;
+      font-weight: 700;
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+
+    .share-feedback.visible {
+      opacity: 1;
+    }
+
     /* TARJETA VISUAL DEL REPRODUCTOR */
 
     .player-card {
@@ -1504,7 +1540,7 @@
 
       .hero-buttons { justify-content: center; }
 
-      .hero-play, .whatsapp-button {
+      .hero-play, .whatsapp-button, .share-song-button {
         min-height: 48px;
       }
 
@@ -1567,7 +1603,7 @@
       .shows-grid { grid-template-columns: 1fr; }
       .show-image { height: 190px; }
       .hero-buttons { flex-direction: column; }
-      .hero-play, .whatsapp-button { width: 100%; justify-content: center; }
+      .hero-play, .whatsapp-button, .share-song-button { width: 100%; justify-content: center; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1714,6 +1750,11 @@
                 <span id="heroPlayText">ESCUCHAR EN VIVO</span>
               </button>
 
+              <button type="button" class="share-song-button" onclick="shareCurrentSong()" aria-label="Compartir canción actual en redes sociales">
+                <i class="fa-solid fa-share-nodes"></i>
+                <span>COMPARTIR CANCIÓN</span>
+              </button>
+
               <a class="whatsapp-button"
                  href="https://whatsapp.com/channel/0029Vb8wXsv2P59imKUGxJ46"
                  target="_blank" rel="noopener noreferrer">
@@ -1721,6 +1762,8 @@
                 CANAL DE WHATSAPP
               </a>
             </div>
+
+            <div class="share-feedback" id="shareFeedback" role="status" aria-live="polite"></div>
           </div>
 
           <!-- REPRODUCTOR VISUAL -->
@@ -2094,6 +2137,7 @@
 
     let isPlaying = false;
     let metadataInterval = null;
+    let shareFeedbackTimer = null;
 
     // Generador dinámico de copos de nieve generales en pantalla
     function createSnowflakes() {
@@ -2145,6 +2189,64 @@
 
       metadataInterval = setInterval(loadAzuraCastData, 15000);
     });
+
+    function showShareFeedback(msg) {
+      const feedback = document.getElementById('shareFeedback');
+      if (!feedback) return;
+
+      feedback.textContent = msg;
+      feedback.classList.add('visible');
+
+      if (shareFeedbackTimer) clearTimeout(shareFeedbackTimer);
+      shareFeedbackTimer = setTimeout(() => {
+        feedback.classList.remove('visible');
+      }, 3000);
+    }
+
+    async function shareCurrentSong() {
+      const title = (document.getElementById('trackTitle')?.textContent || 'Parlar Radio').trim();
+      const artist = (document.getElementById('trackArtist')?.textContent || '').trim();
+      const shareUrl = window.location.href;
+
+      const songLabel = artist && artist.toUpperCase() !== 'SOMOS UN MUNDO NAVIDEÑO'
+        ? `"${title}" - ${artist}`
+        : `"${title}"`;
+
+      const shareText = `🎶 Escuchando ${songLabel} en Parlar Radio · SOMOS MUNDO`;
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'Parlar Radio - En Vivo',
+            text: shareText,
+            url: shareUrl
+          });
+          showShareFeedback('¡Canción compartida!');
+          return;
+        } catch (err) {
+          if (err && err.name === 'AbortError') return;
+        }
+      }
+
+      const fullCopyText = `${shareText} ${shareUrl}`;
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(fullCopyText);
+        } else {
+          const input = document.createElement('textarea');
+          input.value = fullCopyText;
+          input.style.position = 'fixed';
+          input.style.opacity = '0';
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand('copy');
+          input.remove();
+        }
+        showShareFeedback('¡Texto de la canción copiado para compartir en tus redes!');
+      } catch (err) {
+        showShareFeedback(fullCopyText);
+      }
+    }
 
     async function togglePlay() {
       if (!audio.paused) {
