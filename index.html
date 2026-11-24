@@ -2132,6 +2132,9 @@
     const LOGO_URL =
       'https://raw.githubusercontent.com/wladiormaza21/Parlar_Radio/refs/heads/main/file_00000000905c820ea8af303756c20784.png';
 
+    const WHATSAPP_CHANNEL_URL =
+      'https://whatsapp.com/channel/0029Vb8wXsv2P59imKUGxJ46';
+
     const audio = document.getElementById('audioStream');
     const overlay = document.getElementById('autoplayOverlay');
 
@@ -2232,32 +2235,32 @@
         rawTitle.toLowerCase() === 'parlar radio' &&
         rawArtist.toUpperCase() === 'SOMOS UN MUNDO NAVIDEÑO';
 
-      let shareText;
+      let headerText;
       if (isDefaultBanner) {
-        shareText = `🎄 Escuchando la programación navideña en vivo por Parlar Radio · SOMOS MUNDO 🎶\n¡Dale play y súmate a la señal! 👇`;
+        headerText = `🎄 Escuchando la programación navideña en vivo por Parlar Radio · SOMOS MUNDO 🎶\n¡Dale play aquí! 👇\n${shareUrl}`;
       } else {
         const songTag = toHashtag(rawTitle);
         const artistPart = rawArtist && rawArtist.toUpperCase() !== 'SOMOS UN MUNDO NAVIDEÑO'
           ? ` - ${formatArtistHandle(rawArtist)}`
           : '';
-        shareText = `🎶 Escuchando ${songTag}${artistPart} en Parlar Radio · SOMOS MUNDO 🎄\n¡Conéctate en vivo aquí! 👇`;
+        headerText = `🎶 Escuchando ${songTag}${artistPart} en Parlar Radio · SOMOS MUNDO 🎄\n¡Escúchalo en vivo aquí! 👇\n${shareUrl}`;
       }
+
+      const fullCopyText = `${headerText}\n\n💬 Pide tu canción o artista favorito en nuestro canal de WhatsApp:\n${WHATSAPP_CHANNEL_URL}`;
 
       if (navigator.share) {
         try {
           await navigator.share({
             title: 'Parlar Radio · SOMOS MUNDO',
-            text: shareText,
-            url: shareUrl
+            text: fullCopyText
           });
-          showShareFeedback('¡Canción compartida con estilo!');
+          showShareFeedback('¡Canción y canal compartidos!');
           return;
         } catch (err) {
           if (err && err.name === 'AbortError') return;
         }
       }
 
-      const fullCopyText = `${shareText}\n${shareUrl}`;
       try {
         if (navigator.clipboard && window.isSecureContext) {
           await navigator.clipboard.writeText(fullCopyText);
@@ -2271,7 +2274,7 @@
           document.execCommand('copy');
           input.remove();
         }
-        showShareFeedback('¡Post listo! Copiado al portapapeles para pegar en X, Facebook o WhatsApp.');
+        showShareFeedback('¡Post listo con el canal de WhatsApp! Copiado al portapapeles.');
       } catch (err) {
         showShareFeedback(fullCopyText);
       }
