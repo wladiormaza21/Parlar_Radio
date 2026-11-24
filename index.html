@@ -2203,32 +2203,61 @@
       }, 3000);
     }
 
+    function toHashtag(text) {
+      return '#' + text
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z0-9\s]/g, ' ')
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean)
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join('');
+    }
+
+    function formatArtistHandle(artist) {
+      const clean = artist.trim();
+      if (!clean) return '';
+      if (clean.startsWith('@')) return clean;
+      if (/^[a-zA-Z0-9_]+$/.test(clean)) return '@' + clean;
+      return clean;
+    }
+
     async function shareCurrentSong() {
-      const title = (document.getElementById('trackTitle')?.textContent || 'Parlar Radio').trim();
-      const artist = (document.getElementById('trackArtist')?.textContent || '').trim();
+      const rawTitle = (document.getElementById('trackTitle')?.textContent || 'Parlar Radio').trim();
+      const rawArtist = (document.getElementById('trackArtist')?.textContent || '').trim();
       const shareUrl = window.location.href;
 
-      const songLabel = artist && artist.toUpperCase() !== 'SOMOS UN MUNDO NAVIDEÑO'
-        ? `"${title}" - ${artist}`
-        : `"${title}"`;
+      const isDefaultBanner =
+        rawTitle.toLowerCase() === 'parlar radio' &&
+        rawArtist.toUpperCase() === 'SOMOS UN MUNDO NAVIDEÑO';
 
-      const shareText = `🎶 Escuchando ${songLabel} en Parlar Radio · SOMOS MUNDO`;
+      let shareText;
+      if (isDefaultBanner) {
+        shareText = `🎄 Escuchando la programación navideña en vivo por Parlar Radio · SOMOS MUNDO 🎶\n¡Dale play y súmate a la señal! 👇`;
+      } else {
+        const songTag = toHashtag(rawTitle);
+        const artistPart = rawArtist && rawArtist.toUpperCase() !== 'SOMOS UN MUNDO NAVIDEÑO'
+          ? ` - ${formatArtistHandle(rawArtist)}`
+          : '';
+        shareText = `🎶 Escuchando ${songTag}${artistPart} en Parlar Radio · SOMOS MUNDO 🎄\n¡Conéctate en vivo aquí! 👇`;
+      }
 
       if (navigator.share) {
         try {
           await navigator.share({
-            title: 'Parlar Radio - En Vivo',
+            title: 'Parlar Radio · SOMOS MUNDO',
             text: shareText,
             url: shareUrl
           });
-          showShareFeedback('¡Canción compartida!');
+          showShareFeedback('¡Canción compartida con estilo!');
           return;
         } catch (err) {
           if (err && err.name === 'AbortError') return;
         }
       }
 
-      const fullCopyText = `${shareText} ${shareUrl}`;
+      const fullCopyText = `${shareText}\n${shareUrl}`;
       try {
         if (navigator.clipboard && window.isSecureContext) {
           await navigator.clipboard.writeText(fullCopyText);
@@ -2242,7 +2271,7 @@
           document.execCommand('copy');
           input.remove();
         }
-        showShareFeedback('¡Texto de la canción copiado para compartir en tus redes!');
+        showShareFeedback('¡Post listo! Copiado al portapapeles para pegar en X, Facebook o WhatsApp.');
       } catch (err) {
         showShareFeedback(fullCopyText);
       }
