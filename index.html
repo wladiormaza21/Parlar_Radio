@@ -425,9 +425,16 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 55px;
-      align-items: center;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .player-chat-col {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      min-width: 0;
     }
 
     .live-label {
@@ -804,9 +811,9 @@
 
     .player-card {
       width: 100%;
-      max-width: 390px;
+      max-width: 100%;
       margin: auto;
-      padding: 27px;
+      padding: 25px;
       border-radius: 28px;
       border: 1px solid rgba(255,34,71,.38);
       background: linear-gradient(145deg, rgba(35,13,38,.94), rgba(12,7,16,.96));
@@ -815,9 +822,9 @@
     }
 
     .record-wrap {
-      width: min(245px, 75vw);
+      width: min(215px, 68vw);
       aspect-ratio: 1;
-      margin: 0 auto 23px;
+      margin: 0 auto 20px;
       padding: 9px;
       border-radius: 50%;
       border: 2px solid rgba(255,204,0,.7);
@@ -856,7 +863,7 @@
       font-size: 10px;
       font-weight: 900;
       letter-spacing: 1.5px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .equalizer {
@@ -865,7 +872,7 @@
       align-items: center;
       justify-content: center;
       gap: 4px;
-      margin-bottom: 17px;
+      margin-bottom: 16px;
     }
 
     .equalizer span {
@@ -891,11 +898,11 @@
     }
 
     .round-play {
-      width: 65px;
-      height: 65px;
+      width: 62px;
+      height: 62px;
       border-radius: 50%;
-      font-size: 21px;
-      margin: 0 auto 15px;
+      font-size: 20px;
+      margin: 0 auto 14px;
     }
 
     .player-status {
@@ -911,7 +918,7 @@
       display: flex;
       justify-content: center;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: 4px;
     }
 
     .social-links a {
@@ -1199,17 +1206,11 @@
 
     /* SALA DE CHAT E INTERACCIÓN */
 
-    .chat-room-section {
-      border-top: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(16, 7, 20, .72), rgba(28, 10, 32, .68));
-    }
-
     .chat-room-card {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 26px;
-      border-radius: 24px;
-      border: 1px solid rgba(255, 0, 127, .35);
+      width: 100%;
+      padding: 22px;
+      border-radius: 26px;
+      border: 1px solid rgba(255, 34, 71, .35);
       background: linear-gradient(155deg, rgba(32, 13, 36, .92), rgba(12, 7, 16, .96));
       box-shadow: 0 20px 50px rgba(0, 0, 0, .4), 0 0 28px rgba(255, 0, 127, .18);
     }
@@ -1219,32 +1220,32 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      padding-bottom: 18px;
+      gap: 10px;
+      padding-bottom: 14px;
       border-bottom: 1px solid rgba(255, 255, 255, .08);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .chat-tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
 
     .chat-tab {
-      padding: 10px 16px;
+      padding: 8px 13px;
       border-radius: 30px;
       border: 1px solid rgba(255, 0, 127, .3);
       background: rgba(255, 0, 127, .08);
       color: #e9d8ea;
       font-family: Montserrat, sans-serif;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 800;
-      letter-spacing: .8px;
+      letter-spacing: .7px;
       text-transform: uppercase;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       transition: .2s;
     }
 
@@ -1257,13 +1258,13 @@
     .chat-room-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
+      gap: 7px;
+      padding: 6px 12px;
       border-radius: 30px;
       border: 1px solid rgba(0, 210, 106, .35);
       background: rgba(0, 210, 106, .1);
       color: #6df2b0;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
     }
 
@@ -1276,21 +1277,21 @@
     }
 
     .chat-messages-box {
-      height: 290px;
+      height: 220px;
       overflow-y: auto;
-      padding: 16px;
+      padding: 14px;
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, .08);
       background: rgba(8, 5, 11, .82);
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 14px;
     }
 
     .chat-msg {
-      padding: 12px 15px;
-      border-radius: 15px;
+      padding: 10px 13px;
+      border-radius: 14px;
       border: 1px solid rgba(255, 0, 127, .22);
       background: rgba(28, 12, 32, .72);
     }
@@ -1300,8 +1301,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      margin-bottom: 5px;
-      font-size: 11px;
+      margin-bottom: 4px;
+      font-size: 10px;
     }
 
     .chat-msg-author {
@@ -1316,28 +1317,28 @@
 
     .chat-msg-text {
       color: #f4ecf5;
-      font-size: 13px;
-      line-height: 1.55;
+      font-size: 12px;
+      line-height: 1.5;
       overflow-wrap: anywhere;
     }
 
     .chat-form-grid {
       display: grid;
-      grid-template-columns: 190px 1fr auto;
-      gap: 12px;
+      grid-template-columns: 140px 1fr auto;
+      gap: 10px;
       align-items: center;
     }
 
     .chat-input {
       width: 100%;
-      min-height: 46px;
-      padding: 0 15px;
-      border-radius: 14px;
+      min-height: 42px;
+      padding: 0 13px;
+      border-radius: 13px;
       border: 1px solid rgba(255, 0, 127, .32);
       background: rgba(8, 5, 11, .9);
       color: var(--white);
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 13px;
+      font-size: 12px;
     }
 
     .chat-input:focus {
@@ -1346,20 +1347,20 @@
     }
 
     .chat-send-btn {
-      min-height: 46px;
-      padding: 0 22px;
+      min-height: 42px;
+      padding: 0 16px;
       border: 0;
-      border-radius: 14px;
+      border-radius: 13px;
       background: linear-gradient(135deg, var(--magenta), var(--christmas-red));
       color: #fff;
       font-family: Montserrat, sans-serif;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 900;
-      letter-spacing: .8px;
+      letter-spacing: .7px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       white-space: nowrap;
     }
 
@@ -1368,9 +1369,9 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin-top: 12px;
-      font-size: 11px;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 10px;
       color: var(--muted);
     }
 
@@ -1383,7 +1384,7 @@
     }
 
     .poll-box {
-      padding: 20px;
+      padding: 16px;
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, .08);
       background: rgba(8, 5, 11, .82);
@@ -1391,29 +1392,29 @@
 
     .poll-question {
       font-family: Montserrat, sans-serif;
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 800;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       color: var(--white);
     }
 
     .poll-options {
       display: grid;
-      gap: 12px;
+      gap: 10px;
     }
 
     .poll-option-btn {
       width: 100%;
-      padding: 13px 16px;
-      border-radius: 14px;
+      padding: 11px 14px;
+      border-radius: 13px;
       border: 1px solid rgba(255, 0, 127, .32);
       background: rgba(28, 12, 32, .72);
       color: var(--white);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      font-size: 13px;
+      gap: 10px;
+      font-size: 12px;
       font-weight: 700;
       transition: .2s;
     }
@@ -1426,7 +1427,7 @@
     .poll-votes {
       color: var(--christmas-gold);
       font-family: Montserrat, sans-serif;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 900;
     }
 
@@ -1976,11 +1977,11 @@
       }
 
       .player-card {
-        max-width: 360px;
+        max-width: 100%;
         padding: 23px 18px;
       }
 
-      .record-wrap { width: 205px; }
+      .record-wrap { width: 195px; }
 
       .pillar-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -2256,9 +2257,9 @@
             <div class="share-feedback" id="shareFeedback" role="status" aria-live="polite"></div>
           </div>
 
-          <!-- REPRODUCTOR VISUAL -->
+          <!-- REPRODUCTOR VISUAL + CHAT JUNTO AL PLAYER -->
 
-          <div>
+          <div class="player-chat-col">
             <div class="player-card">
 
               <div class="record-wrap" id="vinylRing">
@@ -2283,6 +2284,100 @@
               </button>
 
               <p class="player-status" id="statusText">Pulsa para escuchar la Navidad en Parlar Radio</p>
+            </div>
+
+            <!-- SALA DE CHAT E INTERACCIÓN JUNTO AL PLAYER -->
+            <div class="chat-room-card" id="sala-chat">
+              <div class="chat-room-top">
+                <div class="chat-tabs" role="tablist">
+                  <button type="button" class="chat-tab active" data-tab="chatTab" onclick="switchChatTab('chatTab', this)">
+                    <i class="fa-solid fa-comments"></i> Chat
+                  </button>
+                  <button type="button" class="chat-tab" data-tab="requestsTab" onclick="switchChatTab('requestsTab', this)">
+                    <i class="fa-solid fa-music"></i> Pedidos
+                  </button>
+                  <button type="button" class="chat-tab" data-tab="pollTab" onclick="switchChatTab('pollTab', this)">
+                    <i class="fa-solid fa-square-poll-vertical"></i> Encuesta
+                  </button>
+                </div>
+
+                <div class="chat-room-badge" id="realtimeStatusBadge">
+                  <span class="live-dot"></span>
+                  <span>CONECTANDO...</span>
+                </div>
+              </div>
+
+              <!-- PESTAÑA CHAT -->
+              <div class="chat-panel active" id="chatTab">
+                <div class="chat-messages-box" id="chatMessagesList" aria-live="polite"></div>
+
+                <form class="chat-form-grid" onsubmit="handleChatSubmit(event, 'chat')">
+                  <input
+                    type="text"
+                    id="chatNickInput"
+                    class="chat-input"
+                    maxlength="28"
+                    placeholder="Tu apodo"
+                    aria-label="Tu nombre o apodo">
+                  <input
+                    type="text"
+                    id="chatTextInput"
+                    class="chat-input"
+                    maxlength="240"
+                    placeholder="Escribe un saludo en vivo..."
+                    aria-label="Escribe un saludo o conversa con los oyentes">
+                  <button type="submit" class="chat-send-btn">
+                    <i class="fa-solid fa-paper-plane"></i> ENVIAR
+                  </button>
+                </form>
+
+                <div class="chat-sub-actions">
+                  <span id="chatModeHint">Comunidad en vivo de Parlar Radio.</span>
+                  <a href="https://wa.me/593968503048" target="_blank" rel="noopener noreferrer" class="chat-wa-link">
+                    <i class="fa-brands fa-whatsapp"></i> Cabina (+593 968 503 048)
+                  </a>
+                </div>
+              </div>
+
+              <!-- PESTAÑA PEDIDOS MUSICALES -->
+              <div class="chat-panel" id="requestsTab">
+                <div class="chat-messages-box" id="requestsMessagesList" aria-live="polite"></div>
+
+                <form class="chat-form-grid" onsubmit="handleChatSubmit(event, 'requests')">
+                  <input
+                    type="text"
+                    id="reqNickInput"
+                    class="chat-input"
+                    maxlength="28"
+                    placeholder="Nombre/ciudad"
+                    aria-label="Tu nombre o ciudad">
+                  <input
+                    type="text"
+                    id="reqTextInput"
+                    class="chat-input"
+                    maxlength="240"
+                    placeholder="¿Qué canción o villancico pides?"
+                    aria-label="¿Qué canción o villancico quieres escuchar?">
+                  <button type="submit" class="chat-send-btn">
+                    <i class="fa-solid fa-music"></i> PEDIR
+                  </button>
+                </form>
+
+                <div class="chat-sub-actions">
+                  <span>Envía también audio desde <strong>MENSAJE A CABINA</strong>.</span>
+                  <a href="https://wa.me/593968503048" target="_blank" rel="noopener noreferrer" class="chat-wa-link">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Cabina
+                  </a>
+                </div>
+              </div>
+
+              <!-- PESTAÑA ENCUESTA -->
+              <div class="chat-panel" id="pollTab">
+                <div class="poll-box">
+                  <div class="poll-question">🎄 ¿Qué estilo musical navideño prefieres hoy?</div>
+                  <div class="poll-options" id="pollOptionsList"></div>
+                </div>
+              </div>
             </div>
 
             <!-- REDES OFICIALES -->
@@ -2490,113 +2585,6 @@
       </div>
     </section>
 
-    <!-- SALA DE CHAT E INTERACCIÓN -->
-
-    <section class="section chat-room-section" id="sala-chat">
-      <div class="container">
-
-        <div class="section-heading">
-          <span class="eyebrow">Comunidad en vivo</span>
-          <h2>Sala de Chat e Interacción</h2>
-          <p>Conversa con otros oyentes en tiempo real, deja tus pedidos musicales o vota en la encuesta de la radio.</p>
-        </div>
-
-        <div class="chat-room-card">
-          <div class="chat-room-top">
-            <div class="chat-tabs" role="tablist">
-              <button type="button" class="chat-tab active" data-tab="chatTab" onclick="switchChatTab('chatTab', this)">
-                <i class="fa-solid fa-comments"></i> Chat de Oyentes
-              </button>
-              <button type="button" class="chat-tab" data-tab="requestsTab" onclick="switchChatTab('requestsTab', this)">
-                <i class="fa-solid fa-music"></i> Pedidos Musicales
-              </button>
-              <button type="button" class="chat-tab" data-tab="pollTab" onclick="switchChatTab('pollTab', this)">
-                <i class="fa-solid fa-square-poll-vertical"></i> Encuesta
-              </button>
-            </div>
-
-            <div class="chat-room-badge" id="realtimeStatusBadge">
-              <span class="live-dot"></span>
-              <span>CONECTANDO FIREBASE...</span>
-            </div>
-          </div>
-
-          <!-- PESTAÑA CHAT -->
-          <div class="chat-panel active" id="chatTab">
-            <div class="chat-messages-box" id="chatMessagesList" aria-live="polite"></div>
-
-            <form class="chat-form-grid" onsubmit="handleChatSubmit(event, 'chat')">
-              <input
-                type="text"
-                id="chatNickInput"
-                class="chat-input"
-                maxlength="28"
-                placeholder="Tu nombre o apodo"
-                aria-label="Tu nombre o apodo">
-              <input
-                type="text"
-                id="chatTextInput"
-                class="chat-input"
-                maxlength="240"
-                placeholder="Escribe un saludo o conversa con los oyentes..."
-                aria-label="Escribe un saludo o conversa con los oyentes">
-              <button type="submit" class="chat-send-btn">
-                <i class="fa-solid fa-paper-plane"></i> ENVIAR
-              </button>
-            </form>
-
-            <div class="chat-sub-actions">
-              <span id="chatModeHint">Proyecto parlar-radio-chat vinculado a Firebase Realtime Database.</span>
-              <a href="https://wa.me/593968503048" target="_blank" rel="noopener noreferrer" class="chat-wa-link">
-                <i class="fa-brands fa-whatsapp"></i> WhatsApp Cabina (+593 968 503 048)
-              </a>
-            </div>
-          </div>
-
-          <!-- PESTAÑA PEDIDOS MUSICALES -->
-          <div class="chat-panel" id="requestsTab">
-            <div class="chat-messages-box" id="requestsMessagesList" aria-live="polite"></div>
-
-            <form class="chat-form-grid" onsubmit="handleChatSubmit(event, 'requests')">
-              <input
-                type="text"
-                id="reqNickInput"
-                class="chat-input"
-                maxlength="28"
-                placeholder="Tu nombre o ciudad"
-                aria-label="Tu nombre o ciudad">
-              <input
-                type="text"
-                id="reqTextInput"
-                class="chat-input"
-                maxlength="240"
-                placeholder="¿Qué canción o villancico quieres escuchar?"
-                aria-label="¿Qué canción o villancico quieres escuchar?">
-              <button type="submit" class="chat-send-btn">
-                <i class="fa-solid fa-music"></i> PEDIR
-              </button>
-            </form>
-
-            <div class="chat-sub-actions">
-              <span>También puedes enviar tu pedido con audio desde el botón <strong>MENSAJE A CABINA</strong>.</span>
-              <a href="https://wa.me/593968503048" target="_blank" rel="noopener noreferrer" class="chat-wa-link">
-                <i class="fa-brands fa-whatsapp"></i> Enviar pedido por WhatsApp
-              </a>
-            </div>
-          </div>
-
-          <!-- PESTAÑA ENCUESTA -->
-          <div class="chat-panel" id="pollTab">
-            <div class="poll-box">
-              <div class="poll-question">🎄 ¿Qué estilo musical navideño prefieres escuchar hoy en Parlar Radio?</div>
-              <div class="poll-options" id="pollOptionsList"></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
     <!-- NOSOTROS Y CONTACTO -->
 
     <section class="section about" id="nosotros">
@@ -2754,15 +2742,15 @@
     const POLL_STORAGE_KEY = 'parlar_radio_poll_v1';
 
     const DEFAULT_CHAT = [
-      { author: 'Parlar Radio · Cabina', time: 'En vivo', text: '¡Bienvenidos a la sala de interacción! Saluda a los oyentes y cuéntanos desde dónde escuchas.' }
+      { author: 'Parlar Radio · Cabina', time: 'En vivo', text: '¡Bienvenidos al chat en vivo! Saluda y cuéntanos desde dónde nos escuchas.' }
     ];
     const DEFAULT_REQUESTS = [
-      { author: 'Parlar Radio · Cabina', time: 'En vivo', text: 'Deja aquí tu canción o villancico favorito para programarlo.' }
+      { author: 'Parlar Radio · Cabina', time: 'En vivo', text: 'Pide aquí tu canción o villancico favorito.' }
     ];
     const DEFAULT_POLL = [
-      { id: 'classics', label: '🎶 Villancicos y clásicos navideños', votes: 14 },
-      { id: 'latino', label: '💃 Ritmos latinos y festivos', votes: 19 },
-      { id: 'acoustic', label: '✨ Baladas y acústicos de temporada', votes: 9 }
+      { id: 'classics', label: '🎶 Villancicos y clásicos', votes: 14 },
+      { id: 'latino', label: '💃 Ritmos latinos festivos', votes: 19 },
+      { id: 'acoustic', label: '✨ Baladas y acústicos', votes: 9 }
     ];
 
     const audio = document.getElementById('audioStream');
@@ -2887,14 +2875,14 @@
       const badge = document.getElementById('realtimeStatusBadge');
       const hint = document.getElementById('chatModeHint');
       if (mode === 'sdk') {
-        if (badge) badge.innerHTML = '<span class="live-dot"></span><span>EN TIEMPO REAL · FIREBASE ACTIVO</span>';
-        if (hint) hint.textContent = 'Mensajes sincronizados al instante entre todos los oyentes y cabina.';
+        if (badge) badge.innerHTML = '<span class="live-dot"></span><span>EN VIVO · FIREBASE</span>';
+        if (hint) hint.textContent = 'Mensajes sincronizados al instante.';
       } else if (mode === 'rest') {
-        if (badge) badge.innerHTML = '<span class="live-dot"></span><span>CONECTADO A FIREBASE RTDB</span>';
+        if (badge) badge.innerHTML = '<span class="live-dot"></span><span>FIREBASE RTDB</span>';
         if (hint) hint.textContent = 'Sincronizado con parlar-radio-chat.';
       } else {
-        if (badge) badge.innerHTML = '<span class="live-dot"></span><span>MODO LOCAL · REVISA REGLAS RTDB</span>';
-        if (hint) hint.textContent = 'Verifica que Realtime Database esté habilitado y con reglas de lectura/escritura activas.';
+        if (badge) badge.innerHTML = '<span class="live-dot"></span><span>MODO LOCAL</span>';
+        if (hint) hint.textContent = 'Revisa reglas de Realtime Database si no sincroniza.';
       }
     }
 
