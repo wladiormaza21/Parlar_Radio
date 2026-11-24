@@ -1846,7 +1846,7 @@
 
       <span class="eyebrow">Interacción en vivo</span>
       <h3 id="cabinModalTitle">Mensaje a Cabina</h3>
-      <p class="cabin-subtitle">Escribe tu saludo o pedido musical, o graba un audio y envíalo al canal de WhatsApp de Parlar Radio.</p>
+      <p class="cabin-subtitle">Escribe tu saludo o pedido musical, o graba un audio y envíalo al WhatsApp de cabina (+593 968 503 048).</p>
 
       <label for="cabinMessageInput" class="cabin-label">Texto o pedido musical</label>
       <textarea
@@ -1875,11 +1875,11 @@
 
       <button type="button" class="cabin-send-btn" onclick="sendCabinMessageToWhatsApp()">
         <i class="fa-brands fa-whatsapp"></i>
-        <span>ENVIAR AL CANAL DE WHATSAPP</span>
+        <span>ENVIAR A CABINA (+593 968 503 048)</span>
       </button>
 
       <p class="cabin-note">
-        Se copiará tu texto y se abrirá el canal de WhatsApp. Si grabaste un audio, descárgalo primero para adjuntarlo fácilmente en WhatsApp.
+        Se abrirá WhatsApp con tu mensaje listo para enviar al +593 968 503 048. Si grabaste un audio, se descargará para que lo adjuntes en el chat.
       </p>
     </div>
   </div>
@@ -2383,6 +2383,9 @@
     const WHATSAPP_CHANNEL_URL =
       'https://whatsapp.com/channel/0029Vb8wXsv2P59imKUGxJ46';
 
+    const CABIN_WHATSAPP_NUMBER =
+      '593968503048';
+
     const audio = document.getElementById('audioStream');
     const overlay = document.getElementById('autoplayOverlay');
 
@@ -2505,7 +2508,7 @@
               preview.src = recordedAudioUrl;
               preview.classList.add('visible');
               downloadBtn.style.display = 'inline-flex';
-              status.textContent = 'Audio grabado. Escúchalo, descárgalo y envíalo al canal de WhatsApp.';
+              status.textContent = 'Audio grabado. Escúchalo, descárgalo y envíalo al WhatsApp de cabina.';
             } else {
               status.textContent = 'No se detectó audio grabado.';
             }
@@ -2538,22 +2541,6 @@
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
-    async function copyToClipboardSafe(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-        return true;
-      }
-      const input = document.createElement('textarea');
-      input.value = text;
-      input.style.position = 'fixed';
-      input.style.opacity = '0';
-      document.body.appendChild(input);
-      input.select();
-      const copied = document.execCommand('copy');
-      input.remove();
-      return copied;
-    }
-
     async function sendCabinMessageToWhatsApp() {
       const textArea = document.getElementById('cabinMessageInput');
       const textValue = (textArea?.value || '').trim();
@@ -2573,22 +2560,16 @@
         lines.push(`💬 ${textValue}`);
       }
       if (hasAudio) {
-        lines.push('🎧 _Audio grabado listo para adjuntar (descargado en tu dispositivo)_');
-      }
-      lines.push(`📻 Canal de WhatsApp: ${WHATSAPP_CHANNEL_URL}`);
-      const payloadText = lines.join('\n');
-
-      try {
-        await copyToClipboardSafe(payloadText);
-      } catch (err) {
-        console.warn('No se pudo copiar automáticamente:', err);
+        lines.push('🎧 _Audio grabado descargado; adjúntalo aquí en el chat de cabina._');
       }
 
-      window.open(WHATSAPP_CHANNEL_URL, '_blank', 'noopener,noreferrer');
+      const whatsappDirectUrl = `https://wa.me/${CABIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
+
+      window.open(whatsappDirectUrl, '_blank', 'noopener,noreferrer');
       showShareFeedback(
         hasAudio
-          ? '¡Audio descargado, texto copiado y canal de WhatsApp abierto!'
-          : '¡Mensaje copiado y canal de WhatsApp abierto para enviarlo a cabina!'
+          ? '¡Audio descargado y chat de cabina (+593 968 503 048) abierto!'
+          : '¡Chat de WhatsApp de cabina (+593 968 503 048) abierto con tu mensaje!'
       );
       toggleCabinModal();
     }
