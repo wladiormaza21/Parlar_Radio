@@ -2517,7 +2517,7 @@
 
             <div class="chat-room-badge" id="realtimeStatusBadge">
               <span class="live-dot"></span>
-              <span>MODO LOCAL · CONECTA FIREBASE</span>
+              <span>CONECTANDO FIREBASE...</span>
             </div>
           </div>
 
@@ -2546,7 +2546,7 @@
             </form>
 
             <div class="chat-sub-actions">
-              <span id="chatModeHint">Conecta Firebase Realtime Database para sincronizar los mensajes entre todos los oyentes.</span>
+              <span id="chatModeHint">Proyecto parlar-radio-chat vinculado a Firebase Realtime Database.</span>
               <a href="https://wa.me/593968503048" target="_blank" rel="noopener noreferrer" class="chat-wa-link">
                 <i class="fa-brands fa-whatsapp"></i> WhatsApp Cabina (+593 968 503 048)
               </a>
@@ -2735,16 +2735,19 @@
     const CABIN_WHATSAPP_NUMBER =
       '593968503048';
 
-    // PEGA AQUÍ LOS DATOS DE TU PROYECTO FIREBASE REALTIME DATABASE
+    // CONFIGURACIÓN DE FIREBASE (PARLAR RADIO CHAT)
     const FIREBASE_CONFIG = {
-      apiKey: '',
-      authDomain: '',
-      databaseURL: '',
-      projectId: '',
-      storageBucket: '',
-      messagingSenderId: '',
-      appId: ''
+      apiKey: 'AIzaSyC_0P61jrAXV0-QoiS3kQ4RAqpE7mX9_-o',
+      authDomain: 'parlar-radio-chat.firebaseapp.com',
+      databaseURL: 'https://parlar-radio-chat-default-rtdb.firebaseio.com',
+      projectId: 'parlar-radio-chat',
+      storageBucket: 'parlar-radio-chat.firebasestorage.app',
+      messagingSenderId: '726847053337',
+      appId: '1:726847053337:web:a838af007e1e6805f01488',
+      measurementId: 'G-46H3B6QP9H'
     };
+
+    const RTDB_BASE_URL = FIREBASE_CONFIG.databaseURL.replace(/\/$/, '');
 
     const CHAT_STORAGE_KEY = 'parlar_radio_chat_v1';
     const REQUESTS_STORAGE_KEY = 'parlar_radio_requests_v1';
@@ -2769,7 +2772,9 @@
     let metadataInterval = null;
     let shareFeedbackTimer = null;
     let dbRef = null;
-    let isRealtimeConnected = false;
+    let isSdkRealtimeConnected = false;
+    let restPollTimer = null;
+    let latestPollOptions = [...DEFAULT_POLL];
 
     // Grabadora de voz para cabina
     let mediaRecorder = null;
@@ -2818,7 +2823,7 @@
       }
     }
 
-    // Sala de chat e interacción (Tiempo real con Firebase + fallback local)
+    // Sala de chat e interacción (Firebase Realtime Database SDK + REST fallback)
     function switchChatTab(tabId, btnElement) {
       document.querySelectorAll('.chat-panel').forEach(panel => {
         panel.classList.toggle('active', panel.id === tabId);
@@ -2878,66 +2883,107 @@
       box.scrollTop = box.scrollHeight;
     }
 
-    function updateRealtimeBadge(connected) {
+    function updateRealtimeBadge(mode) {
       const badge = document.getElementById('realtimeStatusBadge');
       const hint = document.getElementById('chatModeHint');
-      if (badge) {
-        badge.innerHTML = connected
-          ? '<span class="live-dot"></span><span>EN TIEMPO REAL · OYENTES CONECTADOS</span>'
-          : '<span class="live-dot"></span><span>MODO LOCAL · CONECTA FIREBASE</span>';
-      }
-      if (hint) {
-        hint.textContent = connected
-          ? 'Mensajes sincronizados en tiempo real entre todos los oyentes y la cabina.'
-          : 'Conecta Firebase Realtime Database para sincronizar los mensajes entre todos los oyentes.';
+      if (mode === 'sdk') {
+        if (badge) badge.innerHTML = '<span class="live-dot"></span><span>EN TIEMPO REAL · FIREBASE ACTIVO</span>';
+        if (hint) hint.textContent = 'Mensajes sincronizados al instante entre todos los oyentes y cabina.';
+      } else if (mode === 'rest') {
+        if (badge) badge.innerHTML = '<span class="live-dot"></span><span>CONECTADO A FIREBASE RTDB</span>';
+        if (hint) hint.textContent = 'Sincronizado con parlar-radio-chat.';
+      } else {
+        if (badge) badge.innerHTML = '<span class="live-dot"></span><span>MODO LOCAL · REVISA REGLAS RTDB</span>';
+        if (hint) hint.textContent = 'Verifica que Realtime Database esté habilitado y con reglas de lectura/escritura activas.';
       }
     }
 
-    function initRealtimeRoom() {
-      const hasFirebaseConfig = Boolean(FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.databaseURL);
+    async function fetchRestRoomData() {
+      try {
+        const [chatRes, reqRes, pollRes] = await Promise.all([
+          fetch(`${RTDB_BASE_URL}/parlar_radio/chat.json`, { cache: 'no-store' }),
+          fetch(`${RTDB_BASE_URL}/parlar_radio/requests.json`, { cache: 'no-store' }),
+          fetch(`${RTDB_BASE_URL}/parlar_radio/poll.json`, { cache: 'no-store' })
+        ]);
 
+        if (!chatRes.ok || !reqRes.ok) {
+          throw new Error('HTTP error en RTDB');
+        }
+
+        const chatVal = await chatRes.json();
+        const reqVal = await reqRes.json();
+        const pollVal = pollRes.ok ? await pollRes.json() : null;
+
+        const chatList = chatVal ? Object.values(chatVal) : DEFAULT_CHAT;
+        const reqList = reqVal ? Object.values(reqVal) : DEFAULT_REQUESTS;
+        const pollList = Array.isArray(pollVal) && pollVal.length > 0 ? pollVal : DEFAULT_POLL;
+
+        latestPollOptions = pollList;
+        renderMessageList('chatMessagesList', chatList);
+        renderMessageList('requestsMessagesList', reqList);
+        renderPoll(pollList);
+        updateRealtimeBadge('rest');
+        return true;
+      } catch (err) {
+        return false;
+      }
+    }
+
+    async function initRealtimeRoom() {
       renderMessageList('chatMessagesList', loadStoredList(CHAT_STORAGE_KEY, DEFAULT_CHAT));
       renderMessageList('requestsMessagesList', loadStoredList(REQUESTS_STORAGE_KEY, DEFAULT_REQUESTS));
       renderPoll(loadStoredList(POLL_STORAGE_KEY, DEFAULT_POLL));
 
-      if (!hasFirebaseConfig || typeof firebase === 'undefined') {
-        updateRealtimeBadge(false);
-        return;
+      const hasSdkConfig = Boolean(FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.databaseURL);
+
+      if (hasSdkConfig && typeof firebase !== 'undefined') {
+        try {
+          if (!firebase.apps.length) {
+            firebase.initializeApp(FIREBASE_CONFIG);
+          }
+          dbRef = firebase.database();
+          isSdkRealtimeConnected = true;
+          updateRealtimeBadge('sdk');
+
+          dbRef.ref('parlar_radio/chat').limitToLast(50).on('value', snapshot => {
+            const val = snapshot.val();
+            const list = val ? Object.values(val) : DEFAULT_CHAT;
+            renderMessageList('chatMessagesList', list);
+          }, err => {
+            console.warn('Error escuchando chat en Firebase:', err);
+          });
+
+          dbRef.ref('parlar_radio/requests').limitToLast(50).on('value', snapshot => {
+            const val = snapshot.val();
+            const list = val ? Object.values(val) : DEFAULT_REQUESTS;
+            renderMessageList('requestsMessagesList', list);
+          }, err => {
+            console.warn('Error escuchando pedidos en Firebase:', err);
+          });
+
+          dbRef.ref('parlar_radio/poll').on('value', snapshot => {
+            const val = snapshot.val();
+            const pollData = Array.isArray(val) && val.length > 0 ? val : DEFAULT_POLL;
+            latestPollOptions = pollData;
+            renderPoll(pollData);
+          }, err => {
+            console.warn('Error escuchando encuesta en Firebase:', err);
+          });
+          return;
+        } catch (err) {
+          console.warn('Error iniciando Firebase SDK:', err);
+        }
       }
 
-      try {
-        if (!firebase.apps.length) {
-          firebase.initializeApp(FIREBASE_CONFIG);
-        }
-        dbRef = firebase.database();
-        isRealtimeConnected = true;
-        updateRealtimeBadge(true);
-
-        dbRef.ref('parlar_radio/chat').limitToLast(50).on('value', snapshot => {
-          const val = snapshot.val();
-          const list = val ? Object.values(val) : DEFAULT_CHAT;
-          renderMessageList('chatMessagesList', list);
-        });
-
-        dbRef.ref('parlar_radio/requests').limitToLast(50).on('value', snapshot => {
-          const val = snapshot.val();
-          const list = val ? Object.values(val) : DEFAULT_REQUESTS;
-          renderMessageList('requestsMessagesList', list);
-        });
-
-        dbRef.ref('parlar_radio/poll').on('value', snapshot => {
-          const val = snapshot.val();
-          const pollData = Array.isArray(val) && val.length > 0 ? val : DEFAULT_POLL;
-          renderPoll(pollData);
-        });
-      } catch (err) {
-        console.warn('No se pudo inicializar Firebase Realtime Database:', err);
-        isRealtimeConnected = false;
-        updateRealtimeBadge(false);
+      const ok = await fetchRestRoomData();
+      if (ok) {
+        restPollTimer = setInterval(fetchRestRoomData, 5000);
+      } else {
+        updateRealtimeBadge('local');
       }
     }
 
-    function handleChatSubmit(event, type) {
+    async function handleChatSubmit(event, type) {
       event.preventDefault();
       const isRequest = type === 'requests';
       const nickInput = document.getElementById(isRequest ? 'reqNickInput' : 'chatNickInput');
@@ -2954,23 +3000,44 @@
         createdAt: Date.now()
       };
 
-      if (isRealtimeConnected && dbRef) {
-        const path = isRequest ? 'parlar_radio/requests' : 'parlar_radio/chat';
-        dbRef.ref(path).push(payload);
-      } else {
-        const storageKey = isRequest ? REQUESTS_STORAGE_KEY : CHAT_STORAGE_KEY;
-        const listId = isRequest ? 'requestsMessagesList' : 'chatMessagesList';
-        const currentList = loadStoredList(storageKey, []);
-        currentList.push(payload);
-        const trimmed = currentList.slice(-50);
+      const path = isRequest ? 'parlar_radio/requests' : 'parlar_radio/chat';
+
+      if (isSdkRealtimeConnected && dbRef) {
         try {
-          localStorage.setItem(storageKey, JSON.stringify(trimmed));
-        } catch (e) {
-          console.warn('No se pudo guardar en localStorage:', e);
+          await dbRef.ref(path).push(payload);
+          if (textInput) textInput.value = '';
+          return;
+        } catch (err) {
+          console.warn('Error enviando a Firebase SDK, intentando fallback:', err);
         }
-        renderMessageList(listId, trimmed);
       }
 
+      try {
+        const res = await fetch(`${RTDB_BASE_URL}/${path}.json`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          await fetchRestRoomData();
+          if (textInput) textInput.value = '';
+          return;
+        }
+      } catch (err) {
+        console.warn('Fallback local activado:', err);
+      }
+
+      const storageKey = isRequest ? REQUESTS_STORAGE_KEY : CHAT_STORAGE_KEY;
+      const listId = isRequest ? 'requestsMessagesList' : 'chatMessagesList';
+      const currentList = loadStoredList(storageKey, []);
+      currentList.push(payload);
+      const trimmed = currentList.slice(-50);
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(trimmed));
+      } catch (e) {
+        console.warn('No se pudo guardar en localStorage:', e);
+      }
+      renderMessageList(listId, trimmed);
       if (textInput) textInput.value = '';
     }
 
@@ -2998,12 +3065,31 @@
       });
     }
 
-    function votePollOption(index) {
-      if (isRealtimeConnected && dbRef) {
+    async function votePollOption(index) {
+      if (isSdkRealtimeConnected && dbRef) {
         const pollRef = dbRef.ref(`parlar_radio/poll/${index}/votes`);
         pollRef.transaction(current => (Number(current) || 0) + 1);
         showShareFeedback('¡Voto registrado en tiempo real para todos los oyentes!');
         return;
+      }
+
+      try {
+        const updated = latestPollOptions.map((item, idx) =>
+          idx === index ? { ...item, votes: (Number(item.votes) || 0) + 1 } : item
+        );
+        const res = await fetch(`${RTDB_BASE_URL}/parlar_radio/poll.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updated)
+        });
+        if (res.ok) {
+          latestPollOptions = updated;
+          renderPoll(updated);
+          showShareFeedback('¡Voto registrado en la encuesta de Parlar Radio!');
+          return;
+        }
+      } catch (err) {
+        console.warn('Error votando en RTDB:', err);
       }
 
       const options = loadStoredList(POLL_STORAGE_KEY, DEFAULT_POLL);
