@@ -7,35 +7,35 @@ content:
     list: true
     fields:
       - name: id
-        label: ID único
+        label: ID
         type: string
         required: true
       - name: categoria
-        label: Categoría
+        label: Categoria
         type: select
         required: true
         options:
-          - label: Música
+          - label: Musica
             value: musica
           - label: Cultura
             value: cultura
-          - label: Información
+          - label: Informacion
             value: informacion
           - label: Lo Nuestro
             value: lo-nuestro
       - name: titulo
-        label: Título
+        label: Titulo
         type: string
         required: true
       - name: fecha
         label: Fecha
         type: string
       - name: imagen
-        label: Nombre o URL de imagen
+        label: Imagen
         type: string
       - name: resumen
         label: Resumen
         type: text
       - name: contenido
-        label: Contenido completo
+        label: Contenido
         type: text
