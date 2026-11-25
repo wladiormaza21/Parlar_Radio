@@ -430,6 +430,10 @@
       align-items: start;
     }
 
+    .hero-copy {
+      min-width: 0;
+    }
+
     .player-chat-col {
       display: flex;
       flex-direction: column;
@@ -634,6 +638,121 @@
 
     .share-feedback.visible {
       opacity: 1;
+    }
+
+    /* HISTORIAL DE CANCIONES RECIENTES JUNTO AL PLAYER */
+
+    .history-card {
+      width: 100%;
+      max-width: 520px;
+      margin-top: 22px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 34, 71, .32);
+      background: linear-gradient(155deg, rgba(28, 12, 32, .92), rgba(11, 7, 15, .96));
+      box-shadow: 0 18px 42px rgba(0, 0, 0, .38), 0 0 22px rgba(255, 204, 0, .08);
+      text-align: left;
+    }
+
+    .history-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .history-header h3 {
+      font-family: Montserrat, sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--white);
+    }
+
+    .history-header h3 i {
+      color: var(--christmas-gold);
+    }
+
+    .history-badge {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--christmas-gold);
+      background: rgba(255, 204, 0, .1);
+      border: 1px solid rgba(255, 204, 0, .28);
+      padding: 4px 10px;
+      border-radius: 30px;
+      white-space: nowrap;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 9px 12px;
+      border-radius: 14px;
+      background: rgba(10, 6, 13, .78);
+      border: 1px solid rgba(255, 0, 127, .18);
+      transition: border-color .2s ease, transform .2s ease;
+    }
+
+    .history-item:hover {
+      border-color: rgba(255, 204, 0, .4);
+      transform: translateX(2px);
+    }
+
+    .history-art {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 204, 0, .35);
+    }
+
+    .history-meta {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .history-song-title {
+      font-family: Montserrat, sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .history-song-artist {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+
+    .history-time {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--christmas-gold);
+      white-space: nowrap;
     }
 
     /* MODAL MENSAJE A CABINA */
@@ -2159,6 +2278,10 @@
         min-height: 48px;
       }
 
+      .history-card {
+        max-width: 100%;
+      }
+
       .player-card {
         max-width: 100%;
         padding: 23px 18px;
@@ -2383,7 +2506,7 @@
 
         <div class="hero-grid">
 
-          <!-- METADATOS -->
+          <!-- METADATOS + HISTORIAL DE CANCIONES JUNTO AL PLAYER -->
 
           <div class="hero-copy">
 
@@ -2438,6 +2561,22 @@
             </div>
 
             <div class="share-feedback" id="shareFeedback" role="status" aria-live="polite"></div>
+
+            <!-- HISTORIAL DE CANCIONES QUE YA SONARON -->
+            <div class="history-card" id="historial-canciones" aria-live="polite">
+              <div class="history-header">
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> Canciones recientes</h3>
+                <span class="history-badge" id="historyCountBadge">Historial</span>
+              </div>
+              <div class="history-list" id="songHistoryList">
+                <div class="history-item">
+                  <div class="history-meta">
+                    <div class="history-song-title">Cargando historial de emisión...</div>
+                    <div class="history-song-artist">Sincronizando con la señal de Parlar Radio</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- REPRODUCTOR VISUAL + CHAT JUNTO AL PLAYER -->
@@ -4002,6 +4141,99 @@
       }
     }
 
+    function formatPlayedAt(playedAtUnix) {
+      const ts = Number(playedAtUnix);
+      if (!ts) return '';
+      const date = new Date(ts * 1000);
+      if (Number.isNaN(date.getTime())) return '';
+      return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function renderSongHistory(data, currentTitle, currentArtist) {
+      const listEl = document.getElementById('songHistoryList');
+      const badgeEl = document.getElementById('historyCountBadge');
+      if (!listEl) return;
+
+      const rawHistory = Array.isArray(data?.song_history) ? data.song_history : [];
+      const parsed = rawHistory
+        .map(entry => {
+          const songObj = entry?.song || {};
+          return {
+            title: (songObj.title || '').trim(),
+            artist: (songObj.artist || 'Artista invitado').trim(),
+            art: songObj.art || LOGO_URL,
+            time: formatPlayedAt(entry?.played_at)
+          };
+        })
+        .filter(item => item.title.length > 0);
+
+      const filtered = parsed.filter((item, index) => {
+        if (index !== 0) return true;
+        const sameTitle = item.title.toLowerCase() === String(currentTitle || '').trim().toLowerCase();
+        const sameArtist = item.artist.toLowerCase() === String(currentArtist || '').trim().toLowerCase();
+        return !(sameTitle && sameArtist);
+      }).slice(0, 5);
+
+      if (badgeEl) {
+        badgeEl.textContent = filtered.length > 0 ? `Últimas ${filtered.length}` : 'En vivo';
+      }
+
+      listEl.innerHTML = '';
+
+      if (filtered.length === 0) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'history-item';
+        emptyDiv.innerHTML = `
+          <div class="history-meta">
+            <div class="history-song-title">Historial disponible al avanzar la emisión</div>
+            <div class="history-song-artist">Aquí aparecerán los últimos temas reproducidos.</div>
+          </div>
+        `;
+        listEl.appendChild(emptyDiv);
+        return;
+      }
+
+      filtered.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'history-item';
+
+        const img = document.createElement('img');
+        img.className = 'history-art';
+        img.src = item.art || LOGO_URL;
+        img.alt = item.title;
+        img.onerror = () => {
+          img.onerror = null;
+          img.src = LOGO_URL;
+        };
+
+        const meta = document.createElement('div');
+        meta.className = 'history-meta';
+
+        const titleEl = document.createElement('div');
+        titleEl.className = 'history-song-title';
+        titleEl.textContent = item.title;
+
+        const artistEl = document.createElement('div');
+        artistEl.className = 'history-song-artist';
+        artistEl.textContent = item.artist;
+
+        meta.appendChild(titleEl);
+        meta.appendChild(artistEl);
+
+        row.appendChild(img);
+        row.appendChild(meta);
+
+        if (item.time) {
+          const timeEl = document.createElement('span');
+          timeEl.className = 'history-time';
+          timeEl.textContent = item.time;
+          row.appendChild(timeEl);
+        }
+
+        listEl.appendChild(row);
+      });
+    }
+
     async function loadAzuraCastData() {
       try {
         const response = await fetch(API_URL, {
@@ -4037,6 +4269,8 @@
 
         setImage('albumArt', art);
         setImage('stickyArt', art);
+
+        renderSongHistory(data, title, artist);
 
         const elapsed = Number(nowPlaying.elapsed) || 0;
         const duration = Number(nowPlaying.duration) || 0;
