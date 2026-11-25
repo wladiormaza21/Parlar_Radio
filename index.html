@@ -955,6 +955,7 @@
       border: 1px solid rgba(255,34,71,.22);
       background: rgba(25,12,29,.72);
       transition: .25s;
+      cursor: pointer;
     }
 
     .pillar:hover {
@@ -1071,6 +1072,116 @@
     .pillar p {
       color: var(--muted);
       font-size: 11px;
+    }
+
+    .pillar-count {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 4px 10px;
+      border-radius: 30px;
+      background: rgba(255, 204, 0, .1);
+      border: 1px solid rgba(255, 204, 0, .28);
+      color: var(--christmas-gold);
+      font-family: Montserrat, sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    /* MODAL DE PUBLICACIONES POR CATEGORÍA */
+
+    .category-posts-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .category-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .category-filter-pill {
+      padding: 7px 13px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 0, 127, .35);
+      background: rgba(255, 0, 127, .09);
+      color: #f3e4f5;
+      font-family: Montserrat, sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      transition: .2s;
+    }
+
+    .category-filter-pill.active {
+      border-color: var(--christmas-gold);
+      background: rgba(255, 204, 0, .16);
+      color: var(--christmas-gold);
+    }
+
+    .post-item-card {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 34, 71, .28);
+      background: linear-gradient(150deg, rgba(32, 13, 36, .9), rgba(14, 8, 18, .96));
+    }
+
+    .post-item-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--christmas-gold);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .post-item-card h3 {
+      font-family: Montserrat, sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .post-item-card p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      margin: 0 0 14px;
+    }
+
+    .post-item-thumb {
+      width: 100%;
+      max-height: 210px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-bottom: 14px;
+    }
+
+    .post-read-btn {
+      padding: 9px 16px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 204, 0, .4);
+      background: rgba(255, 204, 0, .12);
+      color: var(--christmas-gold);
+      font-family: Montserrat, sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: .2s;
+    }
+
+    .post-read-btn:hover {
+      background: rgba(255, 204, 0, .22);
     }
 
     /* PROGRAMAS */
@@ -2405,7 +2516,7 @@
       </div>
     </section>
 
-    <!-- PILARES -->
+    <!-- PILARES (PUERTA DE ENLACE A PUBLICACIONES POR CATEGORÍA) -->
 
     <section class="section pillars" id="pilares">
       <div class="container">
@@ -2413,33 +2524,37 @@
         <div class="section-heading">
           <span class="eyebrow">Espíritu festivo</span>
           <h2>Los 4 pilares en Navidad</h2>
-          <p>Una plataforma internacional unida por la magia, la música y la unión familiar en estas fechas especiales.</p>
+          <p>Toca cada sección para ver noticias, lanzamientos, eventos, conciertos y artículos publicados.</p>
         </div>
 
         <div class="pillar-grid">
 
-          <div class="pillar" onclick="toggleArticleModal()" style="cursor:pointer">
+          <div class="pillar" onclick="openCategoryModal('musica')" role="button" tabindex="0" aria-label="Ver publicaciones de Música">
             <div class="pillar-icon"><i class="fa-solid fa-music"></i></div>
             <h3>MÚSICA</h3>
             <p>Clásicos y villancicos</p>
+            <span class="pillar-count" id="count-musica">Ver artículos</span>
           </div>
 
-          <div class="pillar">
+          <div class="pillar" onclick="openCategoryModal('cultura')" role="button" tabindex="0" aria-label="Ver publicaciones de Cultura">
             <div class="pillar-icon"><i class="fa-solid fa-users"></i></div>
             <h3>CULTURA</h3>
             <p>Tradiciones del mundo</p>
+            <span class="pillar-count" id="count-cultura">Ver artículos</span>
           </div>
 
-          <div class="pillar">
+          <div class="pillar" onclick="openCategoryModal('informacion')" role="button" tabindex="0" aria-label="Ver publicaciones de Información">
             <div class="pillar-icon"><i class="fa-solid fa-circle-info"></i></div>
             <h3>INFORMACIÓN</h3>
             <p>Actualidad global</p>
+            <span class="pillar-count" id="count-informacion">Ver artículos</span>
           </div>
 
-          <div class="pillar">
+          <div class="pillar" onclick="openCategoryModal('lo-nuestro')" role="button" tabindex="0" aria-label="Ver publicaciones de Lo Nuestro">
             <div class="pillar-icon"><i class="fa-solid fa-globe"></i></div>
             <h3>LO NUESTRO</h3>
             <p>Nuestra identidad</p>
+            <span class="pillar-count" id="count-lo-nuestro">Ver artículos</span>
           </div>
 
         </div>
@@ -2628,7 +2743,31 @@
 
   </main>
 
-  <!-- ARTÍCULO MUSICAL -->
+  <!-- MODAL DE LISTADO DE PUBLICACIONES POR CATEGORÍA -->
+
+  <div class="article-modal" id="categoryModal" role="dialog" aria-modal="true" aria-labelledby="categoryModalTitle">
+    <div class="article-content">
+
+      <button class="article-close" onclick="closeCategoryModal()" aria-label="Cerrar sección de publicaciones">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <span class="eyebrow" id="categoryModalEyebrow">Publicaciones de Parlar Radio</span>
+      <h2 id="categoryModalTitle">Música</h2>
+
+      <div class="category-filter-bar" id="categoryFilterBar">
+        <button type="button" class="category-filter-pill" data-cat="musica" onclick="openCategoryModal('musica')">Música</button>
+        <button type="button" class="category-filter-pill" data-cat="cultura" onclick="openCategoryModal('cultura')">Cultura</button>
+        <button type="button" class="category-filter-pill" data-cat="informacion" onclick="openCategoryModal('informacion')">Información</button>
+        <button type="button" class="category-filter-pill" data-cat="lo-nuestro" onclick="openCategoryModal('lo-nuestro')">Lo Nuestro</button>
+      </div>
+
+      <div class="category-posts-grid" id="categoryPostsContainer"></div>
+
+    </div>
+  </div>
+
+  <!-- ARTÍCULO INDIVIDUAL -->
 
   <div class="article-modal" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="articleTitle">
     <div class="article-content">
@@ -2637,25 +2776,28 @@
         <i class="fa-solid fa-xmark"></i>
       </button>
 
-      <span class="eyebrow">Especial musical navideño</span>
+      <span class="eyebrow" id="articleEyebrow">Especial musical navideño</span>
 
       <h2 id="articleTitle">La magia de la música en Navidad: Cómo las melodías unen al mundo entero</h2>
 
       <img
+        id="articleImage"
         src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80"
         alt="Estudio de radio">
 
-      <p>
-        La temporada navideña trae consigo una transformación sonora inigualable. Las melodías tradicionales y contemporáneas logran evocar recuerdos, fomentar la unión y cruzar cualquier frontera cultural.
-      </p>
+      <div id="articleBody">
+        <p>
+          La temporada navideña trae consigo una transformación sonora inigualable. Las melodías tradicionales y contemporáneas logran evocar recuerdos, fomentar la unión y cruzar cualquier frontera cultural.
+        </p>
 
-      <p>
-        En Parlar Radio celebramos esta época compartiendo el talento independiente y la mejor selección musical para acompañar cada hogar del mundo.
-      </p>
+        <p>
+          En Parlar Radio celebramos esta época compartiendo el talento independiente y la mejor selección musical para acompañar cada hogar del mundo.
+        </p>
 
-      <p>
-        Nuestra señal es un espacio para vivir la magia de la radio con identidad propia.
-      </p>
+        <p>
+          Nuestra señal es un espacio para vivir la magia de la radio con identidad propia.
+        </p>
+      </div>
 
     </div>
   </div>
@@ -2723,6 +2865,18 @@
     const CABIN_WHATSAPP_NUMBER =
       '593968503048';
 
+    const PUBLICATIONS_URL = 'publicaciones.json';
+
+    const CATEGORY_LABELS = {
+      musica: 'Música',
+      cultura: 'Cultura',
+      informacion: 'Información',
+      'lo-nuestro': 'Lo Nuestro'
+    };
+
+    let allPublications = [];
+    let currentCategory = 'musica';
+
     // CONFIGURACIÓN DE FIREBASE (PARLAR RADIO CHAT)
     const FIREBASE_CONFIG = {
       apiKey: 'AIzaSyC_0P61jrAXV0-QoiS3kQ4RAqpE7mX9_-o',
@@ -2770,6 +2924,174 @@
     let recordedAudioBlob = null;
     let recordedAudioUrl = null;
     let isRecordingVoice = false;
+
+    // Cargar publicaciones desde publicaciones.json
+    async function loadPublications() {
+      try {
+        const res = await fetch(`${PUBLICATIONS_URL}?v=${Date.now()}`, { cache: 'no-store' });
+        if (!res.ok) throw new Error('No se pudo cargar publicaciones.json');
+        const data = await res.json();
+        allPublications = Array.isArray(data) ? data : [];
+      } catch (err) {
+        console.warn('No se encontró o no se pudo leer publicaciones.json:', err);
+        allPublications = [];
+      }
+      updateCategoryCounters();
+      if (document.getElementById('categoryModal')?.classList.contains('open')) {
+        renderCategoryPosts(currentCategory);
+      }
+    }
+
+    function updateCategoryCounters() {
+      Object.keys(CATEGORY_LABELS).forEach(cat => {
+        const badge = document.getElementById(`count-${cat}`);
+        if (!badge) return;
+        const count = allPublications.filter(item => (item.categoria || '').toLowerCase() === cat).length;
+        badge.textContent = count === 1 ? '1 publicación' : `${count} publicaciones`;
+      });
+    }
+
+    function openCategoryModal(category) {
+      currentCategory = CATEGORY_LABELS[category] ? category : 'musica';
+      const modal = document.getElementById('categoryModal');
+      const titleEl = document.getElementById('categoryModalTitle');
+      const eyebrowEl = document.getElementById('categoryModalEyebrow');
+
+      if (eyebrowEl) eyebrowEl.textContent = 'Sección editorial · Parlar Radio';
+      if (titleEl) titleEl.textContent = CATEGORY_LABELS[currentCategory] || 'Publicaciones';
+
+      document.querySelectorAll('.category-filter-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.cat === currentCategory);
+      });
+
+      renderCategoryPosts(currentCategory);
+
+      if (modal && !modal.classList.contains('open')) {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeCategoryModal() {
+      const modal = document.getElementById('categoryModal');
+      if (!modal) return;
+      modal.classList.remove('open');
+      if (!document.getElementById('articleModal')?.classList.contains('open')) {
+        document.body.style.overflow = '';
+      }
+    }
+
+    function renderCategoryPosts(category) {
+      const container = document.getElementById('categoryPostsContainer');
+      if (!container) return;
+
+      const filtered = allPublications.filter(
+        post => (post.categoria || '').toLowerCase().trim() === category
+      );
+
+      container.innerHTML = '';
+
+      if (filtered.length === 0) {
+        const emptyBox = document.createElement('div');
+        emptyBox.className = 'post-item-card';
+        emptyBox.innerHTML = `
+          <h3>Aún no hay publicaciones en ${CATEGORY_LABELS[category] || category}</h3>
+          <p>Agrega nuevas entradas con <code>"categoria": "${category}"</code> en tu archivo <code>publicaciones.json</code> para que aparezcan aquí automáticamente.</p>
+        `;
+        container.appendChild(emptyBox);
+        return;
+      }
+
+      filtered.forEach((post, idx) => {
+        const card = document.createElement('article');
+        card.className = 'post-item-card';
+
+        const meta = document.createElement('div');
+        meta.className = 'post-item-meta';
+        meta.innerHTML = `
+          <span><i class="fa-solid fa-tag"></i> ${CATEGORY_LABELS[category] || category}</span>
+          <span>${post.fecha || ''}</span>
+        `;
+
+        const title = document.createElement('h3');
+        title.textContent = post.titulo || 'Sin título';
+
+        const summary = document.createElement('p');
+        summary.textContent = post.resumen || '';
+
+        card.appendChild(meta);
+        card.appendChild(title);
+
+        if (post.imagen && String(post.imagen).trim() !== '') {
+          const img = document.createElement('img');
+          img.className = 'post-item-thumb';
+          img.src = post.imagen;
+          img.alt = post.titulo || 'Imagen de publicación';
+          img.onerror = function () {
+            this.style.display = 'none';
+          };
+          card.appendChild(img);
+        }
+
+        card.appendChild(summary);
+
+        const readBtn = document.createElement('button');
+        readBtn.type = 'button';
+        readBtn.className = 'post-read-btn';
+        readBtn.innerHTML = '<i class="fa-solid fa-book-open"></i> Leer nota completa';
+        readBtn.onclick = () => openPublicationArticle(post.id || `${category}-${idx}`);
+        card.appendChild(readBtn);
+
+        container.appendChild(card);
+      });
+    }
+
+    function openPublicationArticle(postId) {
+      const post = allPublications.find((item, idx) => (item.id || `${item.categoria}-${idx}`) === postId);
+      if (!post) return;
+
+      const modal = document.getElementById('articleModal');
+      const eyebrow = document.getElementById('articleEyebrow');
+      const title = document.getElementById('articleTitle');
+      const img = document.getElementById('articleImage');
+      const body = document.getElementById('articleBody');
+
+      const catName = CATEGORY_LABELS[(post.categoria || '').toLowerCase()] || post.categoria || 'Publicación';
+      if (eyebrow) {
+        eyebrow.textContent = post.fecha ? `${catName} · ${post.fecha}` : catName;
+      }
+      if (title) {
+        title.textContent = post.titulo || 'Publicación';
+      }
+      if (img) {
+        if (post.imagen && String(post.imagen).trim() !== '') {
+          img.style.display = 'block';
+          img.src = post.imagen;
+          img.alt = post.titulo || 'Imagen del artículo';
+          img.onerror = () => {
+            img.style.display = 'none';
+          };
+        } else {
+          img.style.display = 'none';
+        }
+      }
+      if (body) {
+        const rawText = post.contenido || post.resumen || '';
+        const paragraphs = String(rawText)
+          .split(/\n+/)
+          .map(p => p.trim())
+          .filter(Boolean);
+
+        body.innerHTML = paragraphs.length > 0
+          ? paragraphs.map(p => `<p>${p}</p>`).join('')
+          : '<p>Sin contenido adicional.</p>';
+      }
+
+      if (modal) {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
 
     // Generador dinámico de copos de nieve generales en pantalla
     function createSnowflakes() {
@@ -3097,6 +3419,7 @@
       createSnowflakes();
       createLogoSnowflakes();
       initRealtimeRoom();
+      loadPublications();
 
       updatePlayerUI(false);
       loadAzuraCastData();
@@ -3527,7 +3850,8 @@
       const modal = document.getElementById('articleModal');
       const opened = modal.classList.toggle('open');
 
-      document.body.style.overflow = opened ? 'hidden' : '';
+      const catOpen = document.getElementById('categoryModal')?.classList.contains('open');
+      document.body.style.overflow = (opened || catOpen) ? 'hidden' : '';
     }
 
     document.addEventListener('keydown', event => {
@@ -3537,15 +3861,20 @@
           toggleCabinModal();
         }
 
-        const modal = document.getElementById('articleModal');
-
-        if (modal.classList.contains('open')) {
+        const articleModal = document.getElementById('articleModal');
+        if (articleModal && articleModal.classList.contains('open')) {
           toggleArticleModal();
+          return;
+        }
+
+        const categoryModal = document.getElementById('categoryModal');
+        if (categoryModal && categoryModal.classList.contains('open')) {
+          closeCategoryModal();
+          return;
         }
 
         const menu = document.getElementById('mobileMenu');
-
-        if (menu.classList.contains('open')) {
+        if (menu && menu.classList.contains('open')) {
           toggleMobileMenu();
         }
       }
