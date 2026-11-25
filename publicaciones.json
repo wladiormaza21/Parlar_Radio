@@ -4,7 +4,7 @@
     "categoria": "musica",
     "titulo": "Estreno musical en Parlar Radio",
     "fecha": "2026-11-25",
-    "imagen": "",
+    "imagen": "IMG_794d8012-58c8-4045-a2b0-f7078a90f254.jpg",
     "resumen": "Nuevo lanzamiento musical y selección destacada de nuestra programación.",
     "contenido": "Conoce los detalles de este lanzamiento, artista o tema musical disponible en Parlar Radio."
   },
@@ -13,7 +13,6 @@
     "categoria": "cultura",
     "titulo": "Agenda cultural y tradiciones",
     "fecha": "2026-11-25",
-    "imagen": "",
     "resumen": "Historias, expresiones artísticas y espacios culturales de nuestra comunidad.",
     "contenido": "Aquí puedes escribir la nota completa, reseña o programación cultural."
   },
@@ -22,7 +21,6 @@
     "categoria": "informacion",
     "titulo": "Noticias y actualidad de Parlar Radio",
     "fecha": "2026-11-25",
-    "imagen": "",
     "resumen": "Últimas noticias, avisos importantes y novedades de la emisora.",
     "contenido": "Escribe aquí el desarrollo de la noticia o comunicado para tus oyentes."
   },
@@ -31,7 +29,6 @@
     "categoria": "lo-nuestro",
     "titulo": "Próximo concierto y evento especial",
     "fecha": "2026-11-25",
-    "imagen": "",
     "resumen": "Fecha, lugar y detalles de nuestros eventos y conciertos.",
     "contenido": "Agrega aquí la información del concierto, fecha, hora y cómo participar."
   }
