@@ -1,0 +1,41 @@
+content:
+  - name: publicaciones
+    label: Publicaciones
+    path: publicaciones.json
+    type: json
+    format: json
+    list: true
+    fields:
+      - name: id
+        label: ID único
+        type: string
+        required: true
+      - name: categoria
+        label: Categoría
+        type: select
+        required: true
+        options:
+          - label: Música
+            value: musica
+          - label: Cultura
+            value: cultura
+          - label: Información
+            value: informacion
+          - label: Lo Nuestro
+            value: lo-nuestro
+      - name: titulo
+        label: Título
+        type: string
+        required: true
+      - name: fecha
+        label: Fecha
+        type: string
+      - name: imagen
+        label: Nombre o URL de imagen
+        type: string
+      - name: resumen
+        label: Resumen
+        type: text
+      - name: contenido
+        label: Contenido completo
+        type: text
