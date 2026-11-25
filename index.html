@@ -1164,6 +1164,13 @@
       margin-bottom: 14px;
     }
 
+    .post-actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
     .post-read-btn {
       padding: 9px 16px;
       border-radius: 30px;
@@ -1182,6 +1189,41 @@
 
     .post-read-btn:hover {
       background: rgba(255, 204, 0, .22);
+    }
+
+    .post-share-btn {
+      padding: 9px 16px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 0, 127, .45);
+      background: rgba(255, 0, 127, .14);
+      color: #ff8bc5;
+      font-family: Montserrat, sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: .2s;
+    }
+
+    .post-share-btn:hover {
+      background: rgba(255, 0, 127, .24);
+      color: #fff;
+    }
+
+    .article-share-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin: 14px 0 18px;
+    }
+
+    .article-share-status {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--christmas-green);
     }
 
     /* PROGRAMAS */
@@ -1710,7 +1752,7 @@
       font-size: clamp(22px, 4vw, 30px);
       line-height: 1.35;
       font-weight: 900;
-      margin: 22px 0;
+      margin: 22px 0 10px;
     }
 
     .article-content p {
@@ -2810,6 +2852,13 @@
 
       <h2 id="articleTitle">La magia de la música en Navidad: Cómo las melodías unen al mundo entero</h2>
 
+      <div class="article-share-bar" id="articleShareBar">
+        <button type="button" class="post-share-btn" id="articleShareBtn">
+          <i class="fa-solid fa-share-nodes"></i> Compartir publicación
+        </button>
+        <span class="article-share-status" id="articleShareStatus" role="status" aria-live="polite"></span>
+      </div>
+
       <img
         id="articleImage"
         src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80"
@@ -2919,6 +2968,8 @@
 
     let allPublications = [];
     let currentCategory = 'musica';
+    let currentOpenedPost = null;
+    let currentOpenedPostKey = '';
 
     // CONFIGURACIÓN DE FIREBASE (PARLAR RADIO CHAT)
     const FIREBASE_CONFIG = {
@@ -3010,6 +3061,81 @@
       }
     }
 
+    function getPostKey(post, idx = 0) {
+      if (post && post.id) return String(post.id);
+      const cat = (post && post.categoria) ? String(post.categoria).toLowerCase().trim() : 'post';
+      return `${cat}-${idx}`;
+    }
+
+    function buildPublicationShareUrl(post, fallbackId = '') {
+      const url = new URL(window.location.href);
+      const idToShare = post && post.id ? String(post.id) : String(fallbackId || '');
+      if (idToShare) {
+        url.searchParams.set('post', idToShare);
+      }
+      return url.toString();
+    }
+
+    async function sharePublication(post, fallbackId = '', statusElement = null) {
+      if (!post) return;
+      const title = (post.titulo || 'Publicación de Parlar Radio').trim();
+      const catKey = (post.categoria || '').toLowerCase().trim();
+      const catLabel = CATEGORY_LABELS[catKey] || post.categoria || 'Parlar Radio';
+      const summary = (post.resumen || '').trim();
+      const shareUrl = buildPublicationShareUrl(post, fallbackId);
+
+      const textParts = [
+        `🎄 *${title}* (${catLabel}) — Parlar Radio · SOMOS MUNDO`,
+        summary ? summary : '',
+        `🔗 Leer aquí: ${shareUrl}`
+      ].filter(Boolean);
+
+      const shareText = textParts.join('\n\n');
+
+      const setStatus = (msg) => {
+        if (statusElement) {
+          statusElement.textContent = msg;
+          setTimeout(() => {
+            if (statusElement.textContent === msg) statusElement.textContent = '';
+          }, 3000);
+        } else {
+          showShareFeedback(msg);
+        }
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: `${title} | Parlar Radio`,
+            text: shareText,
+            url: shareUrl
+          });
+          setStatus('¡Publicación compartida!');
+          return;
+        } catch (err) {
+          if (err && err.name === 'AbortError') return;
+        }
+      }
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(shareText);
+        } else {
+          const temp = document.createElement('textarea');
+          temp.value = shareText;
+          temp.style.position = 'fixed';
+          temp.style.opacity = '0';
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand('copy');
+          temp.remove();
+        }
+        setStatus('¡Enlace y texto copiados para compartir en redes!');
+      } catch (err) {
+        setStatus(shareUrl);
+      }
+    }
+
     // Cargar publicaciones desde publicaciones.json
     async function loadPublications() {
       try {
@@ -3024,6 +3150,27 @@
       updateCategoryCounters();
       if (document.getElementById('categoryModal')?.classList.contains('open')) {
         renderCategoryPosts(currentCategory);
+      }
+    }
+
+    function openPostFromQueryParam() {
+      const params = new URLSearchParams(window.location.search);
+      const requestedId = (params.get('post') || '').trim();
+      if (!requestedId || !Array.isArray(allPublications) || allPublications.length === 0) return;
+
+      const foundIndex = allPublications.findIndex((item, idx) => {
+        const key = getPostKey(item, idx);
+        return key === requestedId || String(item.id || '') === requestedId;
+      });
+
+      if (foundIndex !== -1) {
+        const targetPost = allPublications[foundIndex];
+        const targetKey = getPostKey(targetPost, foundIndex);
+        const cat = (targetPost.categoria || 'musica').toLowerCase().trim();
+        if (CATEGORY_LABELS[cat]) {
+          openCategoryModal(cat);
+        }
+        openPublicationArticle(targetKey);
       }
     }
 
@@ -3088,6 +3235,8 @@
       }
 
       filtered.forEach((post, idx) => {
+        const globalIdx = allPublications.indexOf(post);
+        const postKey = getPostKey(post, globalIdx >= 0 ? globalIdx : idx);
         const card = document.createElement('article');
         card.className = 'post-item-card';
 
@@ -3120,26 +3269,44 @@
 
         card.appendChild(summary);
 
+        const actionsRow = document.createElement('div');
+        actionsRow.className = 'post-actions-row';
+
         const readBtn = document.createElement('button');
         readBtn.type = 'button';
         readBtn.className = 'post-read-btn';
         readBtn.innerHTML = '<i class="fa-solid fa-book-open"></i> Leer nota completa';
-        readBtn.onclick = () => openPublicationArticle(post.id || `${category}-${idx}`);
-        card.appendChild(readBtn);
+        readBtn.onclick = () => openPublicationArticle(postKey);
+
+        const shareBtn = document.createElement('button');
+        shareBtn.type = 'button';
+        shareBtn.className = 'post-share-btn';
+        shareBtn.innerHTML = '<i class="fa-solid fa-share-nodes"></i> Compartir';
+        shareBtn.onclick = () => sharePublication(post, postKey);
+
+        actionsRow.appendChild(readBtn);
+        actionsRow.appendChild(shareBtn);
+        card.appendChild(actionsRow);
 
         container.appendChild(card);
       });
     }
 
     function openPublicationArticle(postId) {
-      const post = allPublications.find((item, idx) => (item.id || `${item.categoria}-${idx}`) === postId);
+      const post = allPublications.find((item, idx) => getPostKey(item, idx) === postId);
       if (!post) return;
+
+      currentOpenedPost = post;
+      currentOpenedPostKey = postId;
 
       const modal = document.getElementById('articleModal');
       const eyebrow = document.getElementById('articleEyebrow');
       const title = document.getElementById('articleTitle');
       const img = document.getElementById('articleImage');
       const body = document.getElementById('articleBody');
+      const shareStatus = document.getElementById('articleShareStatus');
+
+      if (shareStatus) shareStatus.textContent = '';
 
       const catName = CATEGORY_LABELS[(post.categoria || '').toLowerCase()] || post.categoria || 'Publicación';
       if (eyebrow) {
@@ -3502,12 +3669,24 @@
       showShareFeedback('¡Gracias por tu voto en la encuesta de Parlar Radio!');
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
       audio.volume = 1;
       createSnowflakes();
       createLogoSnowflakes();
       initRealtimeRoom();
-      loadPublications();
+
+      const articleShareBtn = document.getElementById('articleShareBtn');
+      const articleShareStatus = document.getElementById('articleShareStatus');
+      if (articleShareBtn) {
+        articleShareBtn.addEventListener('click', () => {
+          if (currentOpenedPost) {
+            sharePublication(currentOpenedPost, currentOpenedPostKey, articleShareStatus);
+          }
+        });
+      }
+
+      await loadPublications();
+      openPostFromQueryParam();
 
       updatePlayerUI(false);
       loadAzuraCastData();
