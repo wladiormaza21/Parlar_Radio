@@ -1702,6 +1702,7 @@
       color: white;
       background: #26132a;
       font-size: 17px;
+      z-index: 10;
     }
 
     .article-content h2 {
@@ -1725,6 +1726,35 @@
       object-fit: cover;
       border-radius: 15px;
       margin: 20px 0;
+    }
+
+    .article-video-container {
+      display: none;
+      margin: 22px 0;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 204, 0, .35);
+      background: #070409;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .45);
+    }
+
+    .article-video-container.visible {
+      display: block;
+    }
+
+    .article-video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    .article-video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     /* FOOTER */
@@ -2785,6 +2815,19 @@
         src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80"
         alt="Estudio de radio">
 
+      <div class="article-video-container" id="articleVideoContainer">
+        <div class="article-video-frame">
+          <iframe
+            id="articleVideoIframe"
+            src=""
+            title="Video de YouTube de la publicación"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+
       <div id="articleBody">
         <p>
           La temporada navideña trae consigo una transformación sonora inigualable. Las melodías tradicionales y contemporáneas logran evocar recuerdos, fomentar la unión y cruzar cualquier frontera cultural.
@@ -2924,6 +2967,48 @@
     let recordedAudioBlob = null;
     let recordedAudioUrl = null;
     let isRecordingVoice = false;
+
+    // Extraer ID de 11 caracteres de YouTube desde URL o ID directo
+    function extractYouTubeId(rawValue) {
+      if (!rawValue || typeof rawValue !== 'string') return '';
+      const trimmed = rawValue.trim();
+      if (!trimmed) return '';
+
+      if (/^[a-zA-Z0-9_-]{11}$/.test(trimmed)) {
+        return trimmed;
+      }
+
+      const match = trimmed.match(
+        /(?:youtu\.be\/|youtube\.com\/(?:watch\?.*v=|embed\/|v\/|shorts\/|live\/))([a-zA-Z0-9_-]{11})/
+      );
+      return match ? match[1] : '';
+    }
+
+    function updateArticleVideo(post) {
+      const container = document.getElementById('articleVideoContainer');
+      const iframe = document.getElementById('articleVideoIframe');
+      if (!container || !iframe) return;
+
+      if (!post) {
+        iframe.src = '';
+        container.classList.remove('visible');
+        return;
+      }
+
+      const videoId =
+        extractYouTubeId(post.video) ||
+        extractYouTubeId(post.youtube) ||
+        extractYouTubeId(post.contenido) ||
+        extractYouTubeId(post.resumen);
+
+      if (videoId) {
+        iframe.src = `https://www.youtube.com/embed/${videoId}`;
+        container.classList.add('visible');
+      } else {
+        iframe.src = '';
+        container.classList.remove('visible');
+      }
+    }
 
     // Cargar publicaciones desde publicaciones.json
     async function loadPublications() {
@@ -3075,6 +3160,9 @@
           img.style.display = 'none';
         }
       }
+
+      updateArticleVideo(post);
+
       if (body) {
         const rawText = post.contenido || post.resumen || '';
         const paragraphs = String(rawText)
@@ -3849,6 +3937,10 @@
     function toggleArticleModal() {
       const modal = document.getElementById('articleModal');
       const opened = modal.classList.toggle('open');
+
+      if (!opened) {
+        updateArticleVideo(null);
+      }
 
       const catOpen = document.getElementById('categoryModal')?.classList.contains('open');
       document.body.style.overflow = (opened || catOpen) ? 'hidden' : '';
