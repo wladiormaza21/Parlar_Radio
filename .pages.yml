@@ -12,17 +12,8 @@ content:
         required: true
       - name: categoria
         label: Categoria
-        type: select
+        type: string
         required: true
-        options:
-          - label: Musica
-            value: musica
-          - label: Cultura
-            value: cultura
-          - label: Informacion
-            value: informacion
-          - label: Lo Nuestro
-            value: lo-nuestro
       - name: titulo
         label: Titulo
         type: string
