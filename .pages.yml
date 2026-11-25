@@ -30,3 +30,15 @@ content:
       - name: contenido
         label: Contenido
         type: text
+      - name: imagen
+        label: Imagen
+        type: string
+      - name: video
+        label: Video de YouTube
+        type: string
+      - name: resumen
+        label: Resumen
+        type: text
+      - name: contenido
+        label: Contenido
+        type: text
