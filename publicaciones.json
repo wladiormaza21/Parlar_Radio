@@ -20,10 +20,11 @@
   {
     "id": "informacion-1",
     "categoria": "informacion",
-    "titulo": "Noticias y actualidad de Parlar Radio",
+    "titulo": "Rescatan a todos los rehenes de un supermercado tras más de 16 horas secuestrados en Cartagena, Colombia",
     "fecha": "2026-11-25",
-    "resumen": "Últimas noticias, avisos importantes y novedades de la emisora.",
-    "contenido": "Escribe aquí el desarrollo de la noticia o comunicado para tus oyentes."
+    "imagen": "0947275813269d2c23a4b444ca700ccf570cd22cw.jpg",
+    "resumen": "La operación conjunta de la Policía y las Fuerzas Militares de Colombia terminó a la 01:30 del 25 de noviembre. Uno de los secuestradores murió durante la intervención.",
+    "contenido": "Las autoridades de Colombia liberaron a todas las personas que permanecían retenidas en un supermercado de Cartagena de Indias, luego de más de 16 horas de secuestro. El operativo concluyó a la 01:30 de este miércoles 25 de noviembre de 2026, con la participación de la Policía Nacional y las Fuerzas Militares. El presidente colombiano, Abelardo de la Espriella, confirmó el rescate mediante un video difundido en X y aseguró que \"se logró el rescate de todos los secuestrados\". Durante la intervención, uno de los integrantes del grupo criminal murió."
   },
   {
     "id": "lo-nuestro-1",
