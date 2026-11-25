@@ -2,7 +2,7 @@ content:
   - name: publicaciones
     label: Publicaciones
     path: publicaciones.json
-    type: json
+    type: file
     format: json
     list: true
     fields:
