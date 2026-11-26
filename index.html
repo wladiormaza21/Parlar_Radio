@@ -1465,6 +1465,95 @@
       flex: 1;
     }
 
+    /* BLOQUE DE PODCAST EN QUINTA SINFONÍA */
+
+    .podcast-box {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 204, 0, .32);
+      background: rgba(9, 5, 13, .85);
+    }
+
+    .podcast-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: Montserrat, sans-serif;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--christmas-gold);
+      margin-bottom: 8px;
+    }
+
+    .podcast-episode-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .podcast-episode-art {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 34, 71, .45);
+    }
+
+    .podcast-episode-meta {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .podcast-episode-title {
+      font-family: Montserrat, sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.35;
+      color: var(--white);
+      overflow-wrap: anywhere;
+    }
+
+    .podcast-episode-sub {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .podcast-play-btn {
+      width: 100%;
+      min-height: 36px;
+      border: 0;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--christmas-red), var(--purple));
+      color: var(--white);
+      font-family: Montserrat, sans-serif;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      margin-bottom: 8px;
+      transition: .2s ease;
+    }
+
+    .podcast-play-btn:hover {
+      filter: brightness(1.1);
+    }
+
+    .podcast-audio {
+      width: 100%;
+      height: 32px;
+      border-radius: 8px;
+      accent-color: var(--christmas-red);
+    }
+
     .show-footer {
       margin-top: 18px;
       padding-top: 13px;
@@ -2813,6 +2902,39 @@
 
               <p class="show-description">Especiales navideños, grandes éxitos y la mejor selección sonora para estas fiestas.</p>
 
+              <!-- PODCAST DE QUINTA SINFONÍA -->
+              <div class="podcast-box" aria-label="Podcast de Quinta Sinfonía">
+                <div class="podcast-tag">
+                  <i class="fa-solid fa-podcast"></i> Podcast · T4 Ep. 1
+                </div>
+
+                <div class="podcast-episode-head">
+                  <img
+                    class="podcast-episode-art"
+                    src="https://stream.parlarradio.com/api/station/parlar_radio/public/podcast/1f1e83e9-431c-6834-8089-23177bf12879/episode/1f1e962a-0cc2-68b2-ae57-1d543c146718/art"
+                    onerror="this.onerror=null;this.src='https://stream.parlarradio.com/api/station/1/public/podcast/1f1e83e9-431c-6834-8089-23177bf12879/art-1795549155.jpg';"
+                    alt="Portada del episodio QUINTA Sinfonia Miercoles 25 de noviembre 2026">
+                  <div class="podcast-episode-meta">
+                    <div class="podcast-episode-title">QUINTA Sinfonia Miercoles 25 de noviembre 2026</div>
+                    <div class="podcast-episode-sub">147.7 MB · 01:47:31</div>
+                  </div>
+                </div>
+
+                <button type="button" class="podcast-play-btn" id="quintaPodcastBtn" onclick="toggleQuintaPodcast()">
+                  <i class="fa-solid fa-play" id="quintaPodcastIcon"></i>
+                  <span id="quintaPodcastBtnText">ESCUCHAR PODCAST</span>
+                </button>
+
+                <audio
+                  id="quintaPodcastAudio"
+                  class="podcast-audio"
+                  controls
+                  preload="none"
+                  src="https://stream.parlarradio.com/api/station/parlar_radio/public/podcast/1f1e83e9-431c-6834-8089-23177bf12879/episode/1f1e962a-0cc2-68b2-ae57-1d543c146718/download.mp3">
+                  Tu navegador no soporta audio HTML5.
+                </audio>
+              </div>
+
               <div class="show-footer">
                 <span>PARLAR RADIO</span>
                 <i class="fa-solid fa-microphone"></i>
@@ -3157,6 +3279,41 @@
     let recordedAudioBlob = null;
     let recordedAudioUrl = null;
     let isRecordingVoice = false;
+
+    // Control del podcast de Quinta Sinfonía
+    function syncQuintaPodcastUI(playing) {
+      const icon = document.getElementById('quintaPodcastIcon');
+      const text = document.getElementById('quintaPodcastBtnText');
+      if (icon) {
+        icon.className = playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+      }
+      if (text) {
+        text.textContent = playing ? 'PAUSAR PODCAST' : 'ESCUCHAR PODCAST';
+      }
+    }
+
+    async function toggleQuintaPodcast() {
+      const podAudio = document.getElementById('quintaPodcastAudio');
+      if (!podAudio) return;
+
+      if (!podAudio.paused) {
+        podAudio.pause();
+        syncQuintaPodcastUI(false);
+        return;
+      }
+
+      if (!audio.paused) {
+        audio.pause();
+      }
+
+      try {
+        await podAudio.play();
+        syncQuintaPodcastUI(true);
+      } catch (err) {
+        console.warn('No se pudo reproducir el podcast:', err);
+        syncQuintaPodcastUI(false);
+      }
+    }
 
     // Extraer ID de 11 caracteres de YouTube desde URL o ID directo
     function extractYouTubeId(rawValue) {
@@ -3814,6 +3971,13 @@
       createLogoSnowflakes();
       initRealtimeRoom();
 
+      const podAudio = document.getElementById('quintaPodcastAudio');
+      if (podAudio) {
+        podAudio.addEventListener('play', () => syncQuintaPodcastUI(true));
+        podAudio.addEventListener('pause', () => syncQuintaPodcastUI(false));
+        podAudio.addEventListener('ended', () => syncQuintaPodcastUI(false));
+      }
+
       const articleShareBtn = document.getElementById('articleShareBtn');
       const articleShareStatus = document.getElementById('articleShareStatus');
       if (articleShareBtn) {
@@ -4047,6 +4211,12 @@
       if (!audio.paused) {
         audio.pause();
         return;
+      }
+
+      const podAudio = document.getElementById('quintaPodcastAudio');
+      if (podAudio && !podAudio.paused) {
+        podAudio.pause();
+        syncQuintaPodcastUI(false);
       }
 
       try {
